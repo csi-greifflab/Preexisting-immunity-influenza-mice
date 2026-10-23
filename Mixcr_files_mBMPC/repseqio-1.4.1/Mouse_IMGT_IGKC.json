@@ -1,0 +1,59 @@
+[ {
+  "taxonId": 10090,
+  "speciesNames": [ "mmu" ],
+  "genes": [ {
+    "baseSequence": "nuccore://NG_005612.1",
+    "name": "IGKC*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "anchorPoints": {
+      "CBegin": 3171454,
+      "CExon1End": 3171774,
+      "CEnd": 3171774
+    }
+}, {
+    "baseSequence": "file://Mouse_IMGT_IGKC.fasta#IGKC*01",
+    "name": "IGKC*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "V00807|IGKC*01|Mus musculus|F|C-REGION|211..530|320 nt|3| | | | |320+0=320| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 320
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGKC.fasta#IGKC*02",
+    "name": "IGKC*02",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "X67002|IGKC*02|Mus musculus_AKR|F|C-REGION|61..376|316 nt|3| | | | |316+0=316| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 316
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGKC.fasta#IGKC*03",
+    "name": "IGKC*03",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "X67011|IGKC*03|Mus musculus_SJL|F|C-REGION|58..373|316 nt|3| | | | |316+0=316| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 316
+    }
+  } ],
+  "meta": {
+    "comments": "Imported from: Mouse_IMGT_IGKC.fasta"
+  }
+  } ]
+} ]

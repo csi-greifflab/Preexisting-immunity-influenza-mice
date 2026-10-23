@@ -1,0 +1,501 @@
+---
+title: "Mouse_influenza_network_analysis"
+output: pdf_document
+date: "`r Sys.Date()`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,message = FALSE,warning = FALSE)
+knitr::opts_chunk$set(dev = "svg",
+                      dpi = 600, out.width = "100%", out.height = "100%",
+                      echo = FALSE,
+                      cache = TRUE)
+library(tidyverse)
+library(stringdist)
+library(igraph)
+library(RColorBrewer)
+library(ForceAtlas2)
+```
+
+# Construct clonal network graph from all sc clones, colored by infections
+```{r message=FALSE, warning=FALSE}
+# Load the data
+cdr3_sc_hc <- read_tsv("./Clonal_network_analysis/cdr3/cdr3_sc_hc.tsv")
+cdr3_sc_lc <- read_tsv("./Clonal_network_analysis/cdr3/cdr3_sc_lc.tsv")
+
+# Calculate the pairwise distance between CDR3 sequences
+threshold <- 1 # Setting the threshold for LV distance, CDR3 sequences with LV distance 1 will be connected
+```
+
+
+```{r}
+# Compute all pairwise LV distance between the CDRH3 sequences
+cdr3_sc_1_hc_dist <- stringdistmatrix(cdr3_sc_hc %>% filter(Replicate == "1") %>% pull(CDR3.aa), method = "lv")
+cdr3_sc_2_hc_dist <- stringdistmatrix(cdr3_sc_hc %>% filter(Replicate == "2") %>% pull(CDR3.aa), method = "lv")
+cdr3_sc_3_hc_dist <- stringdistmatrix(cdr3_sc_hc %>% filter(Replicate == "3") %>% pull(CDR3.aa), method = "lv")
+cdr3_sc_1_lc_dist <- stringdistmatrix(cdr3_sc_lc %>% filter(Replicate == "1") %>% pull(CDR3.aa), method = "lv")
+cdr3_sc_2_lc_dist <- stringdistmatrix(cdr3_sc_lc %>% filter(Replicate == "2") %>% pull(CDR3.aa), method = "lv")
+cdr3_sc_3_lc_dist <- stringdistmatrix(cdr3_sc_lc %>% filter(Replicate == "3") %>% pull(CDR3.aa), method = "lv")
+
+# Convert the dist object into a matrix
+cdr3_sc_1_hc_dist <- as.matrix(cdr3_sc_1_hc_dist)
+cdr3_sc_2_hc_dist <- as.matrix(cdr3_sc_2_hc_dist)
+cdr3_sc_3_hc_dist <- as.matrix(cdr3_sc_3_hc_dist)
+cdr3_sc_1_lc_dist <- as.matrix(cdr3_sc_1_lc_dist)
+cdr3_sc_2_lc_dist <- as.matrix(cdr3_sc_2_lc_dist)
+cdr3_sc_3_lc_dist <- as.matrix(cdr3_sc_3_lc_dist)
+
+rownames(cdr3_sc_1_hc_dist) <- as.character(cdr3_sc_hc %>% filter(Replicate == "1") %>% pull(CDR3.aa))
+rownames(cdr3_sc_2_hc_dist) <- as.character(cdr3_sc_hc %>% filter(Replicate == "2") %>% pull(CDR3.aa))
+rownames(cdr3_sc_3_hc_dist) <- as.character(cdr3_sc_hc %>% filter(Replicate == "3") %>% pull(CDR3.aa))
+rownames(cdr3_sc_1_lc_dist) <- as.character(cdr3_sc_lc %>% filter(Replicate == "1") %>% pull(CDR3.aa))
+rownames(cdr3_sc_2_lc_dist) <- as.character(cdr3_sc_lc %>% filter(Replicate == "2") %>% pull(CDR3.aa))
+rownames(cdr3_sc_3_lc_dist) <- as.character(cdr3_sc_lc %>% filter(Replicate == "3") %>% pull(CDR3.aa))
+
+
+colnames(cdr3_sc_1_hc_dist) <- as.character(cdr3_sc_hc %>% filter(Replicate == "1") %>% pull(CDR3.aa))
+colnames(cdr3_sc_2_hc_dist) <- as.character(cdr3_sc_hc %>% filter(Replicate == "2") %>% pull(CDR3.aa))
+colnames(cdr3_sc_3_hc_dist) <- as.character(cdr3_sc_hc %>% filter(Replicate == "3") %>% pull(CDR3.aa))
+colnames(cdr3_sc_1_lc_dist) <- as.character(cdr3_sc_lc %>% filter(Replicate == "1") %>% pull(CDR3.aa))
+colnames(cdr3_sc_2_lc_dist) <- as.character(cdr3_sc_lc %>% filter(Replicate == "2") %>% pull(CDR3.aa))
+colnames(cdr3_sc_3_lc_dist) <- as.character(cdr3_sc_lc %>% filter(Replicate == "3") %>% pull(CDR3.aa))
+
+# Set the matrix into binary, either under the threshold or not to determine whether edge will be drawn
+cdr3_sc_1_hc_dist[cdr3_sc_1_hc_dist<=threshold] <- 1
+cdr3_sc_2_hc_dist[cdr3_sc_2_hc_dist<=threshold] <- 1
+cdr3_sc_3_hc_dist[cdr3_sc_3_hc_dist<=threshold] <- 1
+cdr3_sc_1_lc_dist[cdr3_sc_1_lc_dist<=threshold] <- 1
+cdr3_sc_2_lc_dist[cdr3_sc_2_lc_dist<=threshold] <- 1
+cdr3_sc_3_lc_dist[cdr3_sc_3_lc_dist<=threshold] <- 1
+
+cdr3_sc_1_hc_dist[cdr3_sc_1_hc_dist>threshold] <- 0
+cdr3_sc_2_hc_dist[cdr3_sc_2_hc_dist>threshold] <- 0
+cdr3_sc_3_hc_dist[cdr3_sc_3_hc_dist>threshold] <- 0
+cdr3_sc_1_lc_dist[cdr3_sc_1_lc_dist>threshold] <- 0
+cdr3_sc_2_lc_dist[cdr3_sc_2_lc_dist>threshold] <- 0
+cdr3_sc_3_lc_dist[cdr3_sc_3_lc_dist>threshold] <- 0
+
+# Create graph based on set threshold
+cdr3_sc_1_hc_dist <- igraph::simplify(graph.adjacency(cdr3_sc_1_hc_dist, weighted=T, mode = "undirected"))
+cdr3_sc_2_hc_dist <- igraph::simplify(graph.adjacency(cdr3_sc_2_hc_dist, weighted=T, mode = "undirected"))
+cdr3_sc_3_hc_dist <- igraph::simplify(graph.adjacency(cdr3_sc_3_hc_dist, weighted=T, mode = "undirected"))
+cdr3_sc_1_lc_dist <- igraph::simplify(graph.adjacency(cdr3_sc_1_lc_dist, weighted=T, mode = "undirected"))
+cdr3_sc_2_lc_dist <- igraph::simplify(graph.adjacency(cdr3_sc_2_lc_dist, weighted=T, mode = "undirected"))
+cdr3_sc_3_lc_dist <- igraph::simplify(graph.adjacency(cdr3_sc_3_lc_dist, weighted=T, mode = "undirected"))
+```
+
+
+```{r eval=FALSE, include=FALSE}
+# Calculate the graph layout
+cdr3_sc_1_hc_layout <- layout.forceatlas2(cdr3_sc_1_hc_dist, directed=FALSE, iterations = 200, linlog = FALSE, pos = NULL, nohubs = FALSE, k = 400, gravity=1, ks=0.1, ksmax=10, delta = 1,  center=NULL, tolerance = 0.1, dim = 2,plotstep=100, plotlabels=FALSE)
+cdr3_sc_2_hc_layout <- layout.forceatlas2(cdr3_sc_2_hc_dist, directed=FALSE, iterations = 200, linlog = FALSE, pos = NULL, nohubs = FALSE, k = 400, gravity=1, ks=0.1, ksmax=10, delta = 1,  center=NULL, tolerance = 0.1, dim = 2,plotstep=100, plotlabels=FALSE)
+cdr3_sc_3_hc_layout <- layout.forceatlas2(cdr3_sc_3_hc_dist, directed=FALSE, iterations = 200, linlog = FALSE, pos = NULL, nohubs = FALSE, k = 400, gravity=1, ks=0.1, ksmax=10, delta = 1,  center=NULL, tolerance = 0.1, dim = 2,plotstep=100, plotlabels=FALSE)
+cdr3_sc_1_lc_layout <- layout.forceatlas2(cdr3_sc_1_lc_dist, directed=FALSE, iterations = 200, linlog = FALSE, pos = NULL, nohubs = FALSE, k = 400, gravity=1, ks=0.1, ksmax=10, delta = 1,  center=NULL, tolerance = 0.1, dim = 2,plotstep=100, plotlabels=FALSE)
+cdr3_sc_2_lc_layout <- layout.forceatlas2(cdr3_sc_2_lc_dist, directed=FALSE, iterations = 200, linlog = FALSE, pos = NULL, nohubs = FALSE, k = 400, gravity=1, ks=0.1, ksmax=10, delta = 1,  center=NULL, tolerance = 0.1, dim = 2,plotstep=100, plotlabels=FALSE)
+cdr3_sc_3_lc_layout <- layout.forceatlas2(cdr3_sc_3_lc_dist, directed=FALSE, iterations = 200, linlog = FALSE, pos = NULL, nohubs = FALSE, k = 400, gravity=1, ks=0.1, ksmax=10, delta = 1,  center=NULL, tolerance = 0.1, dim = 2,plotstep=100, plotlabels=FALSE)
+
+saveRDS(cdr3_sc_1_hc_layout, "Clonal_network_analysis/layout/cdr3_sc_1_hc_layout")
+saveRDS(cdr3_sc_2_hc_layout, "Clonal_network_analysis/layout/cdr3_sc_2_hc_layout")
+saveRDS(cdr3_sc_3_hc_layout, "Clonal_network_analysis/layout/cdr3_sc_3_hc_layout")
+saveRDS(cdr3_sc_1_lc_layout, "Clonal_network_analysis/layout/cdr3_sc_1_lc_layout")
+saveRDS(cdr3_sc_2_lc_layout, "Clonal_network_analysis/layout/cdr3_sc_2_lc_layout")
+saveRDS(cdr3_sc_3_lc_layout, "Clonal_network_analysis/layout/cdr3_sc_3_lc_layout")
+```
+
+
+```{r include=FALSE}
+# Create a color vector for HA binding
+color_binding_sc_1_hc <- factor(cdr3_sc_hc %>% filter(Replicate == "1") %>% pull(HA.binding))
+color_binding_sc_2_hc <- factor(cdr3_sc_hc %>% filter(Replicate == "2") %>% pull(HA.binding))
+color_binding_sc_3_hc <- factor(cdr3_sc_hc %>% filter(Replicate == "3") %>% pull(HA.binding))
+color_binding_sc_1_lc <- factor(cdr3_sc_lc %>% filter(Replicate == "1") %>% pull(HA.binding))
+color_binding_sc_2_lc <- factor(cdr3_sc_lc %>% filter(Replicate == "2") %>% pull(HA.binding))
+color_binding_sc_3_lc <- factor(cdr3_sc_lc %>% filter(Replicate == "3") %>% pull(HA.binding))
+
+levels(color_binding_sc_1_hc) <- c("CA07" = "#E41A1C", "Cross" = "#984EA3", "PR8" = "#377EB8")
+levels(color_binding_sc_2_hc) <- c("CA07" = "#E41A1C", "Cross" = "#984EA3", "PR8" = "#377EB8")
+levels(color_binding_sc_3_hc) <- c("CA07" = "#E41A1C", "Cross" = "#984EA3", "PR8" = "#377EB8")
+levels(color_binding_sc_1_lc) <- c("CA07" = "#E41A1C", "Cross" = "#984EA3", "PR8" = "#377EB8")
+levels(color_binding_sc_2_lc) <- c("CA07" = "#E41A1C", "Cross" = "#984EA3", "PR8" = "#377EB8")
+levels(color_binding_sc_3_lc) <- c("CA07" = "#E41A1C", "Cross" = "#984EA3", "PR8" = "#377EB8")
+```
+
+```{r fig.height=12, fig.width=12}
+# Open a pdf file
+pdf("./Clonal_network_analysis/figures/network_sc_1_hc_binding.pdf", width = 12, height = 12, pointsize = 8)
+# plot
+plot(cdr3_sc_1_hc_dist, layout = cdr3_sc_1_hc_layout, vertex.frame.color = NA, vertex.label = NA,
+     vertex.color = as.character(color_binding_sc_1_hc), 
+     vertex.size = 2, edge.width = 0.2, edge.color = "gray60",rescale = TRUE)
+     legend(x = 0.95, y = 1, c("CA07", "Cross", "PR8"), pch = 21, col = "#777777",
+     pt.bg = levels(color_binding_sc_1_hc), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+# close
+dev.off()
+```
+
+```{r fig.height=12, fig.width=12}
+# Open a pdf file
+pdf("./Clonal_network_analysis/figures/network_sc_2_hc_binding.pdf", width = 12, height = 12, pointsize = 8)
+# plot
+plot(cdr3_sc_2_hc_dist, layout = cdr3_sc_2_hc_layout, vertex.frame.color = NA, vertex.label = NA,
+     vertex.color = as.character(color_binding_sc_2_hc), 
+     vertex.size = 2, edge.width = 0.2, edge.color = "gray60",rescale = TRUE)
+     legend(x = 0.95, y = 1, c("CA07", "Cross", "PR8"), pch = 21, col = "#777777",
+     pt.bg = levels(color_binding_sc_2_hc), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+# close
+dev.off()
+```
+
+```{r fig.height=12, fig.width=12}
+# Open a pdf file
+pdf("./Clonal_network_analysis/figures/network_sc_3_hc_binding.pdf", width = 12, height = 12, pointsize = 8)
+# plot
+plot(cdr3_sc_3_hc_dist, layout = cdr3_sc_3_hc_layout, vertex.frame.color = NA, vertex.label = NA,
+     vertex.color = as.character(color_binding_sc_3_hc), 
+     vertex.size = 2, edge.width = 0.2, edge.color = "gray60",rescale = TRUE)
+     legend(x = 0.95, y = 1, c("CA07", "Cross", "PR8"), pch = 21, col = "#777777",
+     pt.bg = levels(color_binding_sc_3_hc), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+# close
+dev.off()
+```
+
+```{r fig.height=12, fig.width=12}
+# Open a pdf file
+pdf("./Clonal_network_analysis/figures/network_sc_1_lc_binding.pdf", width = 12, height = 12, pointsize = 8)
+# plot
+plot(cdr3_sc_1_lc_dist, layout = cdr3_sc_1_lc_layout, vertex.frame.color = NA, vertex.label = NA,
+     vertex.color = as.character(color_binding_sc_1_lc), 
+     vertex.size = 2, edge.width = 0.2, edge.color = "gray60",rescale = TRUE)
+     legend(x = 0.95, y = 1, c("CA07", "Cross", "PR8"), pch = 21, col = "#777777",
+     pt.bg = levels(color_binding_sc_1_lc), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+# close
+dev.off()
+```
+
+```{r fig.height=12, fig.width=12}
+# Open a pdf file
+pdf("./Clonal_network_analysis/figures/network_sc_2_lc_binding.pdf", width = 12, height = 12, pointsize = 8)
+# plot
+plot(cdr3_sc_2_lc_dist, layout = cdr3_sc_2_lc_layout, vertex.frame.color = NA, vertex.label = NA,
+     vertex.color = as.character(color_binding_sc_2_lc), 
+     vertex.size = 2, edge.width = 0.2, edge.color = "gray60",rescale = TRUE)
+     legend(x = 0.95, y = 1, c("CA07", "Cross", "PR8"), pch = 21, col = "#777777",
+     pt.bg = levels(color_binding_sc_2_lc), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+# close
+dev.off()
+```
+
+```{r fig.height=12, fig.width=12}
+# Open a pdf file
+pdf("./Clonal_network_analysis/figures/network_sc_3_lc_binding.pdf", width = 12, height = 12, pointsize = 8)
+# plot
+plot(cdr3_sc_3_lc_dist, layout = cdr3_sc_3_lc_layout, vertex.frame.color = NA, vertex.label = NA,
+     vertex.color = as.character(color_binding_sc_1_hc), 
+     vertex.size = 2, edge.width = 0.2, edge.color = "gray60",rescale = TRUE)
+     legend(x = 0.95, y = 1, c("CA07", "Cross", "PR8"), pch = 21, col = "#777777",
+     pt.bg = levels(color_binding_sc_3_lc), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+# close
+dev.off()
+```
+
+```{r include=FALSE}
+# Create a color vector for infections
+color_infections_sc_1_hc <- factor(cdr3_sc_hc %>% filter(Replicate == "1") %>% pull(Infections))
+color_infections_sc_2_hc <- factor(cdr3_sc_hc %>% filter(Replicate == "2") %>% pull(Infections))
+color_infections_sc_3_hc <- factor(cdr3_sc_hc %>% filter(Replicate == "3") %>% pull(Infections))
+color_infections_sc_1_lc <- factor(cdr3_sc_lc %>% filter(Replicate == "1") %>% pull(Infections))
+color_infections_sc_2_lc <- factor(cdr3_sc_lc %>% filter(Replicate == "2") %>% pull(Infections))
+color_infections_sc_3_lc <- factor(cdr3_sc_lc %>% filter(Replicate == "3") %>% pull(Infections))
+
+levels(color_infections_sc_1_hc) <- c("#7aa2da", "#fbc8ac", "#abadaf", "#7fb884")
+levels(color_infections_sc_2_hc) <- c("#7aa2da", "#fbc8ac", "#abadaf", "#7fb884")
+levels(color_infections_sc_3_hc) <- c("#7aa2da", "#fbc8ac", "#abadaf", "#7fb884")
+levels(color_infections_sc_1_lc) <- c("#7aa2da", "#fbc8ac", "#abadaf", "#7fb884")
+levels(color_infections_sc_2_lc) <- c("#7aa2da", "#fbc8ac", "#abadaf", "#7fb884")
+levels(color_infections_sc_3_lc) <- c("#7aa2da", "#fbc8ac", "#abadaf", "#7fb884")
+```
+
+```{r fig.height=12, fig.width=12}
+# Open a pdf file
+pdf("./Clonal_network_analysis/figures/network_sc_1_hc_infections.pdf", width = 12, height = 12, pointsize = 8)
+# plot
+plot(cdr3_sc_1_hc_dist, layout = cdr3_sc_1_hc_layout, vertex.frame.color = NA, vertex.label = NA,
+     vertex.color = as.character(color_infections_sc_1_hc), 
+     vertex.size = 2, edge.width = 0.2, edge.color = "gray60",rescale = TRUE)
+     legend(x = 0.95, y = 1, c("CA07;CA07", "PBS;CA07", "PBS;PBS", "PR8;CA07"), pch = 21, col = "#777777",
+     pt.bg = levels(color_infections_sc_1_hc), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+# close
+dev.off()
+```
+
+```{r fig.height=12, fig.width=12}
+# Open a pdf file
+pdf("./Clonal_network_analysis/figures/network_sc_2_hc_infections.pdf", width = 12, height = 12, pointsize = 8)
+# plot
+plot(cdr3_sc_2_hc_dist, layout = cdr3_sc_2_hc_layout, vertex.frame.color = NA, vertex.label = NA,
+     vertex.color = as.character(color_infections_sc_2_hc), 
+     vertex.size = 2, edge.width = 0.2, edge.color = "gray60",rescale = TRUE)
+     legend(x = 0.95, y = 1, c("CA07;CA07", "PBS;CA07", "PBS;PBS", "PR8;CA07"), pch = 21, col = "#777777",
+     pt.bg = levels(color_infections_sc_2_hc), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+# close
+dev.off()
+```
+
+```{r fig.height=12, fig.width=12}
+# Open a pdf file
+pdf("./Clonal_network_analysis/figures/network_sc_3_hc_infections.pdf", width = 12, height = 12, pointsize = 8)
+# plot
+plot(cdr3_sc_3_hc_dist, layout = cdr3_sc_3_hc_layout, vertex.frame.color = NA, vertex.label = NA,
+     vertex.color = as.character(color_infections_sc_3_hc), 
+     vertex.size = 2, edge.width = 0.2, edge.color = "gray60",rescale = TRUE)
+     legend(x = 0.95, y = 1, c("CA07;CA07", "PBS;CA07", "PBS;PBS", "PR8;CA07"), pch = 21, col = "#777777",
+     pt.bg = levels(color_infections_sc_3_hc), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+# close
+dev.off()
+```
+
+```{r fig.height=12, fig.width=12}
+# Open a pdf file
+pdf("./Clonal_network_analysis/figures/network_sc_1_lc_infections.pdf", width = 12, height = 12, pointsize = 8)
+# plot
+plot(cdr3_sc_1_lc_dist, layout = cdr3_sc_1_lc_layout, vertex.frame.color = NA, vertex.label = NA,
+     vertex.color = as.character(color_infections_sc_1_lc), 
+     vertex.size = 2, edge.width = 0.2, edge.color = "gray60",rescale = TRUE)
+     legend(x = 0.95, y = 1, c("CA07;CA07", "PBS;CA07", "PBS;PBS", "PR8;CA07"), pch = 21, col = "#777777",
+     pt.bg = levels(color_infections_sc_1_lc), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+# close
+dev.off()
+```
+
+```{r fig.height=12, fig.width=12}
+# Open a pdf file
+pdf("./Clonal_network_analysis/figures/network_sc_2_lc_infections.pdf", width = 12, height = 12, pointsize = 8)
+# plot
+plot(cdr3_sc_2_lc_dist, layout = cdr3_sc_2_lc_layout, vertex.frame.color = NA, vertex.label = NA,
+     vertex.color = as.character(color_infections_sc_2_lc), 
+     vertex.size = 2, edge.width = 0.2, edge.color = "gray60",rescale = TRUE)
+     legend(x = 0.95, y = 1, c("CA07;CA07", "PBS;CA07", "PBS;PBS", "PR8;CA07"), pch = 21, col = "#777777",
+     pt.bg = levels(color_infections_sc_2_lc), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+# close
+dev.off()
+```
+
+```{r fig.height=12, fig.width=12}
+# Open a pdf file
+pdf("./Clonal_network_analysis/figures/network_sc_3_lc_infections.pdf", width = 12, height = 12, pointsize = 8)
+# plot
+plot(cdr3_sc_3_lc_dist, layout = cdr3_sc_3_lc_layout, vertex.frame.color = NA, vertex.label = NA,
+     vertex.color = as.character(color_infections_sc_1_hc), 
+     vertex.size = 2, edge.width = 0.2, edge.color = "gray60",rescale = TRUE)
+     legend(x = 0.95, y = 1, c("CA07;CA07", "PBS;CA07", "PBS;PBS", "PR8;CA07"), pch = 21, col = "#777777",
+     pt.bg = levels(color_infections_sc_3_lc), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+# close
+dev.off()
+```
+
+```{r}
+# Split the mouse samples CDR3 by infection group
+cdr3_sc_hc_CA07_CA07_1 <- cdr3_sc_hc %>% filter(Infections == "CA07;CA07" & Replicate == "1")
+cdr3_sc_hc_CA07_CA07_2 <- cdr3_sc_hc %>% filter(Infections == "CA07;CA07" & Replicate == "2")
+cdr3_sc_hc_CA07_CA07_3 <- cdr3_sc_hc %>% filter(Infections == "CA07;CA07" & Replicate == "3")
+cdr3_sc_hc_PBS_CA07_1 <- cdr3_sc_hc %>% filter(Infections == "PBS;CA07" & Replicate == "1")
+cdr3_sc_hc_PBS_CA07_2 <- cdr3_sc_hc %>% filter(Infections == "PBS;CA07" & Replicate == "2")
+cdr3_sc_hc_PBS_CA07_3 <- cdr3_sc_hc %>% filter(Infections == "PBS;CA07" & Replicate == "3")
+cdr3_sc_hc_PBS_PBS_1 <- cdr3_sc_hc %>% filter(Infections == "PBS;PBS" & Replicate == "1")
+cdr3_sc_hc_PBS_PBS_2 <- cdr3_sc_hc %>% filter(Infections == "PBS;PBS" & Replicate == "2")
+cdr3_sc_hc_PBS_PBS_3 <- cdr3_sc_hc %>% filter(Infections == "PBS;PBS" & Replicate == "3")
+cdr3_sc_hc_PR8_CA07_1 <- cdr3_sc_hc %>% filter(Infections == "PR8;CA07" & Replicate == "1")
+cdr3_sc_hc_PR8_CA07_2 <- cdr3_sc_hc %>% filter(Infections == "PR8;CA07" & Replicate == "2")
+cdr3_sc_hc_PR8_CA07_3 <- cdr3_sc_hc %>% filter(Infections == "PR8;CA07" & Replicate == "3")
+
+cdr3_sc_lc_CA07_CA07_1 <- cdr3_sc_lc %>% filter(Infections == "CA07;CA07" & Replicate == "1")
+cdr3_sc_lc_CA07_CA07_2 <- cdr3_sc_lc %>% filter(Infections == "CA07;CA07" & Replicate == "2")
+cdr3_sc_lc_CA07_CA07_3 <- cdr3_sc_lc %>% filter(Infections == "CA07;CA07" & Replicate == "3")
+cdr3_sc_lc_PBS_CA07_1 <- cdr3_sc_lc %>% filter(Infections == "PBS;CA07" & Replicate == "1")
+cdr3_sc_lc_PBS_CA07_2 <- cdr3_sc_lc %>% filter(Infections == "PBS;CA07" & Replicate == "2")
+cdr3_sc_lc_PBS_CA07_3 <- cdr3_sc_lc %>% filter(Infections == "PBS;CA07" & Replicate == "3")
+cdr3_sc_lc_PBS_PBS_1 <- cdr3_sc_lc %>% filter(Infections == "PBS;PBS" & Replicate == "1")
+cdr3_sc_lc_PBS_PBS_2 <- cdr3_sc_lc %>% filter(Infections == "PBS;PBS" & Replicate == "2")
+cdr3_sc_lc_PBS_PBS_3 <- cdr3_sc_lc %>% filter(Infections == "PBS;PBS" & Replicate == "3")
+cdr3_sc_lc_PR8_CA07_1 <- cdr3_sc_lc %>% filter(Infections == "PR8;CA07" & Replicate == "1")
+cdr3_sc_lc_PR8_CA07_2 <- cdr3_sc_lc %>% filter(Infections == "PR8;CA07" & Replicate == "2")
+cdr3_sc_lc_PR8_CA07_3 <- cdr3_sc_lc %>% filter(Infections == "PR8;CA07" & Replicate == "3")
+
+# Compute all pairwise LV distance between the CDRH3 sequences
+cdr3_sc_infections <- lapply(ls(pattern = "cdr3_sc_hc_|cdr3_sc_lc_"), get)
+names(cdr3_sc_infections) <- ls(pattern = "cdr3_sc_hc_|cdr3_sc_lc_")
+
+cdr3_sc_infections_dist <- lapply(cdr3_sc_infections, function(x) stringdistmatrix(x %>% pull(CDR3.aa), method = "lv"))
+
+# Convert the dist object into a matrix
+# Set the matrix into binary, either under the threshold or not to determine whether edge will be drawn
+# Create graph based on set threshold
+cdr3_sc_infections_dist <- lapply(cdr3_sc_infections_dist, function(x) as.matrix(x))
+for(i in 1:length(cdr3_sc_infections_dist)){
+  rownames(cdr3_sc_infections_dist[[i]]) <- as.character(cdr3_sc_infections[[i]] %>% pull(CDR3.aa))
+  colnames(cdr3_sc_infections_dist[[i]]) <- as.character(cdr3_sc_infections[[i]] %>% pull(CDR3.aa))
+  cdr3_sc_infections_dist[[i]][cdr3_sc_infections_dist[[i]] <= threshold] <- 1
+  cdr3_sc_infections_dist[[i]][cdr3_sc_infections_dist[[i]] > threshold] <- 0
+  cdr3_sc_infections_dist[[i]] <- igraph::simplify(graph.adjacency(cdr3_sc_infections_dist[[i]], weighted = T, mode = "undirected"))
+}
+```
+
+```{r eval=FALSE, include=FALSE}
+cdr3_sc_infections_layout <- lapply(cdr3_sc_infections_dist, function(x) layout.forceatlas2(x, directed = FALSE, iterations = 200, linlog = FALSE, pos = NULL, nohubs = FALSE, k = 400, gravity = 1, ks = 0.1, ksmax = 10, delta = 1, center = NULL, tolerance = 0.1, dim = 2, plotstep = 100, plotlabels = FALSE))
+
+map2(.x = cdr3_sc_infections_layout, .y = names(cdr3_sc_infections_layout), function(x,y) saveRDS(x, paste0("Clonal_network_analysis/layout/",y,"_layout")))
+```
+
+
+```{r}
+path_infections <- list.files("./Clonal_network_analysis/layout", full.names = T)
+cdr3_sc_infections_layout <- lapply(path_infections, function(x) readRDS(x))
+names(cdr3_sc_infections_layout) <- str_replace_all(list.files("./Clonal_network_analysis/layout"), "layout", "binding")
+
+# Create color vector for binding
+color_binding_sc <- lapply(cdr3_sc_infections, function(x) factor(x %>% pull(HA.binding)))
+for (i in 1:length(color_binding_sc)){
+ levels(color_binding_sc[[i]]) <- c("CA07" = "#E41A1C", "Cross" = "#984EA3", "PR8" = "#377EB8")
+}
+```
+
+```{r}
+# Color the network by HA binding
+for( i in 1:length(cdr3_sc_infections_layout)){
+# Open a pdf file
+pdf(paste0("./Clonal_network_analysis/figures/", names(cdr3_sc_infections_layout)[i], ".pdf"), width = 12, height = 12, pointsize = 8)
+# plot
+plot(cdr3_sc_infections_dist[[i]], layout = cdr3_sc_infections_layout[[i]], vertex.frame.color = NA, vertex.label = NA,
+     vertex.color = as.character(color_binding_sc[[i]]), 
+     vertex.size = 2, edge.width = 0.2, edge.color = "gray60", rescale = TRUE)
+     legend(x = 0.95, y = 1, c("CA07", "Cross", "PR8"), pch = 21, col = "#777777",
+     pt.bg = levels(color_binding_sc[[i]]), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+# close
+dev.off()
+}
+```
+
+# Construct clonal network graph from top 1000 bulk clones, colored by HA binding
+```{r message=FALSE, warning=FALSE}
+# Load the data
+path_bulk_hc <- list.files("./Clonal_network_analysis/cdr3_bulk_top1000/", pattern = "hc", full.names = T)
+path_bulk_lc <- list.files("./Clonal_network_analysis/cdr3_bulk_top1000/", pattern = "lc", full.names = T)
+
+cdr3_bulk_hc <- map(path_bulk_hc, function(x) read_tsv(x))
+names(cdr3_bulk_hc) <- str_sub(list.files("./Clonal_network_analysis/cdr3_bulk_top1000/", pattern = "hc"), end = -5L)
+cdr3_bulk_lc <- map(path_bulk_lc, function(x) read_tsv(x))
+names(cdr3_bulk_lc) <- str_sub(list.files("./Clonal_network_analysis/cdr3_bulk_top1000/", pattern = "lc"), end = -5L)
+
+# Calculate the pairwise distance between CDR3 sequences
+threshold <- 1 # Setting the threshold for LV distance, CDR3 sequences with LV distance 1 will be connected
+```
+
+```{r}
+# Compute all pairwise LV distance between the CDR3 sequences
+cdr3_bulk_hc_dist <- lapply(cdr3_bulk_hc, function(x) stringdistmatrix(x %>% pull(CDR3.aa), method = "lv"))
+cdr3_bulk_lc_dist <- lapply(cdr3_bulk_lc, function(x) stringdistmatrix(x %>% pull(CDR3.aa), method = "lv"))
+
+# Convert the dist object into a matrix
+# Set the matrix into binary, either under the threshold or not to determine whether edge will be drawn
+# Create graph based on set threshold
+cdr3_bulk_hc_dist <- lapply(cdr3_bulk_hc_dist, function(x) as.matrix(x))
+for(i in 1:length(cdr3_bulk_hc_dist)){
+  rownames(cdr3_bulk_hc_dist[[i]]) <- as.character(cdr3_bulk_hc[[i]] %>% pull(CDR3.aa))
+  colnames(cdr3_bulk_hc_dist[[i]]) <- as.character(cdr3_bulk_hc[[i]] %>% pull(CDR3.aa))
+  cdr3_bulk_hc_dist[[i]][cdr3_bulk_hc_dist[[i]] <= threshold] <- 1
+  cdr3_bulk_hc_dist[[i]][cdr3_bulk_hc_dist[[i]] > threshold] <- 0
+  cdr3_bulk_hc_dist[[i]] <- igraph::simplify(graph.adjacency(cdr3_bulk_hc_dist[[i]], weighted = T, mode = "undirected"))
+}
+
+cdr3_bulk_lc_dist <- lapply(cdr3_bulk_lc_dist, function(x) as.matrix(x))
+for(i in 1:length(cdr3_bulk_lc_dist)){
+  rownames(cdr3_bulk_lc_dist[[i]]) <- as.character(cdr3_bulk_lc[[i]] %>% pull(CDR3.aa))
+  colnames(cdr3_bulk_lc_dist[[i]]) <- as.character(cdr3_bulk_lc[[i]] %>% pull(CDR3.aa))
+  cdr3_bulk_lc_dist[[i]][cdr3_bulk_lc_dist[[i]] <= threshold] <- 1
+  cdr3_bulk_lc_dist[[i]][cdr3_bulk_lc_dist[[i]] > threshold] <- 0
+  cdr3_bulk_lc_dist[[i]] <- igraph::simplify(graph.adjacency(cdr3_bulk_lc_dist[[i]], weighted = T, mode = "undirected"))
+}
+```
+
+```{r eval=FALSE, include=FALSE}
+cdr3_bulk_hc_layout <- lapply(cdr3_bulk_hc_dist, function(x) layout.forceatlas2(x, directed = FALSE, iterations = 200, linlog = FALSE, pos = NULL, nohubs = FALSE, k = 400, gravity = 1, ks = 0.1, ksmax = 10, delta = 1, center = NULL, tolerance = 0.1, dim = 2, plotstep = 100, plotlabels = FALSE))
+
+cdr3_bulk_lc_layout <- lapply(cdr3_bulk_lc_dist, function(x) layout.forceatlas2(x, directed = FALSE, iterations = 200, linlog = FALSE, pos = NULL, nohubs = FALSE, k = 400, gravity = 1, ks = 0.1, ksmax = 10, delta = 1, center = NULL, tolerance = 0.1, dim = 2, plotstep = 100, plotlabels = FALSE))
+
+map2(.x = cdr3_bulk_hc_layout, .y = names(cdr3_bulk_hc_layout), function(x,y) saveRDS(x, paste0("Clonal_network_analysis/layout_bulk/",y,"_layout")))
+
+map2(.x = cdr3_bulk_hc_layout, .y = names(cdr3_bulk_lc_layout), function(x,y) saveRDS(x, paste0("Clonal_network_analysis/layout_bulk/",y,"_layout")))
+```
+
+```{r}
+path_bulk_hc_layout <- list.files("./Clonal_network_analysis/layout_bulk/", pattern = "hc", full.names = T)
+path_bulk_lc_layout <- list.files("./Clonal_network_analysis/layout_bulk/", pattern = "lc", full.names = T)
+
+cdr3_bulk_hc_layout <- lapply(path_bulk_hc_layout, function(x) readRDS(x))
+cdr3_bulk_lc_layout <- lapply(path_bulk_lc_layout, function(x) readRDS(x))
+
+names(cdr3_bulk_hc_layout) <- str_replace_all(list.files("./Clonal_network_analysis/layout_bulk/", pattern = "hc"), "layout", "binding")
+
+names(cdr3_bulk_lc_layout) <- str_replace_all(list.files("./Clonal_network_analysis/layout_bulk/", pattern = "lc"), "layout", "binding")
+
+# Create color vector for binding (use gray for NA)
+color_binding <- c("CA07" = "#E41A1C", "Cross" = "#984EA3", "PR8" = "#377EB8")
+
+color_binding_bulk_hc <- lapply(cdr3_bulk_hc, function(x) factor(x %>% pull(HA.binding)))
+
+#for (i in 1:length(color_binding_bulk_hc)){
+ #levels(color_binding_bulk_hc[[i]]) <- c("CA07" = "#E41A1C", "Cross" = "#984EA3", "PR8" = "#377EB8")
+#}
+
+for (i in 1:length(color_binding_bulk_hc)){
+  color_binding_bulk_hc[[i]] <- str_replace_all(color_binding_bulk_hc[[i]], "CA07", "#E41A1C")
+  color_binding_bulk_hc[[i]] <- str_replace_all(color_binding_bulk_hc[[i]], "Cross", "#984EA3")
+  color_binding_bulk_hc[[i]] <- str_replace_all(color_binding_bulk_hc[[i]], "PR8", "#377EB8")
+}
+
+color_binding_bulk_lc <- lapply(cdr3_bulk_lc, function(x) factor(x %>% pull(HA.binding)))
+
+#for (i in 1:length(color_binding_bulk_lc)){
+ #levels(color_binding_bulk_lc[[i]]) <- c("CA07" = "#E41A1C", "Cross" = "#984EA3", "PR8" = "#377EB8")
+#}
+
+for (i in 1:length(color_binding_bulk_lc)){
+  color_binding_bulk_lc[[i]] <- str_replace_all(color_binding_bulk_lc[[i]], "CA07", "#E41A1C")
+  color_binding_bulk_lc[[i]] <- str_replace_all(color_binding_bulk_lc[[i]], "Cross", "#984EA3")
+  color_binding_bulk_lc[[i]] <- str_replace_all(color_binding_bulk_lc[[i]], "PR8", "#377EB8")
+}
+```
+
+```{r}
+# Color the network by HA binding
+for(i in 1:length(cdr3_bulk_hc_layout)){
+# Open a pdf file
+pdf(paste0("./Clonal_network_analysis/figures/", names(cdr3_bulk_hc_layout)[i], ".pdf"), width = 12, height = 12, pointsize = 8)
+# plot
+plot(cdr3_bulk_hc_dist[[i]], layout = cdr3_bulk_hc_layout[[i]], vertex.frame.color = "black", vertex.label = NA,
+     vertex.color = as.character(color_binding_bulk_hc[[i]]),
+     vertex.size = 2, edge.width = 0.2, edge.color = "gray60", rescale = TRUE)
+     legend(x = 0.95, y = 1, c("CA07", "Cross", "PR8"), pch = 21, col = "#777777",
+     pt.bg = color_binding, 
+     pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+# close
+dev.off()
+}
+```
+
+```{r}
+# Color the network by HA binding
+for(i in 1:length(cdr3_bulk_lc_layout)){
+# Open a pdf file
+pdf(paste0("./Clonal_network_analysis/figures/", names(cdr3_bulk_lc_layout)[i], ".pdf"), width = 12, height = 12, pointsize = 8)
+# plot
+plot(cdr3_bulk_lc_dist[[i]], layout = cdr3_bulk_lc_layout[[i]], vertex.frame.color = "black", vertex.label = NA,
+     vertex.color = as.character(color_binding_bulk_lc[[i]]), 
+     vertex.size = 2, edge.width = 0.2, edge.color = "gray60", rescale = TRUE)
+     legend(x = 0.95, y = 1, c("CA07", "Cross", "PR8"), pch = 21, col = "#777777",
+     #pt.bg = levels(color_binding_bulk_lc[[i]]), 
+     pt.bg = color_binding, pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+# close
+dev.off()
+}
+```

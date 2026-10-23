@@ -1,0 +1,540 @@
+---
+title: "mBMPC_Bulkseq"
+author: "Khang"
+date: "`r Sys.Date()`"
+output:
+  pdf_document: 
+    keep_tex: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,message = FALSE,warning = FALSE)
+knitr::opts_chunk$set(dev = "png",
+                      dpi = 300, out.width = "100%", out.height = "100%",
+                      echo = FALSE,
+                      cache = TRUE)
+```
+
+```{r libs, include=FALSE}
+library(immunarch)
+library(tidyverse)
+library(vegan)
+library(pheatmap)
+library(ggplotify)
+library(ggpubr)
+library(cowplot)
+library(ggbeeswarm)
+library(RColorBrewer)
+library(magick)
+library(data.table)
+library(cluster)
+library(scales)
+library(rstatix)
+```
+
+```{r}
+data_all <- readRDS("./data_rep_all")
+
+# Fix the metadata remove the H1N1 preix
+data_all$meta$Infection_1 <-  str_remove_all(data_all$meta$Infection_1, "H1N1_")
+data_all$meta$Infection_2 <-  str_remove_all(data_all$meta$Infection_2, "H1N1_")
+data_all$meta$Infections <-  str_remove_all(data_all$meta$Infections, "H1N1_")
+```
+
+# Sample description
+In each of the 3 biological replicates, the bone marrow from 32 mice (8 mice in each group based on two sequential infections: PBS;PBS, PBS;CA07; CA07;CA07, and PR8;CA07) were extracted and CD138+ positive B cells were isolated. The B cells were made into a bulkseq BCR library using NEBNext Immune Sequencing Kit (Mouse) 5'RACE protocol with all isotypes in one tube. The library was sequenced by Miseq v3 (300 bp paired end) covering the full VDJ region. Resulting fastq files were aligned and clonotyped by MiXCR v4.1.00 with UMI correction and a custom BALB/c mice germline reference library (from OGRDB). Clonotype tables were filtered for productive clones and full-length (no missing regions). Repertoire analysis was perfomed in Immunarch. 
+
+# Clonotype count (after filtering out unidentified and misidentified isotype clonotypes) and Number of reads per repertoire (after alignment and UMI error correction)
+
+```{r Clonotype_and_read_count, echo=FALSE, fig.height=20, fig.width=20, message=FALSE, warning=FALSE}
+volume_all <- repExplore(data_all$data, "volume")
+volume_all <- merge(volume_all, data_all$meta)
+
+p_vol_heavy <- ggplot(data = volume_all[str_which(volume_all$Sample, "hc"),]) +
+  geom_col(aes(x = Sample_Number, y = Volume, fill = Infections), show.legend = T, color = "black") +
+  #scale_y_continuous(limits = c(0, 30000)) +
+  theme_half_open() +
+  theme(axis.text.x = element_text(angle = 0), legend.position = "bottom") + #Rotate text
+  labs(title = "Unique clonotype count heavy chain by replicate", x = "Sample", y = "Count", fill = "Infections") +
+  #geom_text(aes(x = Sample_Number, y = Volume, label = Volume), vjust = -0.3, size = 3, position = position_dodge(width = 0.9)) +
+  facet_wrap(vars(Replicate))
+
+p_vol_light <- ggplot(data = volume_all[str_which(volume_all$Sample, "lc"),]) +
+  geom_col(aes(x = Sample_Number, y = Volume, fill = Infections), show.legend = T, color = "black") +
+  #scale_y_continuous(limits = c(0, 30000)) +
+  theme_half_open() +
+  theme(axis.text.x = element_text(angle = 0), legend.position = "bottom") + #Rotate text
+  labs(title = "Unique clonotype count light chain by replicate", x = "Sample", y = "Count", fill = "Infections") +
+  #geom_text(aes(x = Sample_Number, y = Volume, label = Volume), vjust = -0.3, size = 3, position = position_dodge(width = 0.9)) +
+  facet_wrap(vars(Replicate))
+
+read_all <- repExplore(data_all$data, "clones")
+read_all <- merge(read_all, data_all$meta)
+
+p_read_heavy <- ggplot(data = volume_all[str_which(read_all$Sample, "hc"),]) +
+  geom_col(aes(x = Sample_Number, y = Volume, fill = Infections), show.legend = T, color = "black") +
+  #scale_y_continuous(limits = c(0, 30000)) +
+  theme_half_open() +
+  theme(axis.text.x = element_text(angle = 0), legend.position = "bottom") + #Rotate text
+  labs(title = "Unique UMI count heavy chain by replicate", x = "Sample", y = "Count", fill = "Infections") +
+  #geom_text(aes(x = Sample_Number, y = Volume, label = Volume), vjust = -0.3, size = 3, position = position_dodge(width = 0.9)) +
+  facet_wrap(vars(Replicate))
+
+p_read_light <- ggplot(data = volume_all[str_which(read_all$Sample, "lc"),]) +
+  geom_col(aes(x = Sample_Number, y = Volume, fill = Infections), show.legend = T, color = "black") +
+  #scale_y_continuous(limits = c(0, 30000)) +
+  theme_half_open() +
+  theme(axis.text.x = element_text(angle = 0), legend.position = "bottom") + #Rotate text
+  labs(title = "Unique UMI count light chain by replicate", x = "Sample", y = "Count", fill = "Infections") +
+  #geom_text(aes(x = Sample_Number, y = Volume, label = Volume), vjust = -0.3, size = 3, position = position_dodge(width = 0.9)) +
+  facet_wrap(vars(Replicate))
+
+plot_grid(p_read_heavy, p_read_light, p_vol_heavy, p_vol_light, ncol = 1)
+```
+
+**Figure 1: Number of unique clonotypes and number of unique consensus read (assembled from UMI).** Each unique read is a collapse of consensus UMI sequence (with lower threshold of UMI group size of 1). Each clonotype is a unique VDJ sequence. Each sample is colored by their infection status. On the first replicates, a few samples were highly enriched and made of the majority of reads. on the second and third replicates, the reads were more evenly distributed.
+
+```{r Clonotype_and_read_count_box, fig.height=6, fig.width=12}
+p_bee_vol_hc <- ggplot(data = volume_all[str_which(volume_all$Sample, "hc"),], mapping = aes(x = Infections, y = Volume, colour = Infections)) +
+  geom_beeswarm(dodge.width= 0.5, cex = 1.5, show.legend = T) +
+  scale_y_continuous(limits = c(0, max(volume_all$Volume))) +
+  geom_hline(yintercept = 1000) +
+  theme_half_open() +
+  theme(axis.text.x = element_text(angle = 0), legend.position = "bottom") + #Rotate text
+  labs(title = "Unique clonotype count heavy chain by infection type", x = "Infections", y = "Count", fill = "Infections")
+
+p_bee_vol_lc <- ggplot(data = volume_all[str_which(volume_all$Sample, "lc"),], mapping = aes(x = Infections, y = Volume, colour = Infections)) +
+  geom_beeswarm(dodge.width= 0.5, cex = 1.5, show.legend = T) +
+  scale_y_continuous(limits = c(0, max(volume_all$Volume))) +
+  geom_hline(yintercept = 1000) +
+  theme_half_open() +
+  theme(axis.text.x = element_text(angle = 0), legend.position = "bottom") + #Rotate text
+  labs(title = "Unique clonotype count light chain by infection type", x = "Infections", y = "Count", fill = "Infections")
+
+plot_grid(p_bee_vol_hc, p_bee_vol_lc, ncol = 2)
+```
+
+**Figure 2: Number of unique clonotypes from all 3 replicates together.** Most sample ranged from 1000 to 10000 clonotypes per mouse, with the exception of 2 very large PBS samples, and 1 CA07, 1 PBS samples having less than 1000 clones, these samples will be excluded from further analysis since their size is too small, repertoire-based metrics will be distorted due to under sampling.
+
+```{r}
+# Remove the smallest samples (less than 1000 clonotypes) from the dataset
+small_samples <- volume_all$Sample[which(volume_all$Volume < 1000)]
+data_all$data <- data_all$data[names(data_all$data) %in% small_samples == FALSE]
+data_all$meta <- data_all$meta[data_all$meta$Sample %in% small_samples == FALSE,]
+```
+
+\newpage
+
+# Isotype distribution (IgD, IgE, and IgL3 are excluded due to very low frequency < 0.1%)
+
+```{r Isotype distribution, fig.height=10, fig.width=12}
+# Sum up the count of each isotype in a sample
+isotype_prop <- map2_dfr(.x = data_all$data, .y = names(data_all$data), function (x,y) x %>% group_by(C.name) %>% summarize(Proportion = sum(Proportion), Sample = y))
+isotype_prop$Proportion <- round(isotype_prop$Proportion,3)
+
+# Reduce all IgG and IgL subtype to just IgG and IgL and sum up
+#isotype_prop$C.name[str_which(isotype_prop$C.name, "^IGHG")] <- "IGHG"
+#isotype_prop$C.name[str_which(isotype_prop$C.name, "^IGLC")] <- "IGLC"
+
+isotype_prop <- isotype_prop %>% group_by(C.name, Sample) %>% mutate(Proportion = sum(Proportion))
+isotype_prop <- distinct(isotype_prop) # Reomove duplicate IgG rows
+isotype_prop <- merge(isotype_prop, data_all$meta)
+
+isotype_prop <- isotype_prop %>% filter(C.name != "IGHD" & C.name != "IGHE" & C.name != "IGLC3")
+
+# Stat test for difference within a group (group by Infections)
+isotype_kruskal <- isotype_prop %>% group_by(C.name) %>% kruskal_test(Proportion~Infections)
+# Calculate the effect size of the infection (how much infections contribute to variation in isotype proportion)
+isotype_kruskal_eff <- isotype_prop %>% group_by(C.name) %>% kruskal_effsize(Proportion~Infections)
+
+# In the group with difference, calculate pairwise mean comparison with multiple testing correction
+isotype_pwc <- isotype_prop %>% group_by(C.name) %>% wilcox_test(Proportion~Infections, p.adjust.method = "bonferroni")
+
+# Auto add coordinates for plotting
+isotype_pwc <- isotype_pwc %>% add_xy_position(x = "Infections")
+
+# Remove the light chain from the pairwise comparison
+hc_pwc <- isotype_pwc %>% filter(C.name != "IGKC" & C.name != "IGLC1" & C.name != "IGLC2")
+
+p_hc_prop <-  ggplot(data = isotype_prop[str_which(isotype_prop$Sample, "hc"),]) +
+  geom_violin(mapping = aes(x = Infections, y = Proportion, fill = Infections), outlier.shape = NA) +
+  geom_boxplot(mapping = aes(x = Infections, y = Proportion, fill = Infections), width = 0.1) +
+  scale_fill_brewer(type = "qual", palette = "Set3") +
+  stat_compare_means(aes(x = Infections, y = Proportion), method = "kruskal.test") +
+  stat_pvalue_manual(data = hc_pwc, hide.ns = TRUE) +
+  theme_half_open() +
+  theme(axis.text.x = element_text(angle = 0), legend.position = "bottom") + #Rotate text 90 degrees
+  labs(title = "Isotype distribution by condition", x = "Infections", y = " Repertoire proportion", fill = "Infections") +
+  facet_wrap(~C.name)
+
+p_hc_prop
+```
+
+```{r Lc_distribution, fig.height=5, fig.width=12}
+# Keep the light chain from the pairwise comparison
+lc_pwc <- isotype_pwc %>% filter(C.name == "IGKC" | C.name == "IGLC1" | C.name == "IGLC2")
+
+p_lc_prop <-  ggplot(data = isotype_prop[str_which(isotype_prop$Sample, "lc"),]) +
+  geom_violin(mapping = aes(x = Infections, y = Proportion, fill = Infections), outlier.shape = NA) +
+  geom_boxplot(mapping = aes(x = Infections, y = Proportion, fill = Infections), width = 0.1) +
+  scale_fill_brewer(type = "qual", palette = "Set3") +
+  stat_compare_means(aes(x = Infections, y = Proportion), method = "kruskal.test") +
+  stat_pvalue_manual(data = lc_pwc, hide.ns = TRUE) +
+  theme_half_open() +
+  theme(axis.text.x = element_text(angle = 0), legend.position = "bottom") + #Rotate text 90 degrees
+  labs(title = "Light chain distribution by condition", x = "Infections", y = " Repertoire proportion", fill = "Infections") +
+  facet_wrap(~C.name)
+
+p_lc_prop
+```
+
+**Figure 3: Proportion of sequencing library occupied by each condition.** Mice samples with infections have elevated proportion of IgG, espcially IgG2A and IgG1 compared to negative controls (PBS;PBS). Specifically, mice with only one infection (PBS;CA07) also have a lower proportion of IgG1 and IgG2A compared to mice with 2 infections (CA07;CA07 and PR8;CA07), exhibiting a response to infections detectable in BMPCs.
+
+\newpage
+
+# Clonal proportions
+
+```{r Clonal_proportions, echo=FALSE, fig.height=12, fig.width=8, message=FALSE, warning=FALSE}
+# Proportion of most abundant clonotypes
+#Proportion of low count clonotypes
+clonality_top_hc <- repClonality(data_all$data[str_which(names(data_all$data), "hc")], .method = "top", .head = c(10, 100, 1000, 5000, 30000))
+
+clonality_homeo_hc <- repClonality(data_all$data[str_which(names(data_all$data), "hc")], .method = "homeo", .clone.types = c(Small = 1e-04, Medium = 0.001, Large = 0.01,
+    Hyperexpanded = 1))
+
+vis(clonality_top_hc, .meta = data_all$meta, .by = "Infections") / vis(clonality_homeo_hc, .meta = data_all$meta, .by = "Infections")
+```
+
+**Figure 4: Clonality measurements with regards to relative abundance and top clonotypes proportions.** As expected from plasma cells, the proportion of expanded clonotypes are quite high. The relative abundance of clonotypes remains stable across samples regardless of treatments.
+
+# CDR3 length distribution
+
+```{r CDRH3_length_distribution, fig.height=10, fig.width=12}
+cdr3_length_all <- repExplore(data_all$data, .method = "len", .col = "aa")
+cdr3_length_all$Chain <- str_split(cdr3_length_all$Sample, "_", simplify = T)[,4]
+cdr3_length_all <- cdr3_length_all %>% group_by(Sample) %>% mutate(Fraction = Count/sum(Count))
+cdr3_length_all <- merge(cdr3_length_all, data_all$meta)
+
+cdr3_length_infections <- cdr3_length_all %>% group_by(Length, Chain, Infections) %>% summarise(Fraction_mean = mean(Fraction), Fraction_sd = sd(Fraction, na.rm = T), Count_sum = sum(Count))
+
+# Create a data frame to store the annotation of individual facets
+df_cdr3_facets <- cdr3_length_infections %>% group_by(Chain, Infections) %>% summarize(min(Length), max(Length), median(rep.int(Length, Count_sum)))
+
+# Calculate accurate median from aggregated data by multiplying the value with the count of that value
+df_cdr3_facets$`min(Length)` <- paste0("Min: ", df_cdr3_facets$`min(Length)`)
+df_cdr3_facets$`max(Length)` <- paste0("Max: ", df_cdr3_facets$`max(Length)`)
+df_cdr3_facets$`median(rep.int(Length, Count_sum))` <- paste0("Median: ", df_cdr3_facets$`median(rep.int(Length, Count_sum))`)
+
+p_cdrh3_len <- ggplot(cdr3_length_infections[which(cdr3_length_infections$Chain == "hc"),]) +
+  geom_col(aes(x = Length, y = Fraction_mean, fill = Infections), color = "black") +
+  scale_fill_brewer(type = "qual", palette = "Set3") +
+  geom_errorbar(aes(x = Length, ymin = Fraction_mean-Fraction_sd, ymax = Fraction_mean+Fraction_sd)) +
+  scale_x_continuous(breaks = seq(min(cdr3_length_infections$Length), max(cdr3_length_infections$Length), by = 1)) +
+  geom_text(x = 30, y = 0.20, aes(label =  `min(Length)`), data = df_cdr3_facets[str_which(df_cdr3_facets$Chain, "hc"),]) +
+  geom_text(x = 30, y = 0.19, aes(label =  `max(Length)`), data = df_cdr3_facets[str_which(df_cdr3_facets$Chain, "hc"),]) +
+  geom_text(x = 30, y = 0.18, aes(label =  `median(rep.int(Length, Count_sum))`), data = df_cdr3_facets[str_which(df_cdr3_facets$Chain, "hc"),]) +
+  labs(title = "CDRH3aa length distribution by condition", x = "CDR3 length (aa)", y = "Repertoire fraction") +
+  theme_half_open() +
+  theme(legend.position = "bottom") +
+  facet_wrap(vars(Infections))
+
+p_cdrl3_len <- ggplot(cdr3_length_infections[which(cdr3_length_infections$Chain == "lc"),]) +
+  geom_col(aes(x = Length, y = Fraction_mean, fill = Infections), color = "black") +   scale_fill_brewer(type = "qual", palette = "Set3") +
+  geom_errorbar(aes(x = Length, ymin = Fraction_mean-Fraction_sd, ymax = Fraction_mean+Fraction_sd)) +
+  scale_x_continuous(breaks = seq(min(cdr3_length_infections$Length), max(cdr3_length_infections$Length), by = 2)) +
+  geom_text(x = 40, y = 0.75, aes(label =  `min(Length)`), data = df_cdr3_facets[str_which(df_cdr3_facets$Chain, "lc"),]) +
+  geom_text(x = 40, y = 0.70, aes(label =  `max(Length)`), data = df_cdr3_facets[str_which(df_cdr3_facets$Chain, "lc"),]) +
+  geom_text(x = 40, y = 0.65, aes(label =  `median(rep.int(Length, Count_sum))`), data = df_cdr3_facets[str_which(df_cdr3_facets$Chain, "lc"),]) +
+  labs(title = "CDRL3aa length distribution by condition", x = "CDR3 length (aa)", y = "Repertoire fraction") +
+  theme_half_open() +
+  theme(legend.position = "bottom") +
+  facet_wrap(vars(Infections))
+
+p_cdrh3_len
+```
+
+```{r CDRL3_length_distribution, fig.height=10, fig.width=12}
+p_cdrl3_len
+```
+
+**Figure 5: CDR3 length distribution of each isotype.** The median length (in aa) of the CDR3 sequences is 13 for heavy chain samples, 11 for light chain samples. The distribution of CDR3 remains consistent between treatments. \newpage
+
+# V-gene usage
+
+```{r VH-gene_usage, fig.height=16, fig.width=12, message=FALSE, warning=FALSE}
+#V gene usage heavy chain
+gene_use_hv <- geneUsage(data_all$data[str_which(names(data_all$data), "hc")], .gene= c("musmus.ighv"), .ambig = "maj", .norm = TRUE, .quant = "count")
+gene_use_hv[is.na(gene_use_hv)] <- 0 # Replace NA with 0 for correlation
+
+gene_use_lv <- geneUsage(data_all$data[str_which(names(data_all$data), "lc")], .gene= c("musmus.iglv"), .ambig = "maj", .norm = TRUE, .quant = "count")
+gene_use_lv[is.na(gene_use_lv)] <- 0
+
+# Convert to matrix format for heatmap of gene usage
+gene_use_hv_mat <- gene_use_hv %>% column_to_rownames(var = "Names")
+gene_use_lv_mat <- gene_use_lv %>% column_to_rownames(var = "Names")
+
+pheatmap(gene_use_hv_mat, cluster_rows = F, cluster_cols = F,
+         angle_col = 90,
+         color = colorRampPalette(c("#f7fbff", "#08306b"))(length(seq(round(min(gene_use_hv_mat, na.rm = T), 2), round(max(gene_use_hv_mat, na.rm = T), 2), by = 0.01)))
+         )
+```
+
+\newpage
+
+```{r VL-gene_usage, fig.height=14, fig.width=12, message=FALSE, warning=FALSE}
+pheatmap(gene_use_lv_mat, cluster_rows = F, cluster_cols = F,
+         angle_col = 90, border_color = NA,
+         color = colorRampPalette(c("#f7fbff", "#08306b"))(length(seq(round(min(gene_use_lv_mat, na.rm = T), 2), round(max(gene_use_lv_mat, na.rm = T), 2), by = 0.01)))
+         )
+#Introduce the IMGT V gene naming scheme here so that people can understand (download the affirmed sequence table from OGRDB)
+```
+
+**Figure 6: V-gene usage.** The V gene name nomenclature is based on temporary names by Jackson et al.The V-gene sequence is determined by sequencing of BALBc mice. Only some of these V-gene have official IMGT names. On the heavy chain, IGHV-LLOE is the most frequent V-gene used, reaching over 70% in some samples, followed by IGHV-4X2I, IGHV-5VOM, IGHV-BISP, IGHV-GHLB, IGHV-H2OA, IGHV-ML5T (More information about these V-gene will be added later from OGRDB).
+
+\newpage
+
+# VH gene usage correlation
+
+```{r VH-gene_usage_correlation_pearson, fig.height=16, fig.width=16}
+vh_cor_pearson <- geneUsageAnalysis(gene_use_hv, .method = "cor", .cor = "pearson", .verbose = F)
+vh_cor_spearman <- geneUsageAnalysis(gene_use_hv, .method = "cor", .cor = "spearman", .verbose = F)
+
+# Create a separate df with rownames matching the sample names
+ann_df <- data_all$meta %>% column_to_rownames(var = "Sample") %>% select(Replicate, Infections)
+
+# Specify which color goes to which sample and isotype for the annotation
+ann_colors <- list(Replicate = brewer.pal(3, "Set1"),
+                   Infections = brewer.pal(4, "Set3"))
+
+names(ann_colors$Replicate) <- unique(ann_df$Replicate)
+names(ann_colors$Infections) <- unique(ann_df$Infections)
+
+# Calculate the distance based on correlation values
+dist_pearson <- as.dist(1-cor(gene_use_hv_mat, method = "pearson"))
+hc_pearson <- hclust(dist_pearson, method = "ward.D2")
+
+# set up panel of 2x3 plots:
+#par(mfrow=c(2,3))
+
+# plots for 2, 3, and 4 clusters:
+#plot(silhouette(cutree(hc_pearson,3),dist_pearson))
+#plot(silhouette(cutree(hc_pearson,4),dist_pearson))
+#plot(silhouette(cutree(hc_pearson,5),dist_pearson))
+#plot(silhouette(cutree(hc_pearson,6),dist_pearson))
+#plot(silhouette(cutree(hc_pearson,7),dist_pearson))
+#plot(silhouette(cutree(hc_pearson,8),dist_pearson))
+
+# Draw the cor plot (remember to make silhouette plot to justify cluster number)
+p_cor_pearson <- as.ggplot(pheatmap(vh_cor_pearson, cluster_rows = T, cluster_cols = T, na_col = "gray80", silent = T, clustering_method = "ward.D2",
+  clustering_distance_rows = dist_pearson, clustering_distance_cols = dist_pearson,
+  border_color = "white", angle_col = 90,
+  main = "VH-gene usage Pearson correlation",
+  display_numbers = F, number_color = "black", fontsize_number = 10,
+  annotation = ann_df, annotation_row = ann_df,
+  annotation_colors = ann_colors,
+  cutree_rows = 4 , cutree_cols = 4,
+  breaks = seq(round(min(vh_cor_pearson, na.rm = T),1), 1.0, by = 0.05),
+  legend_breaks = seq(round(min(vh_cor_pearson, na.rm = T),1), 1.0, by = 0.1),
+  legend_labels = c(seq(round(min(vh_cor_pearson, na.rm = T),1), 0.95, by = 0.1), "Cor"), # The breaks vector needs to be ONE element longer than the color vector
+  color = colorRampPalette(c("#ffffb2", "#e31a1c"))(length(seq(round(min(vh_cor_pearson, na.rm = T),1), 1.0, by = 0.05)))))
+
+p_cor_pearson
+```
+
+```{r VH-gene_usage_correlation_spearman, fig.height=16, fig.width=16}
+# Calculate the distance based on correlation values
+dist_spearman <- as.dist(1-cor(gene_use_hv_mat, method = "spearman"))
+hc_spearman <- hclust(dist_spearman, method = "ward.D2")
+
+# set up panel of 2x3 plots:
+#par(mfrow=c(2,3))
+
+# plots for 2, 3, and 4 clusters:
+#plot(silhouette(cutree(hc_spearman,3),dist_spearman))
+#plot(silhouette(cutree(hc_spearman,4),dist_spearman))
+#plot(silhouette(cutree(hc_spearman,5),dist_spearman))
+#plot(silhouette(cutree(hc_spearman,6),dist_spearman))
+#plot(silhouette(cutree(hc_spearman,7),dist_spearman))
+#plot(silhouette(cutree(hc_spearman,8),dist_spearman))
+
+# Draw the cor plot (remember to make silhouette plot to justify cluster number)
+p_cor_spearman <- as.ggplot(pheatmap(vh_cor_spearman, cluster_rows = T, cluster_cols = T, na_col = "gray80", silent = T, clustering_method = "ward.D2",
+  clustering_distance_rows = dist_spearman, clustering_distance_cols = dist_spearman,
+  border_color = "white", angle_col = 90,
+  main = "VH-gene usage Spearman correlation",
+  display_numbers = F, number_color = "black", fontsize_number = 10,
+  annotation = ann_df, annotation_row = ann_df,
+  annotation_colors = ann_colors,
+  cutree_rows = 4, cutree_cols = 4,
+  breaks = seq(round(min(vh_cor_spearman, na.rm = T),1), 1.0, by = 0.05),
+  legend_breaks = seq(round(min(vh_cor_spearman, na.rm = T),1), 1.0, by = 0.1),
+  legend_labels = c(seq(round(min(vh_cor_spearman, na.rm = T),1), 0.95, by = 0.1), "Cor"), # The breaks vector needs to be ONE element longer than the color vector
+  color = colorRampPalette(c("#ffffb2", "#e31a1c"))(length(seq(round(min(vh_cor_spearman, na.rm = T),1), 1.0, by = 0.05)))))
+
+p_cor_spearman
+```
+
+```{r V-gene usage cor scatter, fig.height=8, fig.width=8}
+plot_grid(ggplot(data = gene_use_hv, mapping = aes(Sample_06_2_hc, Sample_24_3_hc)) +
+  geom_point(shape = 1) + # make hollow points
+  geom_abline() +
+  geom_hline(yintercept = 0.01) +
+  geom_vline(xintercept = 0.01) +
+  scale_x_continuous(limits = c(0.00,0.15)) +
+  scale_y_continuous(limits = c(0.00,0.15)) +
+  geom_text(x = 0.05, y = 0.15, label = "Pearson's r: 0.29") +
+  theme_half_open(),
+ggplot(data = gene_use_hv, mapping = aes(Sample_24_2_hc, Sample_02_2_hc)) +
+  geom_point(shape = 1) + # make hollow points
+  geom_abline() +
+  geom_hline(yintercept = 0.01) +
+  geom_vline(xintercept = 0.01) +
+  scale_x_continuous(limits = c(0.00,0.15)) +
+  scale_y_continuous(limits = c(0.00,0.15)) +
+  geom_text(x = 0.05, y = 0.15, label = "Pearson's r: 0.60") +
+  theme_half_open(),
+ggplot(data = gene_use_hv, mapping = aes(Sample_24_2_hc, Sample_16_1_hc)) +
+  geom_point(shape = 1) + # make hollow points
+  geom_abline() +
+  geom_hline(yintercept = 0.01) +
+  geom_vline(xintercept = 0.01) +
+  scale_x_continuous(limits = c(0.00,0.15)) +
+  scale_y_continuous(limits = c(0.00,0.15)) +
+  geom_text(x = 0.05, y = 0.15, label = "Pearson's r: 0.42") +
+  theme_half_open(),
+ggplot(data = gene_use_hv, mapping = aes(Sample_27_2_hc, Sample_13_3_hc)) +
+  geom_point(shape = 1) + # make hollow points
+  geom_abline() +
+  geom_hline(yintercept = 0.01) +
+  geom_vline(xintercept = 0.01) +
+  scale_x_continuous(limits = c(0.00,0.15)) +
+  scale_y_continuous(limits = c(0.00,0.15)) +
+  geom_text(x = 0.05, y = 0.15, label = "Pearson's r: 0.98") +
+  theme_half_open())
+```
+
+**Figure 7: V-gene usage correlation in heavy chain.** After calculating the correlation coefficient for the VH-gene usage frequencies, hierarchical clustering does not clearly separate the samples by infection type. Rather, it mostly separate out the samples with the fewest sequencing reads, suggesting that low abundance libraries seems to have distorted frequency of V-gene usage. (in the future, maybe take into account only the top V gene for correlation)
+
+# VH-gene Jensen-Shannon divergence
+
+```{r fig.height=16, fig.width=16}
+vh_jsd <- geneUsageAnalysis(gene_use_hv, .method = "js", .verbose = F)
+
+p_jsd <- as.ggplot(pheatmap(vh_jsd, cluster_rows = T, cluster_cols = T, na_col = "gray80", silent = T, clustering_method = "ward.D2",
+  border_color = "white", angle_col = 90,
+  main = "VH-gene usage Jensen-Shannon divergence",
+  display_numbers = F, number_color = "black", fontsize_number = 10,
+  annotation = ann_df, annotation_row = ann_df,
+  annotation_colors = ann_colors,
+  cutree_rows = 4 , cutree_cols = 4,
+  breaks = seq(round(min(vh_jsd, na.rm = T),1), round(max(vh_jsd, na.rm = T),1), by = 0.02),
+  legend_breaks = seq(round(min(vh_jsd, na.rm = T),1), round(max(vh_jsd, na.rm = T),1), by = 0.1),
+  legend_labels = c(seq(round(min(vh_jsd, na.rm = T),1), round(max(vh_jsd, na.rm = T),1)-0.05, by = 0.1), "JSD"), # The breaks vector needs to be ONE element longer than the color vector
+  color = colorRampPalette(c("#4a1486", "#f7f7f7"))(length(seq(round(min(vh_jsd, na.rm = T),1), round(max(vh_jsd, na.rm = T),1), by = 0.02)))))
+
+p_jsd
+```
+
+**Figure 8: V-gene usage Jensen-Shannon divergence.** Comparing V-gene usage similarity by the Jensen-Shannon divergence metrics also give similar clustering, with no clear pattern visible with regards to the biological replicates or the infections of the mice.
+
+\newpage
+
+# Repertoire overlap (CDR3)
+
+```{r Repertoire_overlap_Jaccard, fig.height=16, fig.width=16}
+cdrh3_overlap_jaccard <- (repOverlap(data_all$data[str_which(names(data_all$data), "hc")], .method = "jaccard", .col = "aa", .verbose = F))
+#cdrh3_overlap_morisita <- (repOverlap(data_all$data[str_which(names(data_all$data), "hc")], .method = "morisita",.col = "aa",.verbose = F))
+
+#saveRDS(cdrh3_overlap_morisita, "./cdr3_overlap_morisita")
+cdrh3_overlap_morisita <- readRDS("./cdr3_overlap_morisita")
+
+p_cdr3_overlap_jaccard <- as.ggplot(
+  pheatmap(cdrh3_overlap_jaccard, cluster_rows = T, cluster_cols = T, clustering_method = "complete",
+           border_color = "white", na_col =  "white",
+           main = "Shared CDRH3 sequences Jaccard overlap",
+           angle_col = 90, display_numbers = F, number_color = "black",
+           number_format = "%.2f", silent = T, fontsize_number = 10,
+           annotation = ann_df, annotation_row = ann_df,
+           annotation_colors = ann_colors,
+           color = colorRampPalette(c("#f7f7f7", "#252525"))(25)
+           ))
+
+p_cdr3_overlap_jaccard
+
+```
+
+```{r Repertoire_overlap_Morisita, fig.height=16, fig.width=16}
+p_cdr3_overlap_morisita <- as.ggplot(
+  pheatmap(cdrh3_overlap_morisita, cluster_rows = T, cluster_cols = T, clustering_method = "complete",
+           border_color = "white", na_col =  "white",
+           main = "Shared CDRH3 sequences Morisita-Horn overlap",
+           angle_col = 90, display_numbers = F, number_color = "black",
+           number_format = "%.2f", silent = T, fontsize_number = 10,
+           annotation = ann_df, annotation_row = ann_df,
+           annotation_colors = ann_colors,
+           color = colorRampPalette(c("#f7f7f7", "#252525"))(25)
+           ))
+
+p_cdr3_overlap_morisita
+```
+
+**Figure 9: CDR3 sequence and clonotype overlap between samples** There are very few shared CDR3 sequences between mice, as expected. In addition, the mice with infections do not seem to have an increased number of shared CDR3 sequences.
+
+\newpage
+
+# Repertoire diversity and clonal expansion
+
+```{r fig.height=8, fig.width=8, message=FALSE, warning=FALSE}
+#Get clonal proportion of all samples
+freq_all <- lapply(data_all$data[str_which(names(data_all$data), "hc")], function(x) x$Proportion)
+
+# Calculate the Hill numbers
+hill_all <- lapply(data_all$data[str_which(names(data_all$data), "hc")],
+                           function (x) renyi(x$Proportion, scales = seq(0, 10, by = 0.2), hill = TRUE) %>%                                          as_tibble(.,rownames = "alpha"))
+
+# Convert diversity into Evenness
+evenness_all <- hill_all
+evenness_all <- sapply(hill_all, function (x) x$value <- x$value/x$value[[1]])
+evenness_all <- as_tibble(evenness_all)
+
+# Reshape the data from wide to long format
+evenness_all_long <- evenness_all
+evenness_all_long <- gather(evenness_all, key = "sample", value = "value", colnames(evenness_all)[1]:colnames(evenness_all)[ncol(evenness_all)])
+alpha <- seq(0, 10, by = 0.2)
+evenness_all_long <- cbind(evenness_all_long, alpha)
+evenness_all_long <- merge(evenness_all_long, data_all$meta)
+```
+
+```{r}
+cor_evenness_all_pearson <- cor(evenness_all, use = "everything", method = "pearson")
+diag(cor_evenness_all_pearson) <- NA
+
+dist_pearson_hill <- as.dist(1-cor(evenness_all, method = "pearson", use = "everything"))
+hc_pearson_hill <- hclust(dist_pearson_hill, method = "ward.D2")
+
+# set up panel of 2x2 plots:
+#par(mfrow=c(2,2))
+
+# plots for 2, 3, and 4 clusters:
+#plot(silhouette(cutree(hc_pearson_hill,2),dist_pearson_hill))
+#plot(silhouette(cutree(hc_pearson_hill,3),dist_pearson_hill))
+#plot(silhouette(cutree(hc_pearson_hill,4),dist_pearson_hill))
+#plot(silhouette(cutree(hc_pearson_hill,5),dist_pearson_hill))
+
+p_cor_evenness_all_pearson <- as.ggplot(pheatmap(cor_evenness_all_pearson, cluster_rows = T, cluster_cols = T, clustering_method = "ward.D2", clustering_distance_rows = dist_pearson_hill, clustering_distance_cols = dist_pearson_hill, na_col = "gray80", silent = T,
+  border_color = "white", main = "Repertoire evenness by isotype Pearson correlation",
+  display_numbers = F, number_color = "black", fontsize_number = 10,
+  annotation = ann_df, annotation_row = ann_df,
+  annotation_colors = ann_colors,
+  cutree_rows = 3, cutree_cols = 3,
+  breaks = seq(round(min(cor_evenness_all_pearson, na.rm = T),1), 1.0, by = 0.01),
+  legend_breaks = seq(round(min(cor_evenness_all_pearson, na.rm = T),1), 1.0, by = 0.05),
+  legend_labels = c(seq(round(min(cor_evenness_all_pearson, na.rm = T),1), 0.95, by = 0.05), "Cor"), # The breaks vector needs to be ONE element longer than the color vector
+  color = colorRampPalette(c("#ffffb2", "#e31a1c"))(length(seq(round(min(cor_evenness_all_pearson, na.rm = T),1), 1.0, by = 0.01)))))
+```
+
+```{r Evenness_cor_pearson, fig.height=16, fig.width=16}
+p_cor_evenness_all_pearson
+```
+
+**Figure 10: Repertoire Evenness Pearson correlation between samples** Since most of the samples are similar in sampling depth and they are all plasma cells, the repertoire are all highly expanded and their clonal expansion profile are highly similar.

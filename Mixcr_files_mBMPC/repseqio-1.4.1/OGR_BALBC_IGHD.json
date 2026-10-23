@@ -1,0 +1,138 @@
+[ {
+  "taxonId": 10090,
+  "speciesNames": [ "mmu" ],
+  "genes": [ {
+    "baseSequence": "file://OGR_BALBC_IGHD.json.fasta#IGHD-AHWW",
+    "name": "IGHD-AHWW",
+    "geneType": "D",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHD-AHWW"
+    },
+    "anchorPoints": {
+      "DBegin": 0,
+      "DEnd": 17
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHD.json.fasta#IGHD-EVA3",
+    "name": "IGHD-EVA3",
+    "geneType": "D",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHD-EVA3"
+    },
+    "anchorPoints": {
+      "DBegin": 0,
+      "DEnd": 17
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHD.json.fasta#IGHD-HNPT",
+    "name": "IGHD-HNPT",
+    "geneType": "D",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHD-HNPT"
+    },
+    "anchorPoints": {
+      "DBegin": 0,
+      "DEnd": 11
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHD.json.fasta#IGHD-N42X",
+    "name": "IGHD-N42X",
+    "geneType": "D",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHD-N42X"
+    },
+    "anchorPoints": {
+      "DBegin": 0,
+      "DEnd": 17
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHD.json.fasta#IGHD-OWOX",
+    "name": "IGHD-OWOX",
+    "geneType": "D",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHD-OWOX"
+    },
+    "anchorPoints": {
+      "DBegin": 0,
+      "DEnd": 23
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHD.json.fasta#IGHD-PF6D",
+    "name": "IGHD-PF6D",
+    "geneType": "D",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHD-PF6D"
+    },
+    "anchorPoints": {
+      "DBegin": 0,
+      "DEnd": 17
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHD.json.fasta#IGHD-QORP",
+    "name": "IGHD-QORP",
+    "geneType": "D",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHD-QORP"
+    },
+    "anchorPoints": {
+      "DBegin": 0,
+      "DEnd": 17
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHD.json.fasta#IGHD-VVIM",
+    "name": "IGHD-VVIM",
+    "geneType": "D",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHD-VVIM"
+    },
+    "anchorPoints": {
+      "DBegin": 0,
+      "DEnd": 17
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHD.json.fasta#IGHD-XMSU",
+    "name": "IGHD-XMSU",
+    "geneType": "D",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHD-XMSU"
+    },
+    "anchorPoints": {
+      "DBegin": 0,
+      "DEnd": 17
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHD.json.fasta#IGHD-XUKM",
+    "name": "IGHD-XUKM",
+    "geneType": "D",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHD-XUKM"
+    },
+    "anchorPoints": {
+      "DBegin": 0,
+      "DEnd": 16
+    }
+  } ],
+  "meta": {
+    "comments": "Imported from: Mouse_BALB_c_IGHD_rev_3_gapped.fasta"
+  }
+} ]

@@ -1,0 +1,106 @@
+[ {
+  "taxonId": 10090,
+  "speciesNames": [ "mmu" ],
+  "genes": [ {
+    "baseSequence": "file://Mouse_IGLJ_rev_1.json.fasta#IGLJ-2ERU",
+    "name": "IGLJ-2ERU",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "IGLJ-2ERU"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 38
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGLJ_rev_1.json.fasta#IGLJ-ACBW",
+    "name": "IGLJ-ACBW",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "IGLJ-ACBW"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 38
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGLJ_rev_1.json.fasta#IGLJ-FMEA",
+    "name": "IGLJ-FMEA",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "IGLJ-FMEA"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 38
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGLJ_rev_1.json.fasta#IGLJ-KL6B",
+    "name": "IGLJ-KL6B",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "IGLJ-KL6B"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 38
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGLJ_rev_1.json.fasta#IGLJ-PG3G",
+    "name": "IGLJ-PG3G",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "IGLJ-PG3G"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 42
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGLJ_rev_1.json.fasta#IGLJ-UWMQ",
+    "name": "IGLJ-UWMQ",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "IGLJ-UWMQ"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 12,
+      "FR4End": 38
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGLJ_rev_1.json.fasta#IGLJ-XVAO",
+    "name": "IGLJ-XVAO",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "IGLJ-XVAO"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 38
+    }
+  } ],
+  "meta": {
+    "comments": "Imported from: Mouse_IGLJ_rev_1_gapped.fasta"
+  }
+} ]

@@ -1,0 +1,161 @@
+[ {
+  "taxonId": 10090,
+  "speciesNames": [ "mmu" ],
+  "genes": [ {
+    "baseSequence": "file://Mouse_IGKJ_rev_1.json.fasta#IGKJ-4JXG",
+    "name": "IGKJ-4JXG",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKJ-4JXG"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 38
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGKJ_rev_1.json.fasta#IGKJ-5NUZ",
+    "name": "IGKJ-5NUZ",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKJ-5NUZ"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 38
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGKJ_rev_1.json.fasta#IGKJ-ABRI",
+    "name": "IGKJ-ABRI",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKJ-ABRI"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 11,
+      "FR4End": 39
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGKJ_rev_1.json.fasta#IGKJ-AR7L",
+    "name": "IGKJ-AR7L",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKJ-AR7L"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 11,
+      "FR4End": 39
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGKJ_rev_1.json.fasta#IGKJ-HVOR",
+    "name": "IGKJ-HVOR",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKJ-HVOR"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 11,
+      "FR4End": 39
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGKJ_rev_1.json.fasta#IGKJ-IIHF",
+    "name": "IGKJ-IIHF",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKJ-IIHF"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 38
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGKJ_rev_1.json.fasta#IGKJ-LUDL",
+    "name": "IGKJ-LUDL",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKJ-LUDL"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 38
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGKJ_rev_1.json.fasta#IGKJ-MXRV",
+    "name": "IGKJ-MXRV",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKJ-MXRV"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 11,
+      "FR4End": 39
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGKJ_rev_1.json.fasta#IGKJ-O4CL",
+    "name": "IGKJ-O4CL",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKJ-O4CL"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 38
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGKJ_rev_1.json.fasta#IGKJ-WRAP",
+    "name": "IGKJ-WRAP",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKJ-WRAP"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4End": 37
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGKJ_rev_1.json.fasta#IGKJ-Z5J4",
+    "name": "IGKJ-Z5J4",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKJ-Z5J4"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 38
+    }
+  } ],
+  "meta": {
+    "comments": "Imported from: Mouse_IGKJ_rev_1_gapped.fasta"
+  }
+} ]

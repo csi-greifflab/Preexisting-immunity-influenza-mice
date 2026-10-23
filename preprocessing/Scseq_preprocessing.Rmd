@@ -1,0 +1,357 @@
+---
+title: "Mouse_influenza_scBCR-seq_preprocessing"
+author: "Khang"
+date: "r Sys.Date()"
+output: 
+  pdf_document: 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,message = FALSE,warning = FALSE)
+knitr::opts_chunk$set(dev = "png", dpi = 300, echo = FALSE)
+
+library(immunarch)
+library(tidyverse)
+library(RColorBrewer)
+library(cowplot)
+```
+
+```{r load_data}
+files_mixcr <- list.files("./1_Ig_all_unfiltered_contigs/", full.names = T)
+sample_all <- map(.x = files_mixcr, function (x) read_tsv(x))
+names(sample_all) <- str_split(list.files("./1_Ig_all_unfiltered_contigs/"),"\\.", simplify = T)[,1]
+count_mixcr_out <- tibble(Sample = names(sample_all), 
+                          Count = map(sample_all, function(x) nrow(x)) %>% unlist,
+                          Type = "MiXCR_out")
+```
+
+# Check if all contigs have CDR3 and defined isotype (no missing aaseqCDR3, bestVGene, bestJGene, or bestCGene)
+
+```{r Contigs_with_CDR3_isotype, fig.height=5, fig.width=8}
+sample_all <- map(sample_all, function (x)
+  filter(.data = x, !is.na(aaSeqCDR3) & !is.na(bestVGene) & !is.na(bestJGene) & !is.na(bestCGene)))
+
+count_sample_all <- tibble(Sample = names(sample_all), 
+                           Count = map(sample_all, function(x) nrow(x)) %>% unlist,
+                           Type = "Defined_isotype")
+```
+
+# Add information about Infection types by Hashtag oligos (HTO) table from CellRanger FB output, demultiplexed by HTODemux in Seurat (method 1) (BETTER)
+```{r hto_load}
+files_hto <- list.files("./cell_hashtag2/", full.names = T)
+hto_all <-  map(.x = files_hto, function (x) read_csv(x))
+names(hto_all) <- str_split(list.files("./cell_hashtag2/"),"\\.", simplify = T)[,1]
+```
+
+```{r hto_format, eval=FALSE, include=FALSE}
+hto_all <- map(hto_all, function(x) x %>% summarise(barcode = str_split(barcode,"-", simplify = T)[,1],
+                                                   cell_cluster = str_split(Hashtag, "-", simplify = T)[,1],
+                                                   infection = paste(str_split(Hashtag, "-", simplify = T)[,2],
+                                                                    str_split(Hashtag, "-", simplify = T)[,3],
+                                                                    sep = ";")))
+
+# Save the reformatted files
+map2(hto_all, names(hto_all), function(x,y) write_csv(x, paste0("./",y,".csv")))
+
+map(hto_all, function(x) table(x$cell_cluster))
+map(hto_all, function(x) table(x$infection))
+```
+ 
+```{r hto_merge}
+# Merge the HTO table to the mixcr table by cell barcode
+sample_all_hto <- map2(sample_all, hto_all, function(x,y)
+  inner_join(x, y, by = c("tagValueCELL" = "barcode")))
+
+map(sample_all_hto, function(x) table(x$cell_cluster))
+map(sample_all_hto, function(x) table(x$infection))
+
+count_hto_all <- tibble(Sample = names(sample_all_hto), 
+                           Count = map(sample_all_hto, function(x) nrow(x)) %>% unlist,
+                           Type = "Demultiplex_cell_hashtag")
+```
+
+# Filter for singlet droplets (1 cell barcode appear only twice) or multiplets but must have different hashtag barcode (4 hashtags by infection type)
+
+```{r contigs_singlets, fig.height=5, fig.width=8}
+# For each replicate, group by cell barcode, the chain, and the hashtag (4 infection types and 2 tissue types for rep1, only 4 infection types for rep2 and rep3) so that there should be only one unique combination of all 3 features (count the occurrence of the combinations and filter for combinations that appear only once)
+barcode_hashtag_filter <- map(sample_all_hto, function (x) x %>% group_by(tagValueCELL, chains, infection) %>% summarize(n = n()) %>% filter(n == 1))
+
+# List out cell barcodes that appear twice in one infection
+barcode_two <- map(barcode_hashtag_filter, function(x) x %>% group_by(tagValueCELL, infection) %>% filter(n() == 2) %>% pull(tagValueCELL))
+
+# Select for contigs that have barcode_two
+sample_all_paired <- map2(.x = sample_all_hto, .y = barcode_two, function (x,y) x[which(x$tagValueCELL %in% y),])
+
+count_sample_all_paired <- tibble(Sample = names(sample_all_paired), 
+                           Count = map(sample_all_paired, function(x) nrow(x)) %>% unlist,
+                           Type = "Singlets")
+```
+
+# Check if the barcode pairing is between one heavy and one light chain and filter
+
+```{r contigs_paired_correct, fig.height=5, fig.width=8}
+# Group the df by cell barcode and paste the chain name together
+sample_all_paired_2 <- map(sample_all_paired, function(x) 
+                           x %>% group_by(tagValueCELL) %>% 
+                           mutate(chainsPair = paste(chains, collapse = ";")))
+
+# Filter the df by allowing only heavy and light chain pairing
+sample_all_paired_2 <- map(sample_all_paired_2, function(x)
+                           filter(x, chainsPair == "IGH;IGK"| chainsPair == "IGH;IGL"|
+                                  chainsPair == "IGK;IGH"| chainsPair == "IGL;IGH"))
+# Double check the pairing
+lapply(sample_all_paired_2, function(x) table(x$chainsPair))
+
+count_sample_all_paired_2 <- tibble(Sample = names(sample_all_paired_2), 
+                           Count = map(sample_all_paired_2, function(x) nrow(x)) %>% unlist,
+                           Type = "Correct_pairing")
+
+map(sample_all_paired_2, function(x) table(x$cell_cluster))
+map(sample_all_paired_2, function(x) table(x$infection))
+```
+
+# Add Ag-specifity information by dCODE hashtag (either CA07, or PR8, or Cross (CA07+PR8)) (No OVA specificity)
+```{r HA_binding}
+files_dCODE <- list.files("./HA_binding_hashtag2/", full.names = T)
+dCODE_all <-  map(.x = files_dCODE, function (x) read_csv(x))
+names(dCODE_all) <- str_split(list.files("./HA_binding_hashtag2/"),"_", simplify = T)[,1]
+
+for (i in 1:length(dCODE_all)){
+  dCODE_all[[i]]$barcode <- str_remove_all(dCODE_all[[i]]$barcode, "-1")
+}
+
+# remove all non-Ag specific barcode from the df
+dCODE_all <- map(dCODE_all, function(x) x %>% filter(!HA_binding == "Negative"))
+```
+
+```{r HA_binding_merge}
+# Merge the dCODE table to the mixcr table by cell barcode
+sample_all_dCODE <- map2(sample_all_paired_2, dCODE_all, function(x,y)
+  inner_join(x, y, by = c("tagValueCELL" = "barcode")))
+
+map(sample_all_dCODE, function(x) table(x$HA_binding))
+
+count_dCODE_all <- tibble(Sample = names(sample_all_dCODE), 
+                           Count = map(sample_all_dCODE, function(x) nrow(x)) %>% unlist,
+                           Type = "Demultiplex_Ag_binding")
+```
+
+# Save the contig outputs
+```{r eval=FALSE, include=FALSE}
+# Save the filtered contigs
+map2(.x = sample_all_dCODE, .y = names(sample_all_dCODE), function (x,y) write_tsv(x, file = paste0("./2_Ig_all_filtered_contigs/",y,".txt")))
+```
+
+# Track how much contigs are lost after all pre-processing steps
+```{r contigs_track, fig.height=8, fig.width=16}
+count_processing <- rbind(count_mixcr_out, count_sample_all, count_hto_all,
+                          count_dCODE_all, count_sample_all_paired, count_sample_all_paired_2)
+count_processing <- count_processing %>% group_by(Sample) %>% mutate(Proportion = round(Count/max(Count),2))
+
+ggplot(count_processing, aes(x = factor(Type, levels = c("MiXCR_out", "Defined_isotype","Demultiplex_cell_hashtag", "Singlets", "Correct_pairing","Demultiplex_Ag_binding")), y = Count, group = Sample, color = Sample)) +
+  geom_step() +
+  geom_point() +
+  geom_text(aes(label = Count), hjust = 1.2, check_overlap = TRUE) +
+  scale_color_brewer(type = "qual", palette = "Set1") +
+  theme_half_open() +
+  theme(legend.position = "right", axis.text.x = element_text(angle = 0)) +
+  labs(title = "Contigs remaining after processing", x = "Processing step")
+```
+\newpage
+```{r contigs_track_prop, fig.height=8, fig.width=16}
+ggplot(count_processing, aes(x = factor(Type, levels = c("MiXCR_out", "Defined_isotype","Demultiplex_cell_hashtag", "Singlets", "Correct_pairing", "Demultiplex_Ag_binding")), y = Proportion, group = Sample, color = Sample)) +
+  geom_step() +
+  geom_point() +
+  geom_text(aes(label = Proportion), hjust = 1.2, check_overlap = TRUE) +
+  scale_color_brewer(type = "qual", palette = "Set1") +
+  theme_half_open() +
+  theme(legend.position = "right", axis.text.x = element_text(angle = 0)) +
+  labs(title = "Contigs proportion remaining after processing", x = "Processing step")
+
+```
+
+Overall, we lose the majority of contigs after several steps of pre-processing the data. Until the last step, we retained from 25% data in the best case (rep1) to only 6% in the worst case (rep3). The biggest loss of data ocurred during the filtering for singlets, as expected, with loss around 66% of contigs or more. The hashtagging did not seem to help much, as the proportion of lost contigs is similar to what we had before (10X VDJ-seq without hashtagging).
+
+# Collapse the contigs into clonotypes
+
+```{r eval=FALSE, include=FALSE}
+# Split the samples into heavy and light chain
+# Check how many cells barcode a clonotype has (by cloneID)
+lapply(sample_all_dCODE, function(x) table(table(x$cloneId)))
+
+# Collapse contigs into clonotypes by: group the rows by cloneID and hashtag barcode (infection type), paste the cell barcodes together with ";", sum up the readCount and unique UMI count columns, create a new cellCount column by counting the number of rows in each group, the remaining columns SHOULD be identical, and just take the unique value of that.
+
+sample_all_clonotypes <- map(sample_all_dCODE, function (x)
+  x %>% group_by(cloneId, infection)  %>% 
+  summarise(tagValueCELL = paste(tagValueCELL, collapse = ";"),
+            readCount = sum(readCount), uniqueUMICount = sum(uniqueUMICount),
+            cellCount = length(cloneId), targetSequences = unique(targetSequences),
+            targetQualities = unique(targetQualities),
+            allVHitsWithScore = unique(allVHitsWithScore),
+            allDHitsWithScore = unique(allDHitsWithScore),
+            allJHitsWithScore = unique(allJHitsWithScore),
+            allCHitsWithScore = unique(allCHitsWithScore),
+            allVAlignments = unique(allVAlignments),
+            allDAlignments = unique(allDAlignments),
+            allJAlignments = unique(allJAlignments),
+            allCAlignments = unique(allCAlignments),
+            nSeqFR1 = unique(nSeqFR1), minQualFR1 = unique(minQualFR1),
+            nSeqCDR1 = unique(nSeqCDR1), minQualCDR1 = unique(minQualCDR1),
+            nSeqFR2 = unique(nSeqFR2), minQualFR2 = unique(minQualFR2),
+            nSeqCDR2 = unique(nSeqCDR2), minQualCDR2 = unique(minQualCDR2),
+            nSeqFR3 = unique(nSeqFR3), minQualFR3 = unique(minQualFR3),
+            nSeqCDR3 = unique(nSeqCDR3), minQualCDR3 = unique(minQualCDR3),
+            nSeqFR4 = unique(nSeqFR4), minQualFR4 = unique(minQualFR4),
+            aaSeqFR1 = unique(aaSeqFR1), aaSeqCDR1 = unique(aaSeqCDR1),
+            aaSeqFR2 = unique(aaSeqFR2), aaSeqCDR2 = unique(aaSeqCDR2),
+            aaSeqFR3 = unique(aaSeqFR3), aaSeqCDR3 = unique(aaSeqCDR3),
+            aaSeqFR4 = unique(aaSeqFR4), refPoints = unique(refPoints),
+            bestVGene = unique(bestVGene), bestDGene = unique(bestDGene),
+            bestJGene = unique(bestJGene), bestCGene = unique(bestCGene),
+            chains = unique(chains), nSeqVDJRegion = unique(nSeqVDJRegion),
+            aaSeqVDJRegion = unique(aaSeqVDJRegion),
+            aaSeqImputedVDJRegion = unique(aaSeqImputedVDJRegion),
+            #tissue_type = paste(unique(na.omit(tissue_type)), collapse = ";"),
+            infection = paste(unique(na.omit(infection)), collapse = "-"),
+            #cluster_id = paste(unique(na.omit(cluster_id)), collapse = ";"),
+            cell_cluster = paste(unique(na.omit(cell_cluster)), collapse = ";"),
+            HA_binding = paste(unique(na.omit(HA_binding)), collapse = ";")
+            ))
+names(sample_all_clonotypes) <- str_replace_all(names(sample_all_clonotypes), "contigs", "clonotypes")
+
+
+map(sample_all_clonotypes, function(x) table(x$cell_cluster))
+map(sample_all_clonotypes, function(x) table(x$infection))
+map(sample_all_clonotypes, function(x) table(x$HA_binding))
+
+# Consolidate the clonotypes HA binding rules as follows: (OLD, DO NOT USE)
+# 1) Cross and something else is specific to both CA07 and PR8  
+# 2) OVA and CA07 or PR8, remove the OVA.
+# 3) CA07 and PR8 separately becomes CA07+PR8.
+# 4) CA07 and nothing else (or with OVA) is CA07-specific.
+# 5) PR8 and nothing else (or with OVA) is PR8-specific.
+# 6) OVA and nothing else is OVA-specific.
+# 7) Blank cells are cells with no HA_binding information
+
+#Consolidate the clonotypes HA binding rules as follows:
+#1) Cross(CA07+PR8) and something else is specific to both CA07 and PR8  
+#2) CA07 and PR8 separately becomes CA07+PR8.
+#4) CA07 and nothing else is CA07-specific.
+#5) PR8 and nothing elseis PR8-specific.
+
+for(i in 1:length(sample_all_clonotypes)){
+  sample_all_clonotypes[[i]]$HA_binding[str_which(sample_all_clonotypes[[i]]$HA_binding, "Cross")] <- "Cross"
+  sample_all_clonotypes[[i]]$HA_binding[str_which(sample_all_clonotypes[[i]]$HA_binding, "CA07;PR8|PR8;CA07")] <- "Cross"
+}
+
+map(sample_all_clonotypes, function(x) table(x$HA_binding))
+
+# Fix for rep1 cell clusters
+sample_all_clonotypes[[1]]$cell_cluster[str_which(sample_all_clonotypes[[1]]$cell_cluster, "MBC;GC")] <- "GC;MBC"
+
+# Save the full clonotypes
+map2(.x = sample_all_clonotypes, .y = names(sample_all_clonotypes), function (x,y) write_tsv(x, file = paste0("./3_Ig_all_filtered_clonotypes/",y,".txt")))
+
+# Split each sample into heavy and light chain
+sample_all_clonotypes_heavy <- map(sample_all_clonotypes, function(x)
+  x %>% filter(chains == "IGH"))
+sample_all_clonotypes_light <- map(sample_all_clonotypes, function(x)
+  x %>% filter(chains != "IGH"))
+
+map(sample_all_clonotypes_heavy, function(x) table(x$infection))
+map(sample_all_clonotypes_light, function(x) table(x$infection))
+
+# Save the split clonotypes
+map2(.x = sample_all_clonotypes_heavy, .y = names(sample_all_clonotypes_heavy), function (x,y) write_tsv(x, file = paste0("./4_Ig_all_clonotypes_split/",y,"_hc.txt")))
+map2(.x = sample_all_clonotypes_light, .y = names(sample_all_clonotypes_light), function (x,y) write_tsv(x, file = paste0("./4_Ig_all_clonotypes_split/",y,"_lc.txt")))
+```
+
+Consolidate the clonotypes HA binding rules as follows:
+1) Cross(CA07+PR8) and something else is specific to both CA07 and PR8  
+2) CA07 and PR8 separately becomes CA07+PR8.
+4) CA07 and nothing else is CA07-specific.
+5) PR8 and nothing elseis PR8-specific.
+
+
+# Split each sample into sub-samples infection type (i.e hashtag barcode)
+```{r eval=FALSE, include=FALSE}
+#Load the data in immunarch
+data_all <- repLoad("./4_Ig_all_clonotypes_split/", .coding = FALSE)
+
+# Load the data from the source mixcr files
+path <- list.files("./4_Ig_all_clonotypes_split/", full.names = T)
+mixcr_all <- lapply(path, function (x) read_tsv(x))
+
+names(mixcr_all) <- str_split(list.files("./4_Ig_all_clonotypes_split/"), "\\.", simplify = T)[,1]
+names(mixcr_all) <- str_remove_all(names(data_all$data),"rep") %>% str_remove_all(.,"_clonotypes")
+names(data_all$data) <- names(mixcr_all)
+
+# Sort the immunarch data by the order of mixcr cloneID
+data_all$data <- map(data_all$data, function(x) arrange(x, Clone.ID))
+
+# Replace the clonal count in immunarch with the unique UMI count in mixcr, gene name without score, and imputed VDJ seq (for future cloning)
+for (i in 1:length(data_all$data)){
+  data_all$data[[i]]$Clones <- mixcr_all[[i]]$cellCount
+  data_all$data[[i]]$Proportion <- data_all$data[[i]]$Clones/sum(data_all$data[[i]]$Clones)
+  data_all$data[[i]]$V.name <- mixcr_all[[i]]$bestVGene
+  data_all$data[[i]]$D.name <- mixcr_all[[i]]$bestDGene
+  data_all$data[[i]]$J.name <- mixcr_all[[i]]$bestJGene
+  data_all$data[[i]]$C.name <- mixcr_all[[i]]$bestCGene
+  data_all$data[[i]]$Sequence.aa <- mixcr_all[[i]]$aaSeqVDJRegion
+  data_all$data[[i]]$Sequence.aa.imputed <- mixcr_all[[i]]$aaSeqImputedVDJRegion
+  data_all$data[[i]]$UMI.count <- mixcr_all[[i]]$uniqueUMICount
+  data_all$data[[i]]$Barcode <- mixcr_all[[i]]$tagValueCELL
+  data_all$data[[i]]$Tissue.type <- mixcr_all[[i]]$tissue_type
+  data_all$data[[i]]$Infections <- mixcr_all[[i]]$infection
+  #data_all$data[[i]]$Cluster.Id <- mixcr_all[[i]]$cluster_id
+  data_all$data[[i]]$Cell.cluster <- mixcr_all[[i]]$cell_cluster
+  data_all$data[[i]]$HA.binding <- mixcr_all[[i]]$HA_binding
+}
+
+# Split the dataset by hashtag barcode (infection condition)
+map(data_all$data, function(x) table(x$Infections))
+
+filter_1 <- map(data_all$data, function(x) x %>% filter(Infections == "CA07;CA07"))
+filter_2 <- map(data_all$data, function(x) x %>% filter(Infections == "PBS;CA07"))
+filter_3 <- map(data_all$data, function(x) x %>% filter(Infections == "PBS;PBS"))
+filter_4 <- map(data_all$data, function(x) x %>% filter(Infections == "PR8;CA07"))
+#filter_5 <- map(data_all$data, function(x) x %>% filter(Infections == "Unknown"))
+
+names(filter_1) <- paste(names(filter_1), "CA07;CA07", sep = "_")
+names(filter_2) <- paste(names(filter_2), "PBS;CA07", sep = "_")
+names(filter_3) <- paste(names(filter_3), "PBS;PBS", sep = "_")
+names(filter_4) <- paste(names(filter_4), "PR8;CA07", sep = "_")
+#names(filter_5) <- paste(names(filter_5), "Unknown", sep = "_")
+
+data_all$data <- flatten(list(filter_1, filter_2, filter_3, filter_4))
+
+# Filter out the two samples in rep 2 where there is no PBS;PBS clonotypes
+#data_all$data <- data_all$data[-c(15,16)]
+
+# Sort the samples by replicate order
+data_all$data <- data_all$data[order(names(data_all$data))]
+
+# Sort the df by descending number of clones
+data_all$data <- map(data_all$data, function(x) arrange(x, desc(Clones)))
+
+# Rename the isotype to be more concise, recalculate the clonal proportion, get the full-length aa sequence
+for (i in 1:length(data_all$data)){
+  data_all$data[[i]]$Proportion <- data_all$data[[i]]$Clones/sum(data_all$data[[i]]$Clones)}
+
+# Format the metadata
+data_all$meta <- data_frame(Sample = names(data_all$data),
+                            Replicate = str_split(names(data_all$data), "_", simplify = T)[,3],
+                            Chain = str_split(names(data_all$data), "_", simplify = T)[,4],
+                            Method = "sc",
+                            Infections = str_split(names(data_all$data), "_", simplify = T)[,5])
+
+data_all$meta$Infection_1 <-  str_split(data_all$meta$Infections, ";", simplify = T)[,1]
+data_all$meta$Infection_2 <-  str_split(data_all$meta$Infections, ";", simplify = T)[,2]
+data_all$meta$Sample_Number <- NA
+#data_all$meta$Infection_2 <- str_replace_all(data_all$meta$Infection_2, "^$", "Unknown")
+
+map(data_all$data, function(x) table(x$HA.binding))
+
+# Save the processed clonotypes as an R object
+saveRDS(data_all, "./data_all_sc.RDS")
+```

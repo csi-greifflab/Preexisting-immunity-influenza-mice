@@ -1,0 +1,1772 @@
+[ {
+  "taxonId": 10090,
+  "speciesNames": [ "mmu" ],
+  "genes": [ {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-2N6Y",
+    "name": "IGKV-2N6Y",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-2N6Y"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-2QEB",
+    "name": "IGKV-2QEB",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-2QEB"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-2UKG",
+    "name": "IGKV-2UKG",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-2UKG"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-3X3Y",
+    "name": "IGKV-3X3Y",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-3X3Y"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 285
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-3ZYL",
+    "name": "IGKV-3ZYL",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-3ZYL"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 114,
+      "CDR2Begin": 165,
+      "FR3Begin": 174,
+      "CDR3Begin": 279,
+      "VEnd": 305
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-4EYW",
+    "name": "IGKV-4EYW",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-4EYW"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-4KVQ",
+    "name": "IGKV-4KVQ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-4KVQ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-4TDQ",
+    "name": "IGKV-4TDQ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-4TDQ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-5FJO",
+    "name": "IGKV-5FJO",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-5FJO"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-5I4F",
+    "name": "IGKV-5I4F",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-5I4F"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-5T6O",
+    "name": "IGKV-5T6O",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-5T6O"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 111,
+      "CDR2Begin": 162,
+      "FR3Begin": 171,
+      "CDR3Begin": 276,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-6DZU",
+    "name": "IGKV-6DZU",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-6DZU"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 111,
+      "CDR2Begin": 162,
+      "FR3Begin": 171,
+      "CDR3Begin": 276,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-6MSI",
+    "name": "IGKV-6MSI",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-6MSI"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-6QAU",
+    "name": "IGKV-6QAU",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-6QAU"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-7MHY",
+    "name": "IGKV-7MHY",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-7MHY"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-7RT5",
+    "name": "IGKV-7RT5",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-7RT5"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-7UGN",
+    "name": "IGKV-7UGN",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-7UGN"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 114,
+      "CDR2Begin": 165,
+      "FR3Begin": 174,
+      "CDR3Begin": 279,
+      "VEnd": 310
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-25S6",
+    "name": "IGKV-25S6",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-25S6"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-33RB",
+    "name": "IGKV-33RB",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-33RB"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 111,
+      "CDR2Begin": 162,
+      "FR3Begin": 171,
+      "CDR3Begin": 276,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-46A6",
+    "name": "IGKV-46A6",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-46A6"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-54IL",
+    "name": "IGKV-54IL",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-54IL"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 108,
+      "CDR2Begin": 159,
+      "FR3Begin": 168,
+      "CDR3Begin": 273,
+      "VEnd": 299
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-63BQ",
+    "name": "IGKV-63BQ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-63BQ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-565F",
+    "name": "IGKV-565F",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-565F"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 111,
+      "CDR2Begin": 162,
+      "FR3Begin": 171,
+      "CDR3Begin": 276,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-A4RR",
+    "name": "IGKV-A4RR",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-A4RR"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 111,
+      "CDR2Begin": 162,
+      "FR3Begin": 171,
+      "CDR3Begin": 276,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-AMVN",
+    "name": "IGKV-AMVN",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-AMVN"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-AR2X",
+    "name": "IGKV-AR2X",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-AR2X"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 114,
+      "CDR2Begin": 165,
+      "FR3Begin": 174,
+      "CDR3Begin": 279,
+      "VEnd": 305
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-AUFH",
+    "name": "IGKV-AUFH",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-AUFH"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-AVB4",
+    "name": "IGKV-AVB4",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-AVB4"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 285
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-BDYK",
+    "name": "IGKV-BDYK",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-BDYK"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 114,
+      "CDR2Begin": 165,
+      "FR3Begin": 174,
+      "CDR3Begin": 279,
+      "VEnd": 305
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-BLCV",
+    "name": "IGKV-BLCV",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-BLCV"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-C4RM",
+    "name": "IGKV-C4RM",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-C4RM"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-CBFT",
+    "name": "IGKV-CBFT",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-CBFT"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-COD2",
+    "name": "IGKV-COD2",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-COD2"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 282
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-CRV3",
+    "name": "IGKV-CRV3",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-CRV3"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 285
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-DW3X",
+    "name": "IGKV-DW3X",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-DW3X"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-EH6X",
+    "name": "IGKV-EH6X",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-EH6X"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-EJ7T",
+    "name": "IGKV-EJ7T",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-EJ7T"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-EKSH",
+    "name": "IGKV-EKSH",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-EKSH"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 114,
+      "CDR2Begin": 165,
+      "FR3Begin": 174,
+      "CDR3Begin": 279,
+      "VEnd": 311
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-EN2O",
+    "name": "IGKV-EN2O",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-EN2O"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-EQV2",
+    "name": "IGKV-EQV2",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-EQV2"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 108,
+      "CDR2Begin": 159,
+      "FR3Begin": 168,
+      "CDR3Begin": 273,
+      "VEnd": 299
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-EVIF",
+    "name": "IGKV-EVIF",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-EVIF"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 114,
+      "CDR2Begin": 165,
+      "FR3Begin": 174,
+      "CDR3Begin": 279,
+      "VEnd": 305
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-G5I3",
+    "name": "IGKV-G5I3",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-G5I3"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 114,
+      "CDR2Begin": 165,
+      "FR3Begin": 174,
+      "CDR3Begin": 279,
+      "VEnd": 305
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-GTW5",
+    "name": "IGKV-GTW5",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-GTW5"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-GYZG",
+    "name": "IGKV-GYZG",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-GYZG"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-HA63",
+    "name": "IGKV-HA63",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-HA63"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 108,
+      "CDR2Begin": 159,
+      "FR3Begin": 168,
+      "CDR3Begin": 273,
+      "VEnd": 299
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-HPUE",
+    "name": "IGKV-HPUE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-HPUE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-HT2O",
+    "name": "IGKV-HT2O",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-HT2O"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 285
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-HWCO",
+    "name": "IGKV-HWCO",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-HWCO"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-IDLD",
+    "name": "IGKV-IDLD",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-IDLD"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-IFJX",
+    "name": "IGKV-IFJX",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-IFJX"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 282
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-IV2C",
+    "name": "IGKV-IV2C",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-IV2C"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-JCV5",
+    "name": "IGKV-JCV5",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-JCV5"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 57,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 284
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-KCFZ",
+    "name": "IGKV-KCFZ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-KCFZ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-KDB5",
+    "name": "IGKV-KDB5",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-KDB5"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 288
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-KGKZ",
+    "name": "IGKV-KGKZ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-KGKZ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 108,
+      "CDR2Begin": 159,
+      "FR3Begin": 168,
+      "CDR3Begin": 273,
+      "VEnd": 299
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-LD2X",
+    "name": "IGKV-LD2X",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-LD2X"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-LG3C",
+    "name": "IGKV-LG3C",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-LG3C"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 291
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-M3QM",
+    "name": "IGKV-M3QM",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-M3QM"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 108,
+      "CDR2Begin": 159,
+      "FR3Begin": 168,
+      "CDR3Begin": 273,
+      "VEnd": 299
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-M6XE",
+    "name": "IGKV-M6XE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-M6XE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 111,
+      "CDR2Begin": 162,
+      "FR3Begin": 171,
+      "CDR3Begin": 276,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-MMCX",
+    "name": "IGKV-MMCX",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-MMCX"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-MTW7",
+    "name": "IGKV-MTW7",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-MTW7"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 285
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-MXBA",
+    "name": "IGKV-MXBA",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-MXBA"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-N6SE",
+    "name": "IGKV-N6SE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-N6SE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 111,
+      "CDR2Begin": 162,
+      "FR3Begin": 171,
+      "CDR3Begin": 276,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-NEUC",
+    "name": "IGKV-NEUC",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-NEUC"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-NKG7",
+    "name": "IGKV-NKG7",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-NKG7"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-NN4Q",
+    "name": "IGKV-NN4Q",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-NN4Q"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 111,
+      "CDR2Begin": 162,
+      "FR3Begin": 171,
+      "CDR3Begin": 276,
+      "VEnd": 300
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-OHY6",
+    "name": "IGKV-OHY6",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-OHY6"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-OM53",
+    "name": "IGKV-OM53",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-OM53"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 111,
+      "CDR2Begin": 162,
+      "FR3Begin": 171,
+      "CDR3Begin": 276,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-OO5W",
+    "name": "IGKV-OO5W",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-OO5W"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 111,
+      "CDR2Begin": 162,
+      "FR3Begin": 171,
+      "CDR3Begin": 276,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-OVFC",
+    "name": "IGKV-OVFC",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-OVFC"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-P7MZ",
+    "name": "IGKV-P7MZ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-P7MZ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-Q6O7",
+    "name": "IGKV-Q6O7",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-Q6O7"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 283
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-QSPM",
+    "name": "IGKV-QSPM",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-QSPM"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-R2WP",
+    "name": "IGKV-R2WP",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-R2WP"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 108,
+      "CDR2Begin": 159,
+      "FR3Begin": 168,
+      "CDR3Begin": 273,
+      "VEnd": 299
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-R3FW",
+    "name": "IGKV-R3FW",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-R3FW"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-RDPY",
+    "name": "IGKV-RDPY",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-RDPY"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 114,
+      "CDR2Begin": 165,
+      "FR3Begin": 174,
+      "CDR3Begin": 279,
+      "VEnd": 305
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-RNSU",
+    "name": "IGKV-RNSU",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-RNSU"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-ROLX",
+    "name": "IGKV-ROLX",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-ROLX"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-SIXC",
+    "name": "IGKV-SIXC",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-SIXC"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 114,
+      "CDR2Begin": 165,
+      "FR3Begin": 174,
+      "CDR3Begin": 279,
+      "VEnd": 305
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-SUJD",
+    "name": "IGKV-SUJD",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-SUJD"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-TD35",
+    "name": "IGKV-TD35",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-TD35"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-TWDY",
+    "name": "IGKV-TWDY",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-TWDY"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-U5CY",
+    "name": "IGKV-U5CY",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-U5CY"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 108,
+      "CDR2Begin": 159,
+      "FR3Begin": 168,
+      "CDR3Begin": 273,
+      "VEnd": 299
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-UTLD",
+    "name": "IGKV-UTLD",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-UTLD"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-UWOD",
+    "name": "IGKV-UWOD",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-UWOD"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 111,
+      "CDR2Begin": 162,
+      "FR3Begin": 171,
+      "CDR3Begin": 276,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-V7SH",
+    "name": "IGKV-V7SH",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-V7SH"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-V52Q",
+    "name": "IGKV-V52Q",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-V52Q"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-VEVE",
+    "name": "IGKV-VEVE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-VEVE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 114,
+      "CDR2Begin": 165,
+      "FR3Begin": 174,
+      "CDR3Begin": 279,
+      "VEnd": 300
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-VEYK",
+    "name": "IGKV-VEYK",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-VEYK"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-VHCW",
+    "name": "IGKV-VHCW",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-VHCW"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-VOLG",
+    "name": "IGKV-VOLG",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-VOLG"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-WWXM",
+    "name": "IGKV-WWXM",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-WWXM"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 108,
+      "CDR2Begin": 159,
+      "FR3Begin": 168,
+      "CDR3Begin": 273,
+      "VEnd": 299
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-WX7U",
+    "name": "IGKV-WX7U",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-WX7U"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 114,
+      "CDR2Begin": 165,
+      "FR3Begin": 174,
+      "CDR3Begin": 279,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-XQT4",
+    "name": "IGKV-XQT4",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-XQT4"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 282
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-XTKB",
+    "name": "IGKV-XTKB",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-XTKB"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-XU4N",
+    "name": "IGKV-XU4N",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-XU4N"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-YXVU",
+    "name": "IGKV-YXVU",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-YXVU"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-Z76V",
+    "name": "IGKV-Z76V",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-Z76V"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 286
+    }
+  } ],
+  "meta": {
+    "comments": "Imported from: Mouse_BALB_cByJ_IGKV_rev_1_gapped.fasta"
+  }
+} ]

@@ -1,0 +1,5865 @@
+[ {
+  "taxonId": 10090,
+  "speciesNames": [ "mmu" ],
+  "genes": [ {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-2KUO",
+    "name": "IGHV-2KUO",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-2KUO"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-2UIT",
+    "name": "IGHV-2UIT",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-2UIT"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-2UQD",
+    "name": "IGHV-2UQD",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-2UQD"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 288
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-3AN3",
+    "name": "IGHV-3AN3",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-3AN3"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-3GCO",
+    "name": "IGHV-3GCO",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-3GCO"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-3GZS",
+    "name": "IGHV-3GZS",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-3GZS"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-3QFD",
+    "name": "IGHV-3QFD",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-3QFD"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-3QLH",
+    "name": "IGHV-3QLH",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-3QLH"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-4FMT",
+    "name": "IGHV-4FMT",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-4FMT"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-4L6T",
+    "name": "IGHV-4L6T",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-4L6T"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-4T4X",
+    "name": "IGHV-4T4X",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-4T4X"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-4X2I",
+    "name": "IGHV-4X2I",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-4X2I"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-4YZL",
+    "name": "IGHV-4YZL",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-4YZL"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-5CCQ",
+    "name": "IGHV-5CCQ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-5CCQ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-5F5R",
+    "name": "IGHV-5F5R",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-5F5R"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 291
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-5ISV",
+    "name": "IGHV-5ISV",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-5ISV"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 301
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-5LN7",
+    "name": "IGHV-5LN7",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-5LN7"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-5LWB",
+    "name": "IGHV-5LWB",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-5LWB"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-5O75",
+    "name": "IGHV-5O75",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-5O75"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-5UNX",
+    "name": "IGHV-5UNX",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-5UNX"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-5VOM",
+    "name": "IGHV-5VOM",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-5VOM"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-6D76",
+    "name": "IGHV-6D76",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-6D76"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-6NFG",
+    "name": "IGHV-6NFG",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-6NFG"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-6YTP",
+    "name": "IGHV-6YTP",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-6YTP"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-7BBU",
+    "name": "IGHV-7BBU",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-7BBU"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 180,
+      "CDR3Begin": 291,
+      "VEnd": 300
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-7MCI",
+    "name": "IGHV-7MCI",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-7MCI"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 180,
+      "CDR3Begin": 291,
+      "VEnd": 304
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-7MU3",
+    "name": "IGHV-7MU3",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-7MU3"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-7PG3",
+    "name": "IGHV-7PG3",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-7PG3"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-7TJA",
+    "name": "IGHV-7TJA",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-7TJA"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-22XF",
+    "name": "IGHV-22XF",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-22XF"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-32WJ",
+    "name": "IGHV-32WJ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-32WJ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 301
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-37IE",
+    "name": "IGHV-37IE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-37IE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-47EU",
+    "name": "IGHV-47EU",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-47EU"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-56YB",
+    "name": "IGHV-56YB",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-56YB"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 301
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-72VE",
+    "name": "IGHV-72VE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-72VE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-A3LZ",
+    "name": "IGHV-A3LZ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-A3LZ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-AE2O",
+    "name": "IGHV-AE2O",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-AE2O"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-AICW",
+    "name": "IGHV-AICW",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-AICW"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-AK3H",
+    "name": "IGHV-AK3H",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-AK3H"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 180,
+      "CDR3Begin": 291,
+      "VEnd": 299
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-APOU",
+    "name": "IGHV-APOU",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-APOU"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-AX4R",
+    "name": "IGHV-AX4R",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-AX4R"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-AX4W",
+    "name": "IGHV-AX4W",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-AX4W"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-AXRQ",
+    "name": "IGHV-AXRQ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-AXRQ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 301
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-BDLN",
+    "name": "IGHV-BDLN",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-BDLN"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-BIQU",
+    "name": "IGHV-BIQU",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-BIQU"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-BISP",
+    "name": "IGHV-BISP",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-BISP"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-BQCW",
+    "name": "IGHV-BQCW",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-BQCW"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-BT4I",
+    "name": "IGHV-BT4I",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-BT4I"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-CFNH",
+    "name": "IGHV-CFNH",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-CFNH"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-CSIM",
+    "name": "IGHV-CSIM",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-CSIM"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 102,
+      "CDR2Begin": 153,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 300
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-CWNQ",
+    "name": "IGHV-CWNQ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-CWNQ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-DMIT",
+    "name": "IGHV-DMIT",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-DMIT"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-DRA4",
+    "name": "IGHV-DRA4",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-DRA4"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-DUV7",
+    "name": "IGHV-DUV7",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-DUV7"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-EBWE",
+    "name": "IGHV-EBWE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-EBWE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-EK3O",
+    "name": "IGHV-EK3O",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-EK3O"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ES4V",
+    "name": "IGHV-ES4V",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ES4V"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-F3Z6",
+    "name": "IGHV-F3Z6",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-F3Z6"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-F5K7",
+    "name": "IGHV-F5K7",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-F5K7"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-FM2S",
+    "name": "IGHV-FM2S",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-FM2S"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-FMN7",
+    "name": "IGHV-FMN7",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-FMN7"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 102,
+      "CDR2Begin": 153,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-FNCD",
+    "name": "IGHV-FNCD",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-FNCD"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-FOTI",
+    "name": "IGHV-FOTI",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-FOTI"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-G6P5",
+    "name": "IGHV-G6P5",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-G6P5"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-GC2L",
+    "name": "IGHV-GC2L",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-GC2L"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-GFFP",
+    "name": "IGHV-GFFP",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-GFFP"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-GHLB",
+    "name": "IGHV-GHLB",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-GHLB"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-GNPX",
+    "name": "IGHV-GNPX",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-GNPX"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 180,
+      "CDR3Begin": 291,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-GPEO",
+    "name": "IGHV-GPEO",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-GPEO"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-GRWZ",
+    "name": "IGHV-GRWZ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-GRWZ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-GSBQ",
+    "name": "IGHV-GSBQ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-GSBQ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-GSYR",
+    "name": "IGHV-GSYR",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-GSYR"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-H2OA",
+    "name": "IGHV-H2OA",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-H2OA"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 180,
+      "CDR3Begin": 291,
+      "VEnd": 306
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-HHVI",
+    "name": "IGHV-HHVI",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-HHVI"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-HK55",
+    "name": "IGHV-HK55",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-HK55"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-HLLK",
+    "name": "IGHV-HLLK",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-HLLK"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-HZPW",
+    "name": "IGHV-HZPW",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-HZPW"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 299
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-I463",
+    "name": "IGHV-I463",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-I463"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 305
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-IAEK",
+    "name": "IGHV-IAEK",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-IAEK"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ID7Q",
+    "name": "IGHV-ID7Q",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ID7Q"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-IMJE",
+    "name": "IGHV-IMJE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-IMJE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-IZSN",
+    "name": "IGHV-IZSN",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-IZSN"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-JACH",
+    "name": "IGHV-JACH",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-JACH"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 180,
+      "CDR3Begin": 291,
+      "VEnd": 300
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-JAPR",
+    "name": "IGHV-JAPR",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-JAPR"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-JDDE",
+    "name": "IGHV-JDDE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-JDDE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 301
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-JDYC",
+    "name": "IGHV-JDYC",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-JDYC"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-JHQJ",
+    "name": "IGHV-JHQJ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-JHQJ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-JHWS",
+    "name": "IGHV-JHWS",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-JHWS"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-JRQS",
+    "name": "IGHV-JRQS",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-JRQS"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-KO4L",
+    "name": "IGHV-KO4L",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-KO4L"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-KPEP",
+    "name": "IGHV-KPEP",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-KPEP"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-KQPM",
+    "name": "IGHV-KQPM",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-KQPM"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-KRG4",
+    "name": "IGHV-KRG4",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-KRG4"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-KRVC",
+    "name": "IGHV-KRVC",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-KRVC"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 301
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-LAH4",
+    "name": "IGHV-LAH4",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-LAH4"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-LLOE",
+    "name": "IGHV-LLOE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-LLOE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-LP2Z",
+    "name": "IGHV-LP2Z",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-LP2Z"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-LPGY",
+    "name": "IGHV-LPGY",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-LPGY"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-MCP4",
+    "name": "IGHV-MCP4",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-MCP4"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-MG5V",
+    "name": "IGHV-MG5V",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-MG5V"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 180,
+      "CDR3Begin": 291,
+      "VEnd": 300
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-MGBE",
+    "name": "IGHV-MGBE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-MGBE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 180,
+      "CDR3Begin": 291,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ML5T",
+    "name": "IGHV-ML5T",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ML5T"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-NNFU",
+    "name": "IGHV-NNFU",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-NNFU"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-NPBL",
+    "name": "IGHV-NPBL",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-NPBL"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-NUDM",
+    "name": "IGHV-NUDM",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-NUDM"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 126,
+      "CDR2Begin": 177,
+      "FR3Begin": 201,
+      "CDR3Begin": 312,
+      "VEnd": 321
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-NY4F",
+    "name": "IGHV-NY4F",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-NY4F"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-O4YA",
+    "name": "IGHV-O4YA",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-O4YA"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 102,
+      "CDR2Begin": 153,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-OCOS",
+    "name": "IGHV-OCOS",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-OCOS"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-OK63",
+    "name": "IGHV-OK63",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-OK63"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-OW3E",
+    "name": "IGHV-OW3E",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-OW3E"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-P2CQ",
+    "name": "IGHV-P2CQ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-P2CQ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-P7AN",
+    "name": "IGHV-P7AN",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-P7AN"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-PACA",
+    "name": "IGHV-PACA",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-PACA"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 180,
+      "CDR3Begin": 291,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-PEXG",
+    "name": "IGHV-PEXG",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-PEXG"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-PRC5",
+    "name": "IGHV-PRC5",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-PRC5"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-PRJX",
+    "name": "IGHV-PRJX",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-PRJX"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 180,
+      "CDR3Begin": 291,
+      "VEnd": 300
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-QC3C",
+    "name": "IGHV-QC3C",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-QC3C"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-QFGX",
+    "name": "IGHV-QFGX",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-QFGX"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 301
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-QG3Z",
+    "name": "IGHV-QG3Z",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-QG3Z"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-QK6G",
+    "name": "IGHV-QK6G",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-QK6G"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 300
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-QL4G",
+    "name": "IGHV-QL4G",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-QL4G"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-QODY",
+    "name": "IGHV-QODY",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-QODY"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-QQ46",
+    "name": "IGHV-QQ46",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-QQ46"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-R4HE",
+    "name": "IGHV-R4HE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-R4HE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 301
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-R7KA",
+    "name": "IGHV-R7KA",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-R7KA"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-RKXL",
+    "name": "IGHV-RKXL",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-RKXL"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-RLDP",
+    "name": "IGHV-RLDP",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-RLDP"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-RNDH",
+    "name": "IGHV-RNDH",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-RNDH"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-RNSW",
+    "name": "IGHV-RNSW",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-RNSW"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ROYG",
+    "name": "IGHV-ROYG",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ROYG"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-RRLD",
+    "name": "IGHV-RRLD",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-RRLD"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-RYF3",
+    "name": "IGHV-RYF3",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-RYF3"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 301
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-SCRF",
+    "name": "IGHV-SCRF",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-SCRF"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 301
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-SF4U",
+    "name": "IGHV-SF4U",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-SF4U"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-SR2I",
+    "name": "IGHV-SR2I",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-SR2I"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-STIW",
+    "name": "IGHV-STIW",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-STIW"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 102,
+      "CDR2Begin": 153,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 297
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-SX5D",
+    "name": "IGHV-SX5D",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-SX5D"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-T2W5",
+    "name": "IGHV-T2W5",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-T2W5"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-T3DL",
+    "name": "IGHV-T3DL",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-T3DL"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 102,
+      "CDR2Begin": 153,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-TC2W",
+    "name": "IGHV-TC2W",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-TC2W"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-TI7Q",
+    "name": "IGHV-TI7Q",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-TI7Q"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 301
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-TQES",
+    "name": "IGHV-TQES",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-TQES"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 300
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-TUT5",
+    "name": "IGHV-TUT5",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-TUT5"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-UDF7",
+    "name": "IGHV-UDF7",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-UDF7"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 68,
+      "FR2Begin": 92,
+      "CDR2Begin": 143,
+      "FR3Begin": 167,
+      "CDR3Begin": 278,
+      "VEnd": 281
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-UJTO",
+    "name": "IGHV-UJTO",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-UJTO"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-UOVB",
+    "name": "IGHV-UOVB",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-UOVB"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-UTQI",
+    "name": "IGHV-UTQI",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-UTQI"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-V26Z",
+    "name": "IGHV-V26Z",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-V26Z"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-W27J",
+    "name": "IGHV-W27J",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-W27J"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-WN4M",
+    "name": "IGHV-WN4M",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-WN4M"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-WO3N",
+    "name": "IGHV-WO3N",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-WO3N"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-WZ7P",
+    "name": "IGHV-WZ7P",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-WZ7P"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-X4X2",
+    "name": "IGHV-X4X2",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-X4X2"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-XGYI",
+    "name": "IGHV-XGYI",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-XGYI"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-YEPS",
+    "name": "IGHV-YEPS",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-YEPS"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 300
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-Z6OV",
+    "name": "IGHV-Z6OV",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-Z6OV"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ZD3D",
+    "name": "IGHV-ZD3D",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ZD3D"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ZGQJ",
+    "name": "IGHV-ZGQJ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ZGQJ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ZI2X",
+    "name": "IGHV-ZI2X",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ZI2X"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ZIT7",
+    "name": "IGHV-ZIT7",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ZIT7"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ZL77",
+    "name": "IGHV-ZL77",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ZL77"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 299
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ZOKF",
+    "name": "IGHV-ZOKF",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ZOKF"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ZOZI",
+    "name": "IGHV-ZOZI",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ZOZI"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ZVAP",
+    "name": "IGHV-ZVAP",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ZVAP"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHD.json.fasta#IGHD-AHWW",
+    "name": "IGHD-AHWW",
+    "geneType": "D",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHD-AHWW"
+    },
+    "anchorPoints": {
+      "DBegin": 0,
+      "DEnd": 17
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHD.json.fasta#IGHD-EVA3",
+    "name": "IGHD-EVA3",
+    "geneType": "D",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHD-EVA3"
+    },
+    "anchorPoints": {
+      "DBegin": 0,
+      "DEnd": 17
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHD.json.fasta#IGHD-HNPT",
+    "name": "IGHD-HNPT",
+    "geneType": "D",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHD-HNPT"
+    },
+    "anchorPoints": {
+      "DBegin": 0,
+      "DEnd": 11
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHD.json.fasta#IGHD-N42X",
+    "name": "IGHD-N42X",
+    "geneType": "D",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHD-N42X"
+    },
+    "anchorPoints": {
+      "DBegin": 0,
+      "DEnd": 17
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHD.json.fasta#IGHD-OWOX",
+    "name": "IGHD-OWOX",
+    "geneType": "D",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHD-OWOX"
+    },
+    "anchorPoints": {
+      "DBegin": 0,
+      "DEnd": 23
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHD.json.fasta#IGHD-PF6D",
+    "name": "IGHD-PF6D",
+    "geneType": "D",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHD-PF6D"
+    },
+    "anchorPoints": {
+      "DBegin": 0,
+      "DEnd": 17
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHD.json.fasta#IGHD-QORP",
+    "name": "IGHD-QORP",
+    "geneType": "D",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHD-QORP"
+    },
+    "anchorPoints": {
+      "DBegin": 0,
+      "DEnd": 17
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHD.json.fasta#IGHD-VVIM",
+    "name": "IGHD-VVIM",
+    "geneType": "D",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHD-VVIM"
+    },
+    "anchorPoints": {
+      "DBegin": 0,
+      "DEnd": 17
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHD.json.fasta#IGHD-XMSU",
+    "name": "IGHD-XMSU",
+    "geneType": "D",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHD-XMSU"
+    },
+    "anchorPoints": {
+      "DBegin": 0,
+      "DEnd": 17
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHD.json.fasta#IGHD-XUKM",
+    "name": "IGHD-XUKM",
+    "geneType": "D",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHD-XUKM"
+    },
+    "anchorPoints": {
+      "DBegin": 0,
+      "DEnd": 16
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHJ.json.fasta#IGHJ-G76U",
+    "name": "IGHJ-G76U",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHJ-G76U"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 22,
+      "FR4End": 53
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHJ.json.fasta#IGHJ-ICAF",
+    "name": "IGHJ-ICAF",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHJ-ICAF"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 17,
+      "FR4End": 48
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHJ.json.fasta#IGHJ-OMJ3",
+    "name": "IGHJ-OMJ3",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHJ-OMJ3"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 17,
+      "FR4End": 48
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHJ.json.fasta#IGHJ-SCNX",
+    "name": "IGHJ-SCNX",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHJ-SCNX"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 23,
+      "FR4End": 54
+    }
+  }, {
+    "baseSequence": "nuccore://NC_000078.6",
+    "name": "IGHA*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "anchorPoints": {
+      "CBegin": 113260236,
+      "CExon1End": 113259933,
+      "CEnd": 113258767
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHA*01",
+    "name": "IGHA*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "J00475|IGHA*01|Mus musculus_BALB/c|F|CH1|51..353|303 nt|3| | | | |303+0=303| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 303
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHA*03",
+    "name": "IGHA*03",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "D11468|IGHA*03|Mus musculus_BALB/c|F|CH1|5639..5940|302 nt|3| | | | |302+0=302| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHA*04",
+    "name": "IGHA*04",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "AF175973|IGHA*04|Mus musculus_I/St|F|CH1|22..324|303 nt|3| | | | |303+0=303| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 303
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHA*05",
+    "name": "IGHA*05",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "AY045744|IGHA*05|Mus musculus_DBA/2J|F|CH1|1..303|303 nt|3| | | | |303+0=303| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 303
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHA*06",
+    "name": "IGHA*06",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "AY045741|IGHA*06|Mus musculus_C57BL/10|F|CH1|2..304|303 nt|3| | | | |303+0=303| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 303
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHA*07",
+    "name": "IGHA*07",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "AY045747|IGHA*07|Mus musculus_AKR/J|F|CH1|1..303|303 nt|3| | | | |303+0=303| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 303
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHA*08",
+    "name": "IGHA*08",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "AY045750|IGHA*08|Mus musculus_CE/J|F|CH1|1..303|303 nt|3| | | | |303+0=303| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 303
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHA*09",
+    "name": "IGHA*09",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IMGT000065|IGHA*09|Mus musculus_C57BL/6J|F|CH1|2759716..2760018|303 nt|3| | | | |303+0=303| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 303
+    }
+  }, {
+    "baseSequence": "nuccore://NC_000078.6",
+    "name": "IGHD*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "anchorPoints": {
+      "CBegin": 113416324,
+      "CExon1End": 113416042,
+      "CEnd": 113407534
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHD*01",
+    "name": "IGHD*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "V00786|IGHD*01|Mus musculus_BALB/c|F|CH1|23..304|282 nt|3| | | | |282+0=282| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 282
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHD*02",
+    "name": "IGHD*02",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IMGT000065|IGHD*02|Mus musculus_C57BL/6J|F|CH1|2603628..2603909|282 nt|3| | | | |282+0=282| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 282
+    }
+  }, {
+    "baseSequence": "nuccore://NC_000078.6",
+    "name": "IGHE*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "anchorPoints": {
+      "CBegin": 113273248,
+      "CExon1End": 113272975,
+      "CEnd": 113269262
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHE*01",
+    "name": "IGHE*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "X01857|IGHE*01|Mus musculus_BALB/c|F|CH1|140..412|273 nt|3| | | | |273+0=273| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 273
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHE*02",
+    "name": "IGHE*02",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "M23104|IGHE*02|Mus musculus_BALB/c|F|CH1|1..270|270 nt|1| | | | |270+0=270|partial in 5' and in 3' | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 270
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHE*03",
+    "name": "IGHE*03",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "M23085|IGHE*03|Mus musculus_B10.A|F|CH1|1..270|270 nt|1| | | | |270+0=270|partial in 5' and in 3' | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 270
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHE*04",
+    "name": "IGHE*04",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IMGT000065|IGHE*04|Mus musculus_C57BL/6J|F|CH1|2746704..2746976|273 nt|3| | | | |273+0=273| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 273
+    }
+  }, {
+    "baseSequence": "nuccore://NC_000078.6",
+    "name": "IGHG1*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "anchorPoints": {
+      "CBegin": 113330523,
+      "CExon1End": 113330232,
+      "CEnd": 113326543
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG1*01",
+    "name": "IGHG1*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "J00453|IGHG1*01|Mus musculus_BALB/c|F|CH1|100..390|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG1*02",
+    "name": "IGHG1*02",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IMGT000065|IGHG1*02|Mus musculus_C57BL/6J|F|CH1|2689429..2689719|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG2A*01",
+    "name": "IGHG2A*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "V00825|IGHG2A*01|Mus musculus_BALB/c|F|CH1|250..540|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG2A*02",
+    "name": "IGHG2A*02",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "X16997|IGHG2A*02|Mus musculus_MAI|F|CH1|124..414|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "nuccore://NC_000078.6",
+    "name": "IGHG2B*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "anchorPoints": {
+      "CBegin": 113307933,
+      "CExon1End": 113307642,
+      "CEnd": 113306391
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG2B*01",
+    "name": "IGHG2B*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "V00763|IGHG2B*01|Mus musculus_BALB/c|F|CH1|116..406|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG2B*02",
+    "name": "IGHG2B*02",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "V00801|IGHG2B*02|Mus musculus|F|CH1|134..424|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG2B*03",
+    "name": "IGHG2B*03",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IMGT000065|IGHG2B*03|Mus musculus_C57BL/6J|F|CH1|2712019..2712309|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "nuccore://NC_000078.6",
+    "name": "IGHG2C*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "anchorPoints": {
+      "CBegin": 113288932,
+      "CExon1End": 113288641,
+      "CEnd": 113287388
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG2C*01",
+    "name": "IGHG2C*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "J00479|IGHG2C*01|Mus musculus_C57BL/6|F|CH1|135..425|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG2C*02",
+    "name": "IGHG2C*02",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "X16998|IGHG2C*02|Mus musculus_MAI|F|CH1|124..414|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG2C*03",
+    "name": "IGHG2C*03",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IMGT000065|IGHG2C*03|Mus musculus_C57BL/6J|F|CH1|2731020..2731310|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "nuccore://NC_000078.6",
+    "name": "IGHG3*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "anchorPoints": {
+      "CBegin": 113361232,
+      "CExon1End": 113360941,
+      "CEnd": 113357441
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG3*01",
+    "name": "IGHG3*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "X00915|IGHG3*01|Mus musculus_BALB/c|F|CH1|2008..2298|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG3*03",
+    "name": "IGHG3*03",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IMGT000065|IGHG3*03|Mus musculus_C57BL/6J|F|CH1|2658720..2659010|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "nuccore://NC_000078.6",
+    "name": "IGHM*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "anchorPoints": {
+      "CBegin": 113422730,
+      "CExon1End": 113422415,
+      "CEnd": 113418825
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHM*01",
+    "name": "IGHM*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "V00818|IGHM*01|Mus musculus_BALB/c|F|CH1|10..324|315 nt|3| | | | |315+0=315| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 315
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHM*02",
+    "name": "IGHM*02",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "J00443|IGHM*02|Mus musculus_BALB/c|F|CH1|102..416|315 nt|3| | | | |315+0=315| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 315
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHM*03",
+    "name": "IGHM*03",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "K02103|IGHM*03|Mus musculus|F|CH1|47..361|315 nt|3| | | | |315+0=315| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 315
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHM*04",
+    "name": "IGHM*04",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IMGT000065|IGHM*04|Mus musculus_C57BL/6J|F|CH1|2597222..2597536|315 nt|3| | | | |315+0=315| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 315
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-2N6Y",
+    "name": "IGKV-2N6Y",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-2N6Y"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-2QEB",
+    "name": "IGKV-2QEB",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-2QEB"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-2UKG",
+    "name": "IGKV-2UKG",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-2UKG"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-3X3Y",
+    "name": "IGKV-3X3Y",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-3X3Y"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 285
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-3ZYL",
+    "name": "IGKV-3ZYL",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-3ZYL"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 114,
+      "CDR2Begin": 165,
+      "FR3Begin": 174,
+      "CDR3Begin": 279,
+      "VEnd": 305
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-4EYW",
+    "name": "IGKV-4EYW",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-4EYW"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-4KVQ",
+    "name": "IGKV-4KVQ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-4KVQ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-4TDQ",
+    "name": "IGKV-4TDQ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-4TDQ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-5FJO",
+    "name": "IGKV-5FJO",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-5FJO"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-5I4F",
+    "name": "IGKV-5I4F",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-5I4F"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-5T6O",
+    "name": "IGKV-5T6O",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-5T6O"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 111,
+      "CDR2Begin": 162,
+      "FR3Begin": 171,
+      "CDR3Begin": 276,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-6DZU",
+    "name": "IGKV-6DZU",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-6DZU"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 111,
+      "CDR2Begin": 162,
+      "FR3Begin": 171,
+      "CDR3Begin": 276,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-6MSI",
+    "name": "IGKV-6MSI",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-6MSI"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-6QAU",
+    "name": "IGKV-6QAU",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-6QAU"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-7MHY",
+    "name": "IGKV-7MHY",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-7MHY"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-7RT5",
+    "name": "IGKV-7RT5",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-7RT5"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-7UGN",
+    "name": "IGKV-7UGN",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-7UGN"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 114,
+      "CDR2Begin": 165,
+      "FR3Begin": 174,
+      "CDR3Begin": 279,
+      "VEnd": 310
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-25S6",
+    "name": "IGKV-25S6",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-25S6"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-33RB",
+    "name": "IGKV-33RB",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-33RB"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 111,
+      "CDR2Begin": 162,
+      "FR3Begin": 171,
+      "CDR3Begin": 276,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-46A6",
+    "name": "IGKV-46A6",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-46A6"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-54IL",
+    "name": "IGKV-54IL",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-54IL"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 108,
+      "CDR2Begin": 159,
+      "FR3Begin": 168,
+      "CDR3Begin": 273,
+      "VEnd": 299
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-63BQ",
+    "name": "IGKV-63BQ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-63BQ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-565F",
+    "name": "IGKV-565F",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-565F"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 111,
+      "CDR2Begin": 162,
+      "FR3Begin": 171,
+      "CDR3Begin": 276,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-A4RR",
+    "name": "IGKV-A4RR",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-A4RR"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 111,
+      "CDR2Begin": 162,
+      "FR3Begin": 171,
+      "CDR3Begin": 276,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-AMVN",
+    "name": "IGKV-AMVN",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-AMVN"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-AR2X",
+    "name": "IGKV-AR2X",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-AR2X"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 114,
+      "CDR2Begin": 165,
+      "FR3Begin": 174,
+      "CDR3Begin": 279,
+      "VEnd": 305
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-AUFH",
+    "name": "IGKV-AUFH",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-AUFH"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-AVB4",
+    "name": "IGKV-AVB4",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-AVB4"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 285
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-BDYK",
+    "name": "IGKV-BDYK",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-BDYK"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 114,
+      "CDR2Begin": 165,
+      "FR3Begin": 174,
+      "CDR3Begin": 279,
+      "VEnd": 305
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-BLCV",
+    "name": "IGKV-BLCV",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-BLCV"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-C4RM",
+    "name": "IGKV-C4RM",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-C4RM"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-CBFT",
+    "name": "IGKV-CBFT",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-CBFT"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-COD2",
+    "name": "IGKV-COD2",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-COD2"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 282
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-CRV3",
+    "name": "IGKV-CRV3",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-CRV3"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 285
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-DW3X",
+    "name": "IGKV-DW3X",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-DW3X"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-EH6X",
+    "name": "IGKV-EH6X",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-EH6X"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-EJ7T",
+    "name": "IGKV-EJ7T",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-EJ7T"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-EKSH",
+    "name": "IGKV-EKSH",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-EKSH"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 114,
+      "CDR2Begin": 165,
+      "FR3Begin": 174,
+      "CDR3Begin": 279,
+      "VEnd": 311
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-EN2O",
+    "name": "IGKV-EN2O",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-EN2O"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-EQV2",
+    "name": "IGKV-EQV2",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-EQV2"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 108,
+      "CDR2Begin": 159,
+      "FR3Begin": 168,
+      "CDR3Begin": 273,
+      "VEnd": 299
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-EVIF",
+    "name": "IGKV-EVIF",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-EVIF"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 114,
+      "CDR2Begin": 165,
+      "FR3Begin": 174,
+      "CDR3Begin": 279,
+      "VEnd": 305
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-G5I3",
+    "name": "IGKV-G5I3",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-G5I3"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 114,
+      "CDR2Begin": 165,
+      "FR3Begin": 174,
+      "CDR3Begin": 279,
+      "VEnd": 305
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-GTW5",
+    "name": "IGKV-GTW5",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-GTW5"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-GYZG",
+    "name": "IGKV-GYZG",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-GYZG"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-HA63",
+    "name": "IGKV-HA63",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-HA63"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 108,
+      "CDR2Begin": 159,
+      "FR3Begin": 168,
+      "CDR3Begin": 273,
+      "VEnd": 299
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-HPUE",
+    "name": "IGKV-HPUE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-HPUE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-HT2O",
+    "name": "IGKV-HT2O",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-HT2O"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 285
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-HWCO",
+    "name": "IGKV-HWCO",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-HWCO"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-IDLD",
+    "name": "IGKV-IDLD",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-IDLD"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-IFJX",
+    "name": "IGKV-IFJX",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-IFJX"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 282
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-IV2C",
+    "name": "IGKV-IV2C",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-IV2C"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-JCV5",
+    "name": "IGKV-JCV5",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-JCV5"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 57,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 284
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-KCFZ",
+    "name": "IGKV-KCFZ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-KCFZ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-KDB5",
+    "name": "IGKV-KDB5",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-KDB5"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 288
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-KGKZ",
+    "name": "IGKV-KGKZ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-KGKZ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 108,
+      "CDR2Begin": 159,
+      "FR3Begin": 168,
+      "CDR3Begin": 273,
+      "VEnd": 299
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-LD2X",
+    "name": "IGKV-LD2X",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-LD2X"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-LG3C",
+    "name": "IGKV-LG3C",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-LG3C"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 291
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-M3QM",
+    "name": "IGKV-M3QM",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-M3QM"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 108,
+      "CDR2Begin": 159,
+      "FR3Begin": 168,
+      "CDR3Begin": 273,
+      "VEnd": 299
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-M6XE",
+    "name": "IGKV-M6XE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-M6XE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 111,
+      "CDR2Begin": 162,
+      "FR3Begin": 171,
+      "CDR3Begin": 276,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-MMCX",
+    "name": "IGKV-MMCX",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-MMCX"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-MTW7",
+    "name": "IGKV-MTW7",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-MTW7"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 285
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-MXBA",
+    "name": "IGKV-MXBA",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-MXBA"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-N6SE",
+    "name": "IGKV-N6SE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-N6SE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 111,
+      "CDR2Begin": 162,
+      "FR3Begin": 171,
+      "CDR3Begin": 276,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-NEUC",
+    "name": "IGKV-NEUC",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-NEUC"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-NKG7",
+    "name": "IGKV-NKG7",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-NKG7"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-NN4Q",
+    "name": "IGKV-NN4Q",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-NN4Q"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 111,
+      "CDR2Begin": 162,
+      "FR3Begin": 171,
+      "CDR3Begin": 276,
+      "VEnd": 300
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-OHY6",
+    "name": "IGKV-OHY6",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-OHY6"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-OM53",
+    "name": "IGKV-OM53",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-OM53"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 111,
+      "CDR2Begin": 162,
+      "FR3Begin": 171,
+      "CDR3Begin": 276,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-OO5W",
+    "name": "IGKV-OO5W",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-OO5W"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 111,
+      "CDR2Begin": 162,
+      "FR3Begin": 171,
+      "CDR3Begin": 276,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-OVFC",
+    "name": "IGKV-OVFC",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-OVFC"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-P7MZ",
+    "name": "IGKV-P7MZ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-P7MZ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-Q6O7",
+    "name": "IGKV-Q6O7",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-Q6O7"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 283
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-QSPM",
+    "name": "IGKV-QSPM",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-QSPM"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-R2WP",
+    "name": "IGKV-R2WP",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-R2WP"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 108,
+      "CDR2Begin": 159,
+      "FR3Begin": 168,
+      "CDR3Begin": 273,
+      "VEnd": 299
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-R3FW",
+    "name": "IGKV-R3FW",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-R3FW"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-RDPY",
+    "name": "IGKV-RDPY",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-RDPY"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 114,
+      "CDR2Begin": 165,
+      "FR3Begin": 174,
+      "CDR3Begin": 279,
+      "VEnd": 305
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-RNSU",
+    "name": "IGKV-RNSU",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-RNSU"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-ROLX",
+    "name": "IGKV-ROLX",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-ROLX"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-SIXC",
+    "name": "IGKV-SIXC",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-SIXC"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 114,
+      "CDR2Begin": 165,
+      "FR3Begin": 174,
+      "CDR3Begin": 279,
+      "VEnd": 305
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-SUJD",
+    "name": "IGKV-SUJD",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-SUJD"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-TD35",
+    "name": "IGKV-TD35",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-TD35"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-TWDY",
+    "name": "IGKV-TWDY",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-TWDY"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-U5CY",
+    "name": "IGKV-U5CY",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-U5CY"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 108,
+      "CDR2Begin": 159,
+      "FR3Begin": 168,
+      "CDR3Begin": 273,
+      "VEnd": 299
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-UTLD",
+    "name": "IGKV-UTLD",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-UTLD"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-UWOD",
+    "name": "IGKV-UWOD",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-UWOD"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 111,
+      "CDR2Begin": 162,
+      "FR3Begin": 171,
+      "CDR3Begin": 276,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-V7SH",
+    "name": "IGKV-V7SH",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-V7SH"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 159,
+      "CDR3Begin": 264,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-V52Q",
+    "name": "IGKV-V52Q",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-V52Q"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-VEVE",
+    "name": "IGKV-VEVE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-VEVE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 114,
+      "CDR2Begin": 165,
+      "FR3Begin": 174,
+      "CDR3Begin": 279,
+      "VEnd": 300
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-VEYK",
+    "name": "IGKV-VEYK",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-VEYK"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-VHCW",
+    "name": "IGKV-VHCW",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-VHCW"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-VOLG",
+    "name": "IGKV-VOLG",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-VOLG"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-WWXM",
+    "name": "IGKV-WWXM",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-WWXM"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 108,
+      "CDR2Begin": 159,
+      "FR3Begin": 168,
+      "CDR3Begin": 273,
+      "VEnd": 299
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-WX7U",
+    "name": "IGKV-WX7U",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-WX7U"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 114,
+      "CDR2Begin": 165,
+      "FR3Begin": 174,
+      "CDR3Begin": 279,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-XQT4",
+    "name": "IGKV-XQT4",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-XQT4"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 282
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-XTKB",
+    "name": "IGKV-XTKB",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-XTKB"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-XU4N",
+    "name": "IGKV-XU4N",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-XU4N"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-YXVU",
+    "name": "IGKV-YXVU",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-YXVU"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 156,
+      "CDR3Begin": 261,
+      "VEnd": 287
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_cByJ_IGKV_rev_1.json.fasta#IGKV-Z76V",
+    "name": "IGKV-Z76V",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKV-Z76V"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 78,
+      "FR2Begin": 93,
+      "CDR2Begin": 144,
+      "FR3Begin": 153,
+      "CDR3Begin": 258,
+      "VEnd": 286
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGKJ_rev_1.json.fasta#IGKJ-4JXG",
+    "name": "IGKJ-4JXG",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKJ-4JXG"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 38
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGKJ_rev_1.json.fasta#IGKJ-5NUZ",
+    "name": "IGKJ-5NUZ",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKJ-5NUZ"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 38
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGKJ_rev_1.json.fasta#IGKJ-ABRI",
+    "name": "IGKJ-ABRI",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKJ-ABRI"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 11,
+      "FR4End": 39
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGKJ_rev_1.json.fasta#IGKJ-AR7L",
+    "name": "IGKJ-AR7L",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKJ-AR7L"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 11,
+      "FR4End": 39
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGKJ_rev_1.json.fasta#IGKJ-HVOR",
+    "name": "IGKJ-HVOR",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKJ-HVOR"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 11,
+      "FR4End": 39
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGKJ_rev_1.json.fasta#IGKJ-IIHF",
+    "name": "IGKJ-IIHF",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKJ-IIHF"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 38
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGKJ_rev_1.json.fasta#IGKJ-LUDL",
+    "name": "IGKJ-LUDL",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKJ-LUDL"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 38
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGKJ_rev_1.json.fasta#IGKJ-MXRV",
+    "name": "IGKJ-MXRV",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKJ-MXRV"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 11,
+      "FR4End": 39
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGKJ_rev_1.json.fasta#IGKJ-O4CL",
+    "name": "IGKJ-O4CL",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKJ-O4CL"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 38
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGKJ_rev_1.json.fasta#IGKJ-WRAP",
+    "name": "IGKJ-WRAP",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKJ-WRAP"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4End": 37
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGKJ_rev_1.json.fasta#IGKJ-Z5J4",
+    "name": "IGKJ-Z5J4",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "IGKJ-Z5J4"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 38
+    }
+  }, {
+    "baseSequence": "nuccore://NG_005612.1",
+    "name": "IGKC*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "anchorPoints": {
+      "CBegin": 3171454,
+      "CExon1End": 3171774,
+      "CEnd": 3171774
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGKC.fasta#IGKC*01",
+    "name": "IGKC*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "V00807|IGKC*01|Mus musculus|F|C-REGION|211..530|320 nt|3| | | | |320+0=320| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 320
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGKC.fasta#IGKC*02",
+    "name": "IGKC*02",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "X67002|IGKC*02|Mus musculus_AKR|F|C-REGION|61..376|316 nt|3| | | | |316+0=316| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 316
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGKC.fasta#IGKC*03",
+    "name": "IGKC*03",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGK" ],
+    "meta": {
+      "comments": "X67011|IGKC*03|Mus musculus_SJL|F|C-REGION|58..373|316 nt|3| | | | |316+0=316| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 316
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_c_ByJ_IGLV_rev_1.json.fasta#IGLV-FBPO",
+    "name": "IGLV-FBPO",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "IGLV-FBPO"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 168,
+      "CDR3Begin": 273,
+      "VEnd": 313
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_c_ByJ_IGLV_rev_1.json.fasta#IGLV-NOJ2",
+    "name": "IGLV-NOJ2",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "IGLV-NOJ2"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 102,
+      "CDR2Begin": 153,
+      "FR3Begin": 162,
+      "CDR3Begin": 267,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_c_ByJ_IGLV_rev_1.json.fasta#IGLV-P56C",
+    "name": "IGLV-P56C",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "IGLV-P56C"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 102,
+      "CDR2Begin": 153,
+      "FR3Begin": 162,
+      "CDR3Begin": 267,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGLJ_rev_1.json.fasta#IGLJ-2ERU",
+    "name": "IGLJ-2ERU",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "IGLJ-2ERU"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 38
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGLJ_rev_1.json.fasta#IGLJ-ACBW",
+    "name": "IGLJ-ACBW",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "IGLJ-ACBW"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 38
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGLJ_rev_1.json.fasta#IGLJ-FMEA",
+    "name": "IGLJ-FMEA",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "IGLJ-FMEA"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 38
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGLJ_rev_1.json.fasta#IGLJ-KL6B",
+    "name": "IGLJ-KL6B",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "IGLJ-KL6B"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 38
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGLJ_rev_1.json.fasta#IGLJ-PG3G",
+    "name": "IGLJ-PG3G",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "IGLJ-PG3G"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 42
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGLJ_rev_1.json.fasta#IGLJ-UWMQ",
+    "name": "IGLJ-UWMQ",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "IGLJ-UWMQ"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 12,
+      "FR4End": 38
+    }
+  }, {
+    "baseSequence": "file://Mouse_IGLJ_rev_1.json.fasta#IGLJ-XVAO",
+    "name": "IGLJ-XVAO",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "IGLJ-XVAO"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 10,
+      "FR4End": 38
+    }
+  }, {
+    "baseSequence": "nuccore://NG_004051.1",
+    "name": "IGLC1*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "anchorPoints": {
+      "CBegin": 199273,
+      "CExon1End": 199593,
+      "CEnd": 199593
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGLC.fasta#IGLC1*01",
+    "name": "IGLC1*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "J00587|IGLC1*01|Mus musculus_BALB/c|F|C-REGION|30..346|317 nt|3| | | | |317+0=317| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 317
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGLC.fasta#IGLC1*02",
+    "name": "IGLC1*02",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "V00814|IGLC1*02|Mus musculus_BALB/c|P|C-REGION|29..165|137 nt|3| | | | |137+0=137| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 137
+    }
+  }, {
+    "baseSequence": "nuccore://NG_004051.1",
+    "name": "IGLC2*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "anchorPoints": {
+      "CBegin": 62492,
+      "CExon1End": 62809,
+      "CEnd": 62809
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGLC.fasta#IGLC2*01",
+    "name": "IGLC2*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "J00595|IGLC2*01|Mus musculus_BALB/c|F|C-REGION|27..340|314 nt|3| | | | |314+0=314| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 314
+    }
+  }, {
+    "baseSequence": "nuccore://NG_004051.1",
+    "name": "IGLC3*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "anchorPoints": {
+      "CBegin": 195663,
+      "CExon1End": 195980,
+      "CEnd": 195980
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGLC.fasta#IGLC3*01",
+    "name": "IGLC3*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "J00585|IGLC3*01|Mus musculus_BALB/c|F|C-REGION|27..340|314 nt|3| | | | |314+0=314| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 314
+    }
+  }, {
+    "baseSequence": "nuccore://NG_004051.1",
+    "name": "IGLC4*00",
+    "geneType": "C",
+    "isFunctional": false,
+    "chains": [ "IGL" ],
+    "anchorPoints": {
+      "CBegin": 66032,
+      "CExon1End": 66346,
+      "CEnd": 66346
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGLC.fasta#IGLC4*01",
+    "name": "IGLC4*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "X58416|IGLC4*01|Mus musculus_BALB/c|P|C-REGION|53..362|310 nt|3| | | | |310+0=310| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 310
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGLC.fasta#IGLC4*02",
+    "name": "IGLC4*02",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "IMGT000117|IGLC4*02|Mus musculus_C57BL/6J|F|C-REGION|75383..75693|311 nt|3| | | | |311+0=311| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 311
+    }
+  } ],
+  "meta": {
+    "comments": [ "Imported from: Mouse_BALB_cByJ_IGKV_rev_1_gapped.fasta", "Imported from: Mouse_BALB_c_ByJ_IGLV_rev_1_gapped.fasta", "Imported from: Mouse_BALB_c_IGHD_rev_3_gapped.fasta", "Imported from: Mouse_BALB_c_IGHJ_rev_3_gapped.fasta", "Imported from: Mouse_BALB_c_IGHV_rev_3_gapped.fasta", "Imported from: Mouse_IGKJ_rev_1_gapped.fasta", "Imported from: Mouse_IGLJ_rev_1_gapped.fasta", "Imported from: Mouse_IMGT_IGHC.fasta", "Imported from: Mouse_IMGT_IGKC.fasta", "Imported from: Mouse_IMGT_IGLC.fasta" ]
+  }
+} ]

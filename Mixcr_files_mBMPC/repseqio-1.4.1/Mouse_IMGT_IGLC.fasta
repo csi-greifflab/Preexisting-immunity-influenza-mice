@@ -1,0 +1,39 @@
+>J00587|IGLC1*01|Mus musculus_BALB/c|F|C-REGION|30..346|317 nt|3| | | | |317+0=317| | |
+gccagcccaagtcttcgccatcagtcaccctgtttccaccttcctctgaagagctcgaga
+ctaacaaggccacactggtgtgtacgatcactgatttctacccaggtgtggtgacagtgg
+actggaaggtagatggtacccctgtcactcagggtatggagacaacccagccttccaaac
+agagcaacaacaagtacatggctagcagctacctgaccctgacagcaagagcatgggaaa
+ggcatagcagttacagctgccaggtcactcatgaaggtcacactgtggagaagagtttgt
+cccgtgctgactgttcc
+>V00814|IGLC1*02|Mus musculus_BALB/c|P|C-REGION|29..165|137 nt|3| | | | |137+0=137| | |
+gccagcccaagtcttcgccatcagtcaccctgtttccaccttcctctgaagagctcactg
+agaacaaggccacactcgtgtgaacgatcactgatttctacccaggtgtggtgacagtgg
+actggaaggtagatgga
+>J00595|IGLC2*01|Mus musculus_BALB/c|F|C-REGION|27..340|314 nt|3| | | | |314+0=314| | |
+gtcagcccaagtccactcccactctcaccgtgtttccaccttcctctgaggagctcaagg
+aaaacaaagccacactggtgtgtctgatttccaacttttccccgagtggtgtgacagtgg
+cctggaaggcaaatggtacacctatcacccagggtgtggacacttcaaatcccaccaaag
+agggcaacaagttcatggccagcagcttcctacatttgacatcggaccagtggagatctc
+acaacagttttacctgtcaagttacacatgaaggggacactgtggagaagagtctgtctc
+ctgcagaatgtctc
+>J00585|IGLC3*01|Mus musculus_BALB/c|F|C-REGION|27..340|314 nt|3| | | | |314+0=314| | |
+gtcagcccaagtccactcccacactcaccatgtttccaccttcccctgaggagctccagg
+aaaacaaagccacactcgtgtgtctgatttccaatttttccccaagtggtgtgacagtgg
+cctggaaggcaaatggtacacctatcacccagggtgtggacacttcaaatcccaccaaag
+aggacaacaagtacatggccagcagcttcttacatttgacatcggaccagtggagatctc
+acaacagttttacctgccaagttacacatgaaggggacactgtggagaagagtctgtctc
+ctgcagaatgtctc
+>X58416|IGLC4*01|Mus musculus_BALB/c|P|C-REGION|53..362|310 nt|3| | | | |310+0=310| | |
+gccaacccaaggctacaccctcagttaatctgttcccaccttcctctgaagagctcaaga
+ctaaaaaggccacactggtgtgtatgatcactgagttctacgcagctgctgtgagagtgc
+ctggaaggcagatggtacccctttcactcagggtgtagagactacccagcctcccaaaca
+gagggacaacatggctagcagttacctgctcttcacagcagaagcgtgggaatctcatag
+cagttacagctgccatgtcactcatgaagggaacactgtggagaagagtttgtcccgtgc
+tgagtgttcc
+>IMGT000117|IGLC4*02|Mus musculus_C57BL/6J|F|C-REGION|75383..75693|311 nt|3| | | | |311+0=311| | |
+gccaacccaaggctacaccctcagttaatctgttcccaccttcctctgaagagctcaaga
+ctaaaaaggccacactggtgtgtatgatcactgagttctacgcagctgctgtgagagtgg
+cctggaaggcagatggtacccctttcactcagggtgtagagactacccagcctcccaaac
+agagggacaacatggctagcagttacctgctcttcacagcagaagcgtgggaatctcata
+gcagttacagctgccatgtcactcatgaagggaacactgtggagaagagtttgtcccgtg
+ctgagtgttcc

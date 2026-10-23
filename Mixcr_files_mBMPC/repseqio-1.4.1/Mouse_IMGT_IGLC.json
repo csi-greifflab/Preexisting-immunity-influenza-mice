@@ -1,0 +1,131 @@
+[ {
+  "taxonId": 10090,
+  "speciesNames": [ "mmu" ],
+  "genes": [ {
+    "baseSequence": "nuccore://NG_004051.1",
+    "name": "IGLC1*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "anchorPoints": {
+      "CBegin": 199273,
+      "CExon1End": 199593,
+      "CEnd": 199593
+    }
+  }, {
+    "baseSequence": "nuccore://NG_004051.1",
+    "name": "IGLC2*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "anchorPoints": {
+      "CBegin": 62492,
+      "CExon1End": 62809,
+      "CEnd": 62809
+    }
+  }, {
+    "baseSequence": "nuccore://NG_004051.1",
+    "name": "IGLC3*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "anchorPoints": {
+      "CBegin": 195663,
+      "CExon1End": 195980,
+      "CEnd": 195980
+    }
+  }, {
+    "baseSequence": "nuccore://NG_004051.1",
+    "name": "IGLC4*00",
+    "geneType": "C",
+    "isFunctional": false,
+    "chains": [ "IGL" ],
+    "anchorPoints": {
+      "CBegin": 66032,
+      "CExon1End": 66346,
+      "CEnd": 66346
+    }
+}, {
+    "baseSequence": "file://Mouse_IMGT_IGLC.fasta#IGLC1*01",
+    "name": "IGLC1*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "J00587|IGLC1*01|Mus musculus_BALB/c|F|C-REGION|30..346|317 nt|3| | | | |317+0=317| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 317
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGLC.fasta#IGLC1*02",
+    "name": "IGLC1*02",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "V00814|IGLC1*02|Mus musculus_BALB/c|P|C-REGION|29..165|137 nt|3| | | | |137+0=137| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 137
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGLC.fasta#IGLC2*01",
+    "name": "IGLC2*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "J00595|IGLC2*01|Mus musculus_BALB/c|F|C-REGION|27..340|314 nt|3| | | | |314+0=314| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 314
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGLC.fasta#IGLC3*01",
+    "name": "IGLC3*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "J00585|IGLC3*01|Mus musculus_BALB/c|F|C-REGION|27..340|314 nt|3| | | | |314+0=314| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 314
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGLC.fasta#IGLC4*01",
+    "name": "IGLC4*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "X58416|IGLC4*01|Mus musculus_BALB/c|P|C-REGION|53..362|310 nt|3| | | | |310+0=310| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 310
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGLC.fasta#IGLC4*02",
+    "name": "IGLC4*02",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "IMGT000117|IGLC4*02|Mus musculus_C57BL/6J|F|C-REGION|75383..75693|311 nt|3| | | | |311+0=311| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 311
+    }
+  } ],
+  "meta": {
+    "comments": "Imported from: Mouse_IMGT_IGLC.fasta"
+  }
+  } ]
+} ]

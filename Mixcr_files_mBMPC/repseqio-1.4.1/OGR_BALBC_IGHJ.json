@@ -1,0 +1,64 @@
+[ {
+  "taxonId": 10090,
+  "speciesNames": [ "mmu" ],
+  "genes": [ {
+    "baseSequence": "file://OGR_BALBC_IGHJ.json.fasta#IGHJ-G76U",
+    "name": "IGHJ-G76U",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHJ-G76U"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 22,
+      "FR4End": 53
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHJ.json.fasta#IGHJ-ICAF",
+    "name": "IGHJ-ICAF",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHJ-ICAF"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 17,
+      "FR4End": 48
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHJ.json.fasta#IGHJ-OMJ3",
+    "name": "IGHJ-OMJ3",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHJ-OMJ3"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 17,
+      "FR4End": 48
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHJ.json.fasta#IGHJ-SCNX",
+    "name": "IGHJ-SCNX",
+    "geneType": "J",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHJ-SCNX"
+    },
+    "anchorPoints": {
+      "JBegin": 0,
+      "FR4Begin": 23,
+      "FR4End": 54
+    }
+  } ],
+  "meta": {
+    "comments": "Imported from: Mouse_BALB_c_IGHJ_rev_3_gapped.fasta"
+  }
+} ]

@@ -1,0 +1,573 @@
+---
+title: "Mouse_influenza_bulkseq_scseq_comparison"
+author: "Khang"
+date: "`r Sys.Date()`"
+output:
+  pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,message = FALSE,warning = FALSE)
+knitr::opts_chunk$set(dev = "pdf",
+                      dpi = 300, out.width = "100%", out.height = "100%",
+                      echo = FALSE,
+                      cache = TRUE)
+```
+
+```{r libs, include=FALSE}
+library(immunarch)
+library(tidyverse)
+library(pheatmap)
+library(ggplotify)
+library(cowplot)
+library(reshape2)
+library(seqinr)
+library(GGally)
+library(RColorBrewer)
+library(Platypus)
+```
+
+```{r eval=FALSE, include=FALSE}
+# Load the data
+data_all_bulk <- readRDS("../bulkBCR-seq/data_rep_all")
+
+# Remove the two mice with very small sample size in the bulkseq data
+data_all_bulk$data <- data_all_bulk$data[-c(8,36,79,111)]
+data_all_bulk$meta <- data_all_bulk$meta[-c(8,36,79,111),]
+
+# Sort the bulkseq df by order of descending UMI counts
+data_all_bulk$data <- map(data_all_bulk$data, function(x) arrange(x, desc(Clones)))
+
+data_all_bulk$meta$Method <- "bulk"
+data_all_bulk$meta$Chain <- str_split(data_all_bulk$meta$Sample, "_", simplify = T)[,4]
+data_all_bulk$meta$Infection_1 <- str_remove_all(data_all_bulk$meta$Infection_1, "H1N1_")
+data_all_bulk$meta$Infection_1 <- str_replace_all(data_all_bulk$meta$Infection_1, "PR08", "PR8")
+data_all_bulk$meta$Infection_2 <- str_remove_all(data_all_bulk$meta$Infection_2, "H1N1_")
+data_all_bulk$meta$Infection_2 <- str_replace_all(data_all_bulk$meta$Infection_2, "PR08", "PR8")
+data_all_bulk$meta$Infections <- str_remove_all(data_all_bulk$meta$Infections, "H1N1_")
+data_all_bulk$meta$Infections <- str_replace_all(data_all_bulk$meta$Infections, "PR08", "PR8")
+
+# Rename the bulk samples
+names(data_all_bulk$data) <-  paste(data_all_bulk$meta$Method, data_all_bulk$meta$Sample_Number, data_all_bulk$meta$Infections, data_all_bulk$meta$Replicate, data_all_bulk$meta$Chain, sep = "_")
+
+data_all_sc <- readRDS("../scBCR-seq/data_all_sc.RDS")
+
+# Sort the sc df by order of descending cell barcode counts
+data_all_sc$data <- map(data_all_sc$data, function(x) arrange(x, desc(Clones)))
+
+# Rename the bulk samples
+names(data_all_sc$data) <-  paste(data_all_sc$meta$Method, "all", data_all_sc$meta$Infections, data_all_sc$meta$Replicate, data_all_sc$meta$Chain, sep = "_")
+
+data_all_both <- list(data = c(data_all_bulk$data, data_all_sc$data),
+                      meta = rbind(data_all_bulk$meta, data_all_sc$meta))
+data_all_both$meta$Sample <- names(data_all_both$data)
+
+# Save the formatted data
+saveRDS(data_all_both, "./data_all_both")
+```
+
+```{r}
+# Load the data
+data_all_both <- readRDS("./data_all_both")
+```
+
+# Clonotype count (after filtering out unidentified and misidentified isotype clonotypes) and Number of reads per repertoire (after alignment and UMI error correction)
+
+```{r Clonotype_count, echo=FALSE, message=FALSE, warning=FALSE}
+volume_all <- repExplore(data_all_both$data, "volume")
+volume_all <- merge(volume_all, data_all_both$meta)
+```
+
+```{r echo=FALSE, fig.height=20, fig.width=12, message=FALSE, warning=FALSE}
+p_vol_heavy_bulk <- ggplot(data = volume_all %>% filter(Method == "bulk" & Chain == "hc"), aes(x = factor(Infections, levels = c("PBS;PBS", "PBS;CA07", "CA07;CA07", "PR8;CA07")), y = Volume, fill = factor(Infections, levels = c("PBS;PBS", "PBS;CA07", "CA07;CA07", "PR8;CA07")))) +
+  geom_col(show.legend = T, color = "black") +
+  theme_half_open() +
+  theme(axis.text.x = element_text(angle = 0), legend.position = "bottom") + #Rotate text
+  labs(title = "Unique bulk clonotype count heavy chain by replicate", x = "Infections", y = "Count", fill = "Infections") +
+  scale_fill_manual(values = c("#abadaf", "#fbc8ac", "#7aa2da", "#7fb884")) +
+  geom_text(aes(label = Volume), size = 3, position = position_stack(vjust = 0.5)) +
+  facet_wrap(vars(Replicate))
+
+p_vol_heavy_sc <- ggplot(data = volume_all %>% filter(Method == "sc" & Chain == "hc")) +
+  geom_col(aes(x = factor(Infections, levels = c("PBS;PBS", "PBS;CA07", "CA07;CA07", "PR8;CA07")), y = Volume, fill = factor(Infections, levels = c("PBS;PBS", "PBS;CA07", "CA07;CA07", "PR8;CA07"))), show.legend = T, color = "black") +
+  scale_fill_manual(values = c("#abadaf", "#fbc8ac", "#7aa2da", "#7fb884")) +
+  theme_half_open() +
+  theme(axis.text.x = element_text(angle = 0), legend.position = "bottom") + #Rotate text
+  labs(title = "Unique sc clonotype count heavy chain by replicate", x = "Infections", y = "Count", fill = "Infections") +
+  geom_text(aes(x = Infections, y = Volume, label = Volume), vjust = -0.3, size = 3, position = position_dodge(width = 0.9)) +
+  facet_wrap(vars(Replicate))
+
+
+p_vol_light_bulk <- ggplot(data = volume_all %>% filter(Method == "bulk" & Chain == "lc"), aes(x = factor(Infections, levels = c("PBS;PBS", "PBS;CA07", "CA07;CA07", "PR8;CA07")), y = Volume, fill = factor(Infections, levels = c("PBS;PBS", "PBS;CA07", "CA07;CA07", "PR8;CA07")))) +
+  scale_fill_manual(values = c("#abadaf", "#fbc8ac", "#7aa2da", "#7fb884")) +
+  geom_col(show.legend = T, color = "black") +
+  theme_half_open() +
+  theme(axis.text.x = element_text(angle = 0), legend.position = "bottom") + #Rotate text
+  labs(title = "Unique bulk clonotype count light chain by replicate", x = "Infections", y = "Count", fill = "Infections") +
+  geom_text(aes(label = Volume), size = 3, position = position_stack(vjust = 0.5)) +
+  facet_wrap(vars(Replicate))
+
+p_vol_light_sc <- ggplot(data = volume_all %>% filter(Method == "sc" & Chain == "lc")) +
+  geom_col(aes(x = factor(Infections, levels = c("PBS;PBS", "PBS;CA07", "CA07;CA07", "PR8;CA07")), y = Volume, fill = factor(Infections, levels = c("PBS;PBS", "PBS;CA07", "CA07;CA07", "PR8;CA07"))), show.legend = T, color = "black") +
+  scale_fill_manual(values = c("#abadaf", "#fbc8ac", "#7aa2da", "#7fb884")) +
+  theme_half_open() +
+  theme(axis.text.x = element_text(angle = 0), legend.position = "bottom") + #Rotate text
+  labs(title = "Unique sc clonotype count light chain by replicate", x = "Infections", y = "Count", fill = "Infections") +
+  geom_text(aes(x = Infections, y = Volume, label = Volume), vjust = -0.3, size = 3, position = position_dodge(width = 0.9)) +
+  facet_wrap(vars(Replicate))
+
+p_vol_all <- plot_grid(p_vol_heavy_bulk, p_vol_heavy_sc, p_vol_light_bulk, p_vol_light_sc, ncol = 1)
+p_vol_all
+#ggsave("./figures/clone_count_all.pdf", p_vol_all, height = 20, width = 12, dpi = 600)
+```
+
+*Figure 1: The clonotype count was skewed towards PBS;PBS mice in replicate 1, very few PBS;PBS mice in replicate 2, and most even in replicate 3, in both bulk and single-cell samples*
+
+```{r Clonotype_and_read_count, echo=FALSE, message=FALSE, warning=FALSE}
+read_all <- repExplore(data_all_both$data, "clones")
+read_all <- merge(read_all, data_all_both$meta)
+```
+
+```{r echo=FALSE, fig.height=5, fig.width=12, message=FALSE, warning=FALSE}
+p_read_sc <- ggplot(data = read_all %>% filter(Method == "sc" & Chain == "hc")) +
+  geom_col(aes(x = factor(Infections, levels = c("PBS;PBS", "PBS;CA07", "CA07;CA07", "PR8;CA07")), y = Clones, fill = factor(Infections, levels = c("PBS;PBS", "PBS;CA07", "CA07;CA07", "PR8;CA07"))), show.legend = T, color = "black") +
+  scale_fill_manual(values = c("#abadaf", "#fbc8ac", "#7aa2da", "#7fb884")) +
+  theme_half_open() +
+  theme(axis.text.x = element_text(angle = 0), legend.position = "bottom") + #Rotate text
+  labs(title = "Scseq unique cell count by replicate", x = "Infections", y = "Count", fill = "Infections") +
+  geom_text(aes(x = Infections, y = Clones, label = Clones), vjust = -0.3, size = 3, position = position_dodge(width = 0.9)) +
+  facet_wrap(vars(Replicate))
+
+p_read_sc
+#ggsave("./figures/cell_count_sc.pdf", p_read_sc, height = 5, width = 12, dpi = 600)
+```
+
+*Figure 2: We recovered 462 cells in rep 1, 3281 cells in rep 2 (very few PBS;PBS cells), and around 3566 cells in rep 3 (cells are kept if both chains are present and the hashtag can separate the cells into 1 of the 4 treatment groups). Cell hashing was demultiplexed using HTODemux in Seurat from CellRanger output.*
+
+\newpage
+
+```{r}
+# Visualize top 100 HC clonotypes in sc data with respect to Ag-binding
+p_sc_top100 <- map2(data_all_both$data[intersect(grep("sc",names(data_all_both$data)), grep("hc",names(data_all_both$data)))],
+                    names(data_all_both$data[intersect(grep("sc",names(data_all_both$data)), grep("hc",names(data_all_both$data)))]),
+                    function(a,b)
+ggplot(data = a[1:100,], mapping = aes(x = seq_len(nrow(a[1:100,])), y = Clones)) +
+  geom_col(aes(fill = HA.binding)) +
+  scale_fill_manual(values = c("CA07" = "#E41A1C", "Cross" = "#984EA3", "PR8" = "#377EB8"), 
+                    na.value = "#bdbdbd") +
+  labs(x = "Clone index", y = "Cell counts", title = b) +
+  theme_half_open()
+)
+```
+
+```{r fig.height=12, fig.width=18}
+p_top100_sc <- plot_grid(plotlist = p_sc_top100)
+p_top100_sc
+#ggsave("./figures/top100_sc_binding.pdf", p_top100_sc, height = 12, width = 18, dpi = 600)
+```
+
+*Figure 3: Top 100 clonotypes in single-cell repertoires, colored by Ag-binding. In general, there is more clonal expansion in infected mice compared to control mice, and the most expanded clonotypes are either CA07 or CA07+PR8 binding.*
+
+
+```{r}
+# Create a separate df with rownames matching the sample names
+ann_df <- data_all_both$meta %>% column_to_rownames(var = "Sample") %>% select(Replicate, Infections, Method)
+
+# Specify which color goes to which sample and isotype for the annotation
+ann_colors <- list(Replicate = c("#e41a1c", "#ffff33", "#377eb8"),
+                   Infections = c("#abadaf", "#fbc8ac", "#7aa2da", "#7fb884"),
+                   Method = c("#404040","#bababa"))
+
+names(ann_colors$Replicate) <- unique(ann_df$Replicate)
+names(ann_colors$Infections) <- unique(ann_df$Infections)
+names(ann_colors$Method) <- unique(ann_df$Method)
+```
+
+\newpage
+
+```{r eval=FALSE, include=FALSE}
+# Export sc CDR3 as a whole replicate, with info on infections for network analysis
+data_sc_hc <- data_all_both$data[intersect(str_which(names(data_all_both$data), "sc"),
+                                           str_which(names(data_all_both$data), "hc"))]
+
+for (i in 1:length(data_sc_hc)){
+  data_sc_hc[[i]]$Replicate <- str_split(names(data_sc_hc[i]),"_",simplify = T)[,4]
+}
+
+cdr3_sc_hc <- tibble()
+for (i in 1:length(data_sc_hc)){
+  df_tmp <- tibble()
+  df_tmp <- data_sc_hc[[i]] %>% select(CDR3.aa, HA.binding, Infections, Replicate)
+  cdr3_sc_hc <- rbind(cdr3_sc_hc, df_tmp)
+  }
+
+data_sc_lc <- data_all_both$data[intersect(str_which(names(data_all_both$data), "sc"),
+                                           str_which(names(data_all_both$data), "lc"))]
+
+for (i in 1:length(data_sc_lc)){
+  data_sc_lc[[i]]$Replicate <- str_split(names(data_sc_lc[i]),"_",simplify = T)[,4]
+}
+
+cdr3_sc_lc <- tibble()
+for (i in 1:length(data_sc_lc)){
+  df_tmp <- tibble()
+  df_tmp <- data_sc_lc[[i]] %>% select(CDR3.aa, HA.binding, Infections, Replicate)
+  cdr3_sc_lc <- rbind(cdr3_sc_lc, df_tmp)
+}
+
+write_tsv(cdr3_sc_hc, "./Clonal_network_analysis/cdr3/cdr3_sc_hc.tsv")
+write_tsv(cdr3_sc_lc, "./Clonal_network_analysis/cdr3/cdr3_sc_lc.tsv")
+```
+
+# Bulk_single-cell repertoire analysis
+# VH gene usage (remember to replace with IMGT names later from ORGDB table)
+
+```{r VH-gene_usage, message=FALSE, warning=FALSE}
+#V gene usage heavy chain
+gene_use_vh <- geneUsage(data_all_both$data[str_which(names(data_all_both$data),"hc")], .gene= c("musmus.ighv"), .ambig = "maj", .quant = "count", .norm = TRUE)
+
+# Set NA to 0 for correlation calculation
+gene_use_vh[is.na(gene_use_vh)] <- 0
+
+# Load the csv file translating OGRDB gene names to IMGT names
+ogrdb_gene_list <- read.csv("./OGRDB_to_IGMT_Vgene.csv")
+ogrdb_Vgene <- ogrdb_gene_list %>% filter(str_detect(Label,"IGHV"))
+ogrdb_Vgene$IMGT.Name <- na_if(ogrdb_Vgene$IMGT.Name,"")
+ogrdb_Vgene$IMGT.Name[which(is.na(ogrdb_Vgene$IMGT.Name))] <- ogrdb_Vgene$Alt.Names[which(is.na(ogrdb_Vgene$IMGT.Name))]
+ogrdb_Vgene$Label <- str_sub(ogrdb_Vgene$Label, end = -2L)
+
+# Replace the OGRDB names with the IMGT names one by one
+for (i in 1:nrow(gene_use_vh)){
+  gene_use_vh$Names <- str_replace(gene_use_vh$Names, gene_use_vh$Names[i], ogrdb_Vgene$IMGT.Name[i])
+}
+
+# Convert to matrix format for heatmap of gene usage
+gene_use_vh_mat <- gene_use_vh %>% column_to_rownames(var = "Names")
+```
+
+```{r fig.height=20, fig.width=16, message=FALSE, warning=FALSE}
+p_vh_gene_usage <- as.ggplot(pheatmap(gene_use_vh_mat, cluster_rows = F, cluster_cols = T, clustering_method = "ward.D2",
+         angle_col = 90, cutree_cols = 3,
+         annotation_col = ann_df, annotation_colors = ann_colors,
+         color = colorRampPalette(c("#f7fbff", "#08306b"))(length(seq(round(min(gene_use_vh_mat, na.rm = T), 2), round(max(gene_use_vh_mat, na.rm = T), 2), by = 0.01)))
+         ))
+
+#ggsave("./figures/vh_gene_usage.pdf", p_vh_gene_usage, height = 20, width = 16, dpi = 600)
+```
+
+*Figure 4: Without regarding the Ag-specificity of each clonotype, the scseq samples (GC B cells) have a clearly distinct VH-gene usage profile from the bulkseq samples (BMPCs).*
+
+\newpage
+
+# Repertoire overlap (shared CDR3 sequence)
+
+```{r}
+# Number of public CDRH3 sequences between bulk and scseq heavy chain
+cdrh3_public_bulk_sc <- (repOverlap(data_all_both$data[str_which(names(data_all_both$data),"hc")], .method = "public", .col = "aa", .verbose = F))
+
+# Filter the matrix so that bulkseq is on the row, scseq is on the column
+cdrh3_public_bulk_sc <- cdrh3_public_bulk_sc[str_which(rownames(cdrh3_public_bulk_sc), "bulk"),
+                                             str_which(colnames(cdrh3_public_bulk_sc), "sc")]
+
+# Replace the 0 values with NA to make the plot more readable
+cdrh3_public_bulk_sc[cdrh3_public_bulk_sc == 0] <- NA
+
+display_mat_cdrh3_public_bulk_sc <- cdrh3_public_bulk_sc
+display_mat_cdrh3_public_bulk_sc[is.na(display_mat_cdrh3_public_bulk_sc)] <- ""
+```
+
+
+```{r fig.height=20, fig.width=10}
+p_cdr3_public_bulk_sc <- as.ggplot(
+  pheatmap(cdrh3_public_bulk_sc, cluster_rows = F, cluster_cols = F, clustering_method = "complete",
+           #cutree_rows = 3, cutree_cols = 3,
+           border_color = "white", na_col =  "#ffffb2",
+           main = "Number of shared CDRH3 sequences between bulk and scseq samples",
+           angle_col = 90, display_numbers = display_mat_cdrh3_public_bulk_sc, number_color = "black",
+           number_format = "%.0f", silent = T, fontsize_number = 10,
+           gaps_row = c(7,11,19,27,35,43,50,58,66,74,80), gaps_col = c(4,8),
+           annotation_col = ann_df, annotation_row = ann_df,
+           annotation_colors = ann_colors,
+           color = colorRampPalette(c("#ffffb2", "#e31a1c"))(25)
+           ))
+
+p_cdr3_public_bulk_sc
+#ggsave("./figures/cdrh3_public_bulk_sc.pdf", p_cdr3_public_bulk_sc, height = 20, width = 10, dpi = 600)
+```
+
+\newpage
+```{r}
+# Number of public CDRL3 sequences between bulk and scseq heavy chain
+cdrl3_public_bulk_sc <- (repOverlap(data_all_both$data[str_which(names(data_all_both$data),"lc")], .method = "public", .col ="aa", .verbose = F))
+
+# Filter the matrix so that bulkseq is on the row, scseq is on the column
+cdrl3_public_bulk_sc <- cdrl3_public_bulk_sc[str_which(rownames(cdrl3_public_bulk_sc), "bulk"),
+                                             str_which(colnames(cdrl3_public_bulk_sc), "sc")]
+
+# Replace the 0 values with NA to make the plot more readable
+cdrl3_public_bulk_sc[cdrl3_public_bulk_sc == 0] <- NA
+
+display_mat_cdrl3_public_bulk_sc <- cdrl3_public_bulk_sc
+display_mat_cdrl3_public_bulk_sc[is.na(display_mat_cdrl3_public_bulk_sc)] <- ""
+```
+
+```{r fig.height=20, fig.width=10}
+p_cdrl3_public_bulk_sc <- as.ggplot(
+  pheatmap(cdrl3_public_bulk_sc, cluster_rows = F, cluster_cols = F, clustering_method = "complete",
+           #cutree_rows = 3, cutree_cols = 3,
+           border_color = "white", na_col =  "#ffffb2",
+           main = "Number of shared CDRL3 sequences between bulk and scseq samples",
+           angle_col = 90, display_numbers = display_mat_cdrl3_public_bulk_sc, number_color = "black",
+           number_format = "%.0f", silent = T, fontsize_number = 10,
+           gaps_row = c(7,11,19,27,35,43,50,58,66,74,80), gaps_col = c(4,8),
+           annotation_col = ann_df, annotation_row = ann_df,
+           annotation_colors = ann_colors,
+           color = colorRampPalette(c("#ffffb2", "#e31a1c"))(25)
+           ))
+p_cdrl3_public_bulk_sc
+#ggsave("./figures/cdrl3_public_bulk_sc.pdf", p_cdrl3_public_bulk_sc, height = 20, width = 10, dpi = 600)
+```
+
+*Figure 5: There is some CDR3 overlap between bulk and scseq samples within replicates, but fewer actual shared clonotypes. The highest overlap occurs between bulk and scseq of the same replicate. As for the CDRL3 sequences, there is a lot more sharing between bulk and scseq samples but no obvious difference between replicates and treatment groups*
+
+```{r}
+# Number of shared clonotypes between bulk and scseq heavy chain
+clone_public_bulk_sc <- (repOverlap(data_all_both$data[str_which(names(data_all_both$data),"hc")], .method = "public", .col ="aa+v+j", .verbose = F))
+
+# Filter the matrix so that bulkseq is on the row, scseq is on the column
+clone_public_bulk_sc <- clone_public_bulk_sc[str_which(rownames(clone_public_bulk_sc), "bulk"),
+                                             str_which(colnames(clone_public_bulk_sc), "sc")]
+
+# Replace the 0 values with NA to make the plot more readable
+clone_public_bulk_sc[clone_public_bulk_sc == 0] <- NA
+
+display_mat_clone_public_bulk_sc <- clone_public_bulk_sc
+display_mat_clone_public_bulk_sc[is.na(display_mat_clone_public_bulk_sc)] <- ""
+
+# Number of clonotypes between bulk and scseq light chain
+clone_public_bulk_sc_lc <- (repOverlap(data_all_both$data[str_which(names(data_all_both$data),"lc")], .method = "public", .col ="aa+v+j", .verbose = F))
+
+# Filter the matrix so that bulkseq is on the row, scseq is on the column
+clone_public_bulk_sc_lc <- clone_public_bulk_sc_lc[str_which(rownames(clone_public_bulk_sc_lc), "bulk"),
+                                                   str_which(colnames(clone_public_bulk_sc_lc), "sc")]
+
+# Replace the 0 values with NA to make the plot more readable
+clone_public_bulk_sc_lc[clone_public_bulk_sc_lc == 0] <- NA
+
+display_mat_clone_public_bulk_sc_lc <- clone_public_bulk_sc_lc
+display_mat_clone_public_bulk_sc_lc[is.na(display_mat_clone_public_bulk_sc_lc)] <- ""
+```
+
+\newpage
+
+```{r fig.height=20, fig.width=10}
+p_clone_public_bulk_sc <- as.ggplot(
+  pheatmap(clone_public_bulk_sc, cluster_rows = F, cluster_cols = F, clustering_method = "complete",
+           #cutree_rows = 3, cutree_cols = 3,
+           border_color = "white", na_col =  "#ffffb2",
+           main = "Number of shared clonotypes (CDRH3+V+J) between bulk and scseq samples",
+           angle_col = 90, display_numbers = display_mat_clone_public_bulk_sc, number_color = "black",
+           number_format = "%.0f", silent = T, fontsize_number = 10,
+           gaps_row = c(7,11,19,27,35,43,50,58,66,74,80), gaps_col = c(4,8),
+           annotation_col = ann_df, annotation_row = ann_df,
+           annotation_colors = ann_colors,
+           color = colorRampPalette(c("#ffffb2", "#e31a1c"))(25)
+           ))
+
+p_clone_public_bulk_sc
+#ggsave("./figures/clone_hc_public_bulk_sc.pdf", p_clone_public_bulk_sc, height = 20, width = 10, dpi = 600)
+```
+
+\newpage
+
+```{r fig.height=20, fig.width=10}
+p_clone_public_bulk_sc_lc <- as.ggplot(
+  pheatmap(clone_public_bulk_sc_lc, cluster_rows = F, cluster_cols = F, clustering_method = "complete",
+           #cutree_rows = 3, cutree_cols = 3,
+           border_color = "white", na_col =  "#ffffb2",
+           main = "Number of shared clonotypes (CDRH3+V+J) between bulk and scseq samples",
+           angle_col = 90, display_numbers = display_mat_clone_public_bulk_sc_lc, number_color = "black",
+           number_format = "%.0f", silent = T, fontsize_number = 10,
+           gaps_row = c(7,11,19,27,35,43,50,58,66,74,80), gaps_col = c(4,8),
+           annotation_col = ann_df, annotation_row = ann_df,
+           annotation_colors = ann_colors,
+           color = colorRampPalette(c("#ffffb2", "#e31a1c"))(25)
+           ))
+p_clone_public_bulk_sc_lc
+#ggsave("./figures/clone_lc_public_bulk_sc.pdf", p_clone_public_bulk_sc_lc, height = 20, width = 10, dpi = 600)
+```
+
+*Figure 6: There are fewer shared hc clonotypes than shared CDRH3 sequences. Similarly, almost all lc clonotypes in the scseq samples also appeared in the bulkseq samples.*
+
+\newpage
+
+# Merge samples from 3 replicates into larger samples based of HA binding
+
+```{r include=FALSE}
+data_all_sc <- data_all_both
+data_all_sc$data <- data_all_both$data[str_which(names(data_all_both$data),"sc")]
+data_all_sc$meta <- data_all_both$meta %>% filter(Method == "sc")
+
+# Add columns for replicates and chain
+for (i in 1:length(data_all_sc$data)){
+  data_all_sc$data[[i]]$Replicate <- data_all_sc$meta$Replicate[i]
+  data_all_sc$data[[i]]$Chain <- data_all_sc$meta$Chain[i]
+}
+
+# Filter clonotypes on HA binding
+HA_CA07 <- map(data_all_sc$data, function(x) x %>% filter(HA.binding == "CA07"))
+HA_Cross <- map(data_all_sc$data, function(x) x %>% filter(HA.binding == "Cross"))
+HA_PR8 <- map(data_all_sc$data, function(x) x %>% filter(HA.binding == "PR8"))
+
+# Keep only dfs with observations
+HA_Cross <- HA_Cross %>% keep(~ nrow(.x) != 0)
+HA_PR8 <- HA_PR8 %>% keep(~ nrow(.x) != 0)
+
+# Create larger samples based only on HA binding
+HA_CA07 <- bind_rows(HA_CA07)
+HA_Cross <- bind_rows(HA_Cross)
+HA_PR8 <- bind_rows(HA_PR8)
+
+
+data_all_sc2 <- list(HA_CA07, HA_Cross, HA_PR8)
+names(data_all_sc2) <- c("HA_CA07", "HA_Cross", "HA_PR8")
+
+# Re-calculate the clonal proportions
+for (i in 1:length(data_all_sc2)){
+  data_all_sc2[[i]]$Proportion <- data_all_sc2[[i]]$Clones/sum(data_all_sc2[[i]]$Clones)
+}
+```
+
+# Logo plot of CDRH3/L3 distribution for HA binding
+```{r}
+# Create a vector of CDR3 sequences with repeat of each CDR3 equals to clone frequency
+data_all_sc2_hc <- map(data_all_sc2, function(x) x %>% filter(Chain == "hc"))
+data_all_sc2_lc <- map(data_all_sc2, function(x) x %>% filter(Chain == "lc"))
+
+CDR3_vec_hc <- map(data_all_sc2_hc, function(x) rep(x$CDR3.aa, times = x$Clones))
+CDR3_vec_lc <- map(data_all_sc2_lc, function(x) rep(x$CDR3.aa, times = x$Clones))
+```
+
+```{r fig.height=3, fig.width=6}
+p_logo_CDRH3_CA07 <- VDJ_logoplot_vector(CDR3_vec_hc$HA_CA07)
+p_logo_CDRH3_Cross <- VDJ_logoplot_vector(CDR3_vec_hc$HA_Cross)
+p_logo_CDRH3_PR8 <- VDJ_logoplot_vector(CDR3_vec_hc$HA_PR8)
+
+p_logo_CDRL3_CA07 <- VDJ_logoplot_vector(CDR3_vec_lc$HA_CA07)
+p_logo_CDRL3_Cross <- VDJ_logoplot_vector(CDR3_vec_lc$HA_Cross)
+p_logo_CDRL3_PR8 <- VDJ_logoplot_vector(CDR3_vec_lc$HA_PR8)
+
+#ggsave("./figures/logo_CDRH3_CA07.pdf", p_logo_CDRH3_CA07, height = 3, width = 6, dpi = 600)
+#ggsave("./figures/logo_CDRH3_Cross.pdf", p_logo_CDRH3_Cross, height = 3, width = 6, dpi = 600)
+#ggsave("./figures/logo_CDRH3_PR87.pdf", p_logo_CDRH3_PR8, height = 3, width = 6, dpi = 600)
+#ggsave("./figures/logo_CDRL3_CA07.pdf", p_logo_CDRL3_CA07, height = 3, width = 6, dpi = 600)
+#ggsave("./figures/logo_CDRL3_Cross.pdf", p_logo_CDRL3_Cross, height = 3, width = 6, dpi = 600)
+#ggsave("./figures/logo_CDRL3_PR8.pdf", p_logo_CDRL3_PR8, height = 3, width = 6, dpi = 600)
+```
+
+\newpage
+
+# Use the HA binding data in scseq samples to label bulkseq data
+```{r}
+data_all_bulk <- data_all_both
+data_all_bulk$data <- data_all_both$data[str_which(names(data_all_both$data),"bulk")]
+data_all_bulk$meta <- data_all_both$meta %>% filter(Method == "bulk")
+
+# Add a column called clonotype with V+J+CDR3aa in scseq and bulkseq
+for (i in 1:length(data_all_sc2)){
+  data_all_sc2[[i]]$Clonotype <- paste(data_all_sc2[[i]]$V.name, data_all_sc2[[i]]$J.name, data_all_sc2[[i]]$CDR3.aa, sep = ";")
+}
+
+for (i in 1:length(data_all_bulk$data)){
+  data_all_bulk$data[[i]]$Clonotype <- paste(data_all_bulk$data[[i]]$V.name, data_all_bulk$data[[i]]$J.name, data_all_bulk$data[[i]]$CDR3.aa, sep = ";")
+}
+# Extract all sc clonotypes with their HA binding
+clonotypes_CA07 <- unique(data_all_sc2$HA_CA07$Clonotype)
+clonotypes_Cross <- unique(data_all_sc2$HA_Cross$Clonotype)
+clonotypes_PR8 <- unique(data_all_sc2$HA_PR8$Clonotype)
+
+# Get rid of the shared clonotypes between the Ag-specific groups
+clonotypes_CA07_unique <- setdiff(clonotypes_CA07, c(clonotypes_Cross, clonotypes_PR8))
+clonotypes_Cross_unique <- setdiff(clonotypes_Cross, c(clonotypes_CA07, clonotypes_PR8))
+clonotypes_PR8_unique <- setdiff(clonotypes_PR8, c(clonotypes_CA07, clonotypes_Cross))
+
+# Use left join to add HA binding data to bulkseq
+# LABEL the clonotypes in bulkseq that were detected in the Ag-specific data
+
+# Create a df version of the Ag-specific clonotypes and add to original data using left join
+clonotypes_CA07_unique_df <- tibble(Clonotype = clonotypes_CA07_unique, HA.binding = "CA07")
+clonotypes_Cross_unique_df <- tibble(Clonotype = clonotypes_Cross_unique, HA.binding = "Cross")
+clonotypes_PR8_unique_df <- tibble(Clonotype = clonotypes_PR8_unique, HA.binding = "PR8")
+clonotypes_allAg_unique_df <- bind_rows(clonotypes_CA07_unique_df, clonotypes_Cross_unique_df, clonotypes_PR8_unique_df)
+
+# Label the bulkseq data with detected Ag-specific clones using left join
+data_all_bulk$data <- map(data_all_bulk$data, function(x) 
+  left_join(x, clonotypes_allAg_unique_df, by = "Clonotype"))
+
+```
+
+# Make barplot of clonotype frequency of top 500 clones, colored by HA binding
+
+```{r}
+p_bulk_top500 <- map2(data_all_bulk$data, names(data_all_bulk$data), function(a,b)
+ggplot(data = a[1:500,], mapping = aes(x = seq_len(nrow(a[1:500,])), y = Clones)) +
+  geom_col(aes(fill = HA.binding)) +
+  scale_fill_manual(values = c("CA07" = "#E41A1C", "Cross" = "#984EA3", "PR8" = "#377EB8"), na.value = "#bdbdbd") +
+  scale_y_log10() +
+  labs(x = "Clone index", y = "UMI counts", title = b) +
+  theme_half_open()
+)
+```
+
+# Top 500 clones bulkseq heavy chain
+```{r fig.height=20, fig.width=30}
+p_bulk_top500_hc_rep1 <- plot_grid(plotlist = p_bulk_top500[1:27])
+p_bulk_top500_hc_rep1
+#ggsave("./figures/bulk_top500_hc_rep1.pdf", p_bulk_top500_hc_rep1, height = 20, width = 30, dpi = 600)
+```
+
+\newpage
+
+```{r fig.height=16, fig.width=28}
+p_bulk_top500_hc_rep2 <- plot_grid(plotlist = p_bulk_top500[55:85])
+p_bulk_top500_hc_rep2
+#ggsave("./figures/bulk_top500_hc_rep2.pdf", p_bulk_top500_hc_rep2, height = 20, width = 30, dpi = 600)
+```
+
+\newpage
+
+```{r fig.height=16, fig.width=28}
+p_bulk_top500_hc_rep3 <- plot_grid(plotlist = p_bulk_top500[117:146])
+p_bulk_top500_hc_rep3
+#ggsave("./figures/bulk_top500_hc_rep3.pdf", p_bulk_top500_hc_rep3, height = 20, width = 30, dpi = 600)
+```
+\newpage
+# Top 500 clones bulkseq light chain
+```{r fig.height=20, fig.width=30}
+p_bulk_top500_lc_rep1 <- plot_grid(plotlist = p_bulk_top500[28:54])
+p_bulk_top500_lc_rep1
+#ggsave("./figures/bulk_top500_lc_rep1.pdf", p_bulk_top500_lc_rep1, height = 20, width = 30, dpi = 600)
+```
+
+```{r fig.height=20, fig.width=30}
+p_bulk_top500_lc_rep2 <- plot_grid(plotlist = p_bulk_top500[86:116])
+p_bulk_top500_lc_rep2
+#ggsave("./figures/bulk_top500_lc_rep2.pdf", p_bulk_top500_lc_rep2, height = 20, width = 30, dpi = 600)
+```
+```{r fig.height=20, fig.width=30}
+p_bulk_top500_lc_rep3 <- plot_grid(plotlist = p_bulk_top500[147:176])
+p_bulk_top500_lc_rep3
+#ggsave("./figures/bulk_top500_lc_rep3.pdf", p_bulk_top500_lc_rep3, height = 20, width = 30, dpi = 600)
+```
+
+\newpage
+
+# Export the CDRH3 sequences from the top 1000 clones with HA binding to use in clonal network analysis
+```{r eval=FALSE, include=FALSE}
+# Take the top 1000 clones from bulkseq data
+for (i in 1:length(data_all_bulk$data)){
+  df_tmp <- tibble()
+  df_tmp <- data_all_bulk$data[[i]][1:1000,] %>% select(CDR3.aa, HA.binding)
+  write_tsv(df_tmp, file = paste0("./Clonal_network_analysis/cdr3_bulk_top1000/", names(data_all_bulk$data[i]), ".tsv"))
+}
+```

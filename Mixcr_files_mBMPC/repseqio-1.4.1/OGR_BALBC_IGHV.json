@@ -1,0 +1,2960 @@
+[ {
+  "taxonId": 10090,
+  "speciesNames": [ "mmu" ],
+  "genes": [ {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-2KUO",
+    "name": "IGHV-2KUO",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-2KUO"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-2UIT",
+    "name": "IGHV-2UIT",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-2UIT"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-2UQD",
+    "name": "IGHV-2UQD",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-2UQD"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 288
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-3AN3",
+    "name": "IGHV-3AN3",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-3AN3"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-3GCO",
+    "name": "IGHV-3GCO",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-3GCO"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-3GZS",
+    "name": "IGHV-3GZS",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-3GZS"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-3QFD",
+    "name": "IGHV-3QFD",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-3QFD"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-3QLH",
+    "name": "IGHV-3QLH",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-3QLH"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-4FMT",
+    "name": "IGHV-4FMT",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-4FMT"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-4L6T",
+    "name": "IGHV-4L6T",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-4L6T"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-4T4X",
+    "name": "IGHV-4T4X",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-4T4X"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-4X2I",
+    "name": "IGHV-4X2I",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-4X2I"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-4YZL",
+    "name": "IGHV-4YZL",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-4YZL"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-5CCQ",
+    "name": "IGHV-5CCQ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-5CCQ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-5F5R",
+    "name": "IGHV-5F5R",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-5F5R"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 291
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-5ISV",
+    "name": "IGHV-5ISV",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-5ISV"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 301
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-5LN7",
+    "name": "IGHV-5LN7",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-5LN7"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-5LWB",
+    "name": "IGHV-5LWB",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-5LWB"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-5O75",
+    "name": "IGHV-5O75",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-5O75"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-5UNX",
+    "name": "IGHV-5UNX",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-5UNX"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-5VOM",
+    "name": "IGHV-5VOM",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-5VOM"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-6D76",
+    "name": "IGHV-6D76",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-6D76"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-6NFG",
+    "name": "IGHV-6NFG",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-6NFG"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-6YTP",
+    "name": "IGHV-6YTP",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-6YTP"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-7BBU",
+    "name": "IGHV-7BBU",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-7BBU"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 180,
+      "CDR3Begin": 291,
+      "VEnd": 300
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-7MCI",
+    "name": "IGHV-7MCI",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-7MCI"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 180,
+      "CDR3Begin": 291,
+      "VEnd": 304
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-7MU3",
+    "name": "IGHV-7MU3",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-7MU3"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-7PG3",
+    "name": "IGHV-7PG3",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-7PG3"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-7TJA",
+    "name": "IGHV-7TJA",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-7TJA"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-22XF",
+    "name": "IGHV-22XF",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-22XF"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-32WJ",
+    "name": "IGHV-32WJ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-32WJ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 301
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-37IE",
+    "name": "IGHV-37IE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-37IE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-47EU",
+    "name": "IGHV-47EU",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-47EU"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-56YB",
+    "name": "IGHV-56YB",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-56YB"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 301
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-72VE",
+    "name": "IGHV-72VE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-72VE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-A3LZ",
+    "name": "IGHV-A3LZ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-A3LZ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-AE2O",
+    "name": "IGHV-AE2O",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-AE2O"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-AICW",
+    "name": "IGHV-AICW",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-AICW"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-AK3H",
+    "name": "IGHV-AK3H",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-AK3H"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 180,
+      "CDR3Begin": 291,
+      "VEnd": 299
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-APOU",
+    "name": "IGHV-APOU",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-APOU"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-AX4R",
+    "name": "IGHV-AX4R",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-AX4R"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-AX4W",
+    "name": "IGHV-AX4W",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-AX4W"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-AXRQ",
+    "name": "IGHV-AXRQ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-AXRQ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 301
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-BDLN",
+    "name": "IGHV-BDLN",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-BDLN"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-BIQU",
+    "name": "IGHV-BIQU",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-BIQU"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-BISP",
+    "name": "IGHV-BISP",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-BISP"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-BQCW",
+    "name": "IGHV-BQCW",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-BQCW"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-BT4I",
+    "name": "IGHV-BT4I",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-BT4I"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-CFNH",
+    "name": "IGHV-CFNH",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-CFNH"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-CSIM",
+    "name": "IGHV-CSIM",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-CSIM"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 102,
+      "CDR2Begin": 153,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 300
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-CWNQ",
+    "name": "IGHV-CWNQ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-CWNQ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-DMIT",
+    "name": "IGHV-DMIT",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-DMIT"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-DRA4",
+    "name": "IGHV-DRA4",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-DRA4"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-DUV7",
+    "name": "IGHV-DUV7",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-DUV7"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-EBWE",
+    "name": "IGHV-EBWE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-EBWE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-EK3O",
+    "name": "IGHV-EK3O",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-EK3O"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ES4V",
+    "name": "IGHV-ES4V",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ES4V"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-F3Z6",
+    "name": "IGHV-F3Z6",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-F3Z6"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-F5K7",
+    "name": "IGHV-F5K7",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-F5K7"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-FM2S",
+    "name": "IGHV-FM2S",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-FM2S"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-FMN7",
+    "name": "IGHV-FMN7",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-FMN7"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 102,
+      "CDR2Begin": 153,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-FNCD",
+    "name": "IGHV-FNCD",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-FNCD"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-FOTI",
+    "name": "IGHV-FOTI",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-FOTI"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-G6P5",
+    "name": "IGHV-G6P5",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-G6P5"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-GC2L",
+    "name": "IGHV-GC2L",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-GC2L"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-GFFP",
+    "name": "IGHV-GFFP",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-GFFP"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-GHLB",
+    "name": "IGHV-GHLB",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-GHLB"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-GNPX",
+    "name": "IGHV-GNPX",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-GNPX"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 180,
+      "CDR3Begin": 291,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-GPEO",
+    "name": "IGHV-GPEO",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-GPEO"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-GRWZ",
+    "name": "IGHV-GRWZ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-GRWZ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-GSBQ",
+    "name": "IGHV-GSBQ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-GSBQ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-GSYR",
+    "name": "IGHV-GSYR",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-GSYR"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-H2OA",
+    "name": "IGHV-H2OA",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-H2OA"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 180,
+      "CDR3Begin": 291,
+      "VEnd": 306
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-HHVI",
+    "name": "IGHV-HHVI",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-HHVI"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-HK55",
+    "name": "IGHV-HK55",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-HK55"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-HLLK",
+    "name": "IGHV-HLLK",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-HLLK"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-HZPW",
+    "name": "IGHV-HZPW",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-HZPW"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 299
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-I463",
+    "name": "IGHV-I463",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-I463"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 305
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-IAEK",
+    "name": "IGHV-IAEK",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-IAEK"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ID7Q",
+    "name": "IGHV-ID7Q",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ID7Q"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-IMJE",
+    "name": "IGHV-IMJE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-IMJE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-IZSN",
+    "name": "IGHV-IZSN",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-IZSN"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-JACH",
+    "name": "IGHV-JACH",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-JACH"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 180,
+      "CDR3Begin": 291,
+      "VEnd": 300
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-JAPR",
+    "name": "IGHV-JAPR",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-JAPR"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-JDDE",
+    "name": "IGHV-JDDE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-JDDE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 301
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-JDYC",
+    "name": "IGHV-JDYC",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-JDYC"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-JHQJ",
+    "name": "IGHV-JHQJ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-JHQJ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-JHWS",
+    "name": "IGHV-JHWS",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-JHWS"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-JRQS",
+    "name": "IGHV-JRQS",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-JRQS"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-KO4L",
+    "name": "IGHV-KO4L",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-KO4L"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-KPEP",
+    "name": "IGHV-KPEP",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-KPEP"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-KQPM",
+    "name": "IGHV-KQPM",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-KQPM"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-KRG4",
+    "name": "IGHV-KRG4",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-KRG4"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-KRVC",
+    "name": "IGHV-KRVC",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-KRVC"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 301
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-LAH4",
+    "name": "IGHV-LAH4",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-LAH4"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-LLOE",
+    "name": "IGHV-LLOE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-LLOE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-LP2Z",
+    "name": "IGHV-LP2Z",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-LP2Z"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-LPGY",
+    "name": "IGHV-LPGY",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-LPGY"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-MCP4",
+    "name": "IGHV-MCP4",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-MCP4"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-MG5V",
+    "name": "IGHV-MG5V",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-MG5V"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 180,
+      "CDR3Begin": 291,
+      "VEnd": 300
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-MGBE",
+    "name": "IGHV-MGBE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-MGBE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 180,
+      "CDR3Begin": 291,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ML5T",
+    "name": "IGHV-ML5T",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ML5T"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-NNFU",
+    "name": "IGHV-NNFU",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-NNFU"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-NPBL",
+    "name": "IGHV-NPBL",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-NPBL"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-NUDM",
+    "name": "IGHV-NUDM",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-NUDM"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 126,
+      "CDR2Begin": 177,
+      "FR3Begin": 201,
+      "CDR3Begin": 312,
+      "VEnd": 321
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-NY4F",
+    "name": "IGHV-NY4F",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-NY4F"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-O4YA",
+    "name": "IGHV-O4YA",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-O4YA"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 102,
+      "CDR2Begin": 153,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-OCOS",
+    "name": "IGHV-OCOS",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-OCOS"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-OK63",
+    "name": "IGHV-OK63",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-OK63"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-OW3E",
+    "name": "IGHV-OW3E",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-OW3E"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-P2CQ",
+    "name": "IGHV-P2CQ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-P2CQ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-P7AN",
+    "name": "IGHV-P7AN",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-P7AN"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-PACA",
+    "name": "IGHV-PACA",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-PACA"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 180,
+      "CDR3Begin": 291,
+      "VEnd": 302
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-PEXG",
+    "name": "IGHV-PEXG",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-PEXG"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-PRC5",
+    "name": "IGHV-PRC5",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-PRC5"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-PRJX",
+    "name": "IGHV-PRJX",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-PRJX"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 180,
+      "CDR3Begin": 291,
+      "VEnd": 300
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-QC3C",
+    "name": "IGHV-QC3C",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-QC3C"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-QFGX",
+    "name": "IGHV-QFGX",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-QFGX"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 301
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-QG3Z",
+    "name": "IGHV-QG3Z",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-QG3Z"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-QK6G",
+    "name": "IGHV-QK6G",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-QK6G"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 300
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-QL4G",
+    "name": "IGHV-QL4G",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-QL4G"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-QODY",
+    "name": "IGHV-QODY",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-QODY"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-QQ46",
+    "name": "IGHV-QQ46",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-QQ46"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-R4HE",
+    "name": "IGHV-R4HE",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-R4HE"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 301
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-R7KA",
+    "name": "IGHV-R7KA",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-R7KA"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-RKXL",
+    "name": "IGHV-RKXL",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-RKXL"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-RLDP",
+    "name": "IGHV-RLDP",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-RLDP"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-RNDH",
+    "name": "IGHV-RNDH",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-RNDH"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-RNSW",
+    "name": "IGHV-RNSW",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-RNSW"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ROYG",
+    "name": "IGHV-ROYG",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ROYG"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-RRLD",
+    "name": "IGHV-RRLD",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-RRLD"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-RYF3",
+    "name": "IGHV-RYF3",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-RYF3"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 301
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-SCRF",
+    "name": "IGHV-SCRF",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-SCRF"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 301
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-SF4U",
+    "name": "IGHV-SF4U",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-SF4U"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-SR2I",
+    "name": "IGHV-SR2I",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-SR2I"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-STIW",
+    "name": "IGHV-STIW",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-STIW"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 102,
+      "CDR2Begin": 153,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 297
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-SX5D",
+    "name": "IGHV-SX5D",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-SX5D"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-T2W5",
+    "name": "IGHV-T2W5",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-T2W5"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-T3DL",
+    "name": "IGHV-T3DL",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-T3DL"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 102,
+      "CDR2Begin": 153,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-TC2W",
+    "name": "IGHV-TC2W",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-TC2W"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-TI7Q",
+    "name": "IGHV-TI7Q",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-TI7Q"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 301
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-TQES",
+    "name": "IGHV-TQES",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-TQES"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 300
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-TUT5",
+    "name": "IGHV-TUT5",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-TUT5"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-UDF7",
+    "name": "IGHV-UDF7",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-UDF7"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 68,
+      "FR2Begin": 92,
+      "CDR2Begin": 143,
+      "FR3Begin": 167,
+      "CDR3Begin": 278,
+      "VEnd": 281
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-UJTO",
+    "name": "IGHV-UJTO",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-UJTO"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-UOVB",
+    "name": "IGHV-UOVB",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-UOVB"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-UTQI",
+    "name": "IGHV-UTQI",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-UTQI"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-V26Z",
+    "name": "IGHV-V26Z",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-V26Z"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-W27J",
+    "name": "IGHV-W27J",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-W27J"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-WN4M",
+    "name": "IGHV-WN4M",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-WN4M"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-WO3N",
+    "name": "IGHV-WO3N",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-WO3N"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-WZ7P",
+    "name": "IGHV-WZ7P",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-WZ7P"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-X4X2",
+    "name": "IGHV-X4X2",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-X4X2"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-XGYI",
+    "name": "IGHV-XGYI",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-XGYI"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-YEPS",
+    "name": "IGHV-YEPS",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-YEPS"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 300
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-Z6OV",
+    "name": "IGHV-Z6OV",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-Z6OV"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ZD3D",
+    "name": "IGHV-ZD3D",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ZD3D"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 292
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ZGQJ",
+    "name": "IGHV-ZGQJ",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ZGQJ"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 296
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ZI2X",
+    "name": "IGHV-ZI2X",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ZI2X"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 171,
+      "CDR3Begin": 282,
+      "VEnd": 293
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ZIT7",
+    "name": "IGHV-ZIT7",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ZIT7"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ZL77",
+    "name": "IGHV-ZL77",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ZL77"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 105,
+      "CDR2Begin": 156,
+      "FR3Begin": 177,
+      "CDR3Begin": 288,
+      "VEnd": 299
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ZOKF",
+    "name": "IGHV-ZOKF",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ZOKF"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ZOZI",
+    "name": "IGHV-ZOZI",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ZOZI"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://OGR_BALBC_IGHV.json.fasta#IGHV-ZVAP",
+    "name": "IGHV-ZVAP",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IGHV-ZVAP"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 99,
+      "CDR2Begin": 150,
+      "FR3Begin": 174,
+      "CDR3Begin": 285,
+      "VEnd": 294
+    }
+  } ],
+  "meta": {
+    "comments": "Imported from: Mouse_BALB_c_IGHV_rev_3_gapped.fasta"
+  }
+} ]

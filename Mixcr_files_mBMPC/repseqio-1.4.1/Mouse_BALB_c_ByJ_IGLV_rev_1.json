@@ -1,0 +1,62 @@
+[ {
+  "taxonId": 10090,
+  "speciesNames": [ "mmu" ],
+  "genes": [ {
+    "baseSequence": "file://Mouse_BALB_c_ByJ_IGLV_rev_1.json.fasta#IGLV-FBPO",
+    "name": "IGLV-FBPO",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "IGLV-FBPO"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 96,
+      "CDR2Begin": 147,
+      "FR3Begin": 168,
+      "CDR3Begin": 273,
+      "VEnd": 313
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_c_ByJ_IGLV_rev_1.json.fasta#IGLV-NOJ2",
+    "name": "IGLV-NOJ2",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "IGLV-NOJ2"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 102,
+      "CDR2Begin": 153,
+      "FR3Begin": 162,
+      "CDR3Begin": 267,
+      "VEnd": 294
+    }
+  }, {
+    "baseSequence": "file://Mouse_BALB_c_ByJ_IGLV_rev_1.json.fasta#IGLV-P56C",
+    "name": "IGLV-P56C",
+    "geneType": "V",
+    "isFunctional": true,
+    "chains": [ "IGL" ],
+    "meta": {
+      "comments": "IGLV-P56C"
+    },
+    "anchorPoints": {
+      "FR1Begin": 0,
+      "CDR1Begin": 75,
+      "FR2Begin": 102,
+      "CDR2Begin": 153,
+      "FR3Begin": 162,
+      "CDR3Begin": 267,
+      "VEnd": 294
+    }
+  } ],
+  "meta": {
+    "comments": "Imported from: Mouse_BALB_c_ByJ_IGLV_rev_1_gapped.fasta"
+  }
+} ]

@@ -1,0 +1,487 @@
+[ {
+  "taxonId": 10090,
+  "speciesNames": [ "mmu" ],
+  "genes": [ {
+    "baseSequence": "nuccore://NC_000078.6",
+    "name": "IGHA*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "anchorPoints": {
+      "CBegin": 113260236,
+      "CExon1End": 113259933,
+      "CEnd": 113258767
+    }
+  }, {
+    "baseSequence": "nuccore://NC_000078.6",
+    "name": "IGHD*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "anchorPoints": {
+      "CBegin": 113416324,
+      "CExon1End": 113416042,
+      "CEnd": 113407534
+    }
+  }, {
+    "baseSequence": "nuccore://NC_000078.6",
+    "name": "IGHE*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "anchorPoints": {
+      "CBegin": 113273248,
+      "CExon1End": 113272975,
+      "CEnd": 113269262
+    }
+  }, {
+    "baseSequence": "nuccore://NC_000078.6",
+    "name": "IGHG1*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "anchorPoints": {
+      "CBegin": 113330523,
+      "CExon1End": 113330232,
+      "CEnd": 113326543
+    }
+  }, {
+    "baseSequence": "nuccore://NC_000078.6",
+    "name": "IGHG2B*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "anchorPoints": {
+      "CBegin": 113307933,
+      "CExon1End": 113307642,
+      "CEnd": 113306391
+    }
+  }, {
+    "baseSequence": "nuccore://NC_000078.6",
+    "name": "IGHG2C*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "anchorPoints": {
+      "CBegin": 113288932,
+      "CExon1End": 113288641,
+      "CEnd": 113287388
+    }
+  }, {
+    "baseSequence": "nuccore://NC_000078.6",
+    "name": "IGHG3*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "anchorPoints": {
+      "CBegin": 113361232,
+      "CExon1End": 113360941,
+      "CEnd": 113357441
+    }
+  }, {
+    "baseSequence": "nuccore://NC_000078.6",
+    "name": "IGHM*00",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "anchorPoints": {
+      "CBegin": 113422730,
+      "CExon1End": 113422415,
+      "CEnd": 113418825
+    }
+   }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHA*01",
+    "name": "IGHA*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "J00475|IGHA*01|Mus musculus_BALB/c|F|CH1|51..353|303 nt|3| | | | |303+0=303| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 303
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHA*03",
+    "name": "IGHA*03",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "D11468|IGHA*03|Mus musculus_BALB/c|F|CH1|5639..5940|302 nt|3| | | | |302+0=302| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 302
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHA*04",
+    "name": "IGHA*04",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "AF175973|IGHA*04|Mus musculus_I/St|F|CH1|22..324|303 nt|3| | | | |303+0=303| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 303
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHA*05",
+    "name": "IGHA*05",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "AY045744|IGHA*05|Mus musculus_DBA/2J|F|CH1|1..303|303 nt|3| | | | |303+0=303| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 303
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHA*06",
+    "name": "IGHA*06",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "AY045741|IGHA*06|Mus musculus_C57BL/10|F|CH1|2..304|303 nt|3| | | | |303+0=303| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 303
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHA*07",
+    "name": "IGHA*07",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "AY045747|IGHA*07|Mus musculus_AKR/J|F|CH1|1..303|303 nt|3| | | | |303+0=303| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 303
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHA*08",
+    "name": "IGHA*08",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "AY045750|IGHA*08|Mus musculus_CE/J|F|CH1|1..303|303 nt|3| | | | |303+0=303| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 303
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHA*09",
+    "name": "IGHA*09",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IMGT000065|IGHA*09|Mus musculus_C57BL/6J|F|CH1|2759716..2760018|303 nt|3| | | | |303+0=303| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 303
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHD*01",
+    "name": "IGHD*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "V00786|IGHD*01|Mus musculus_BALB/c|F|CH1|23..304|282 nt|3| | | | |282+0=282| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 282
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHD*02",
+    "name": "IGHD*02",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IMGT000065|IGHD*02|Mus musculus_C57BL/6J|F|CH1|2603628..2603909|282 nt|3| | | | |282+0=282| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 282
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHE*01",
+    "name": "IGHE*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "X01857|IGHE*01|Mus musculus_BALB/c|F|CH1|140..412|273 nt|3| | | | |273+0=273| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 273
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHE*02",
+    "name": "IGHE*02",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "M23104|IGHE*02|Mus musculus_BALB/c|F|CH1|1..270|270 nt|1| | | | |270+0=270|partial in 5' and in 3' | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 270
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHE*03",
+    "name": "IGHE*03",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "M23085|IGHE*03|Mus musculus_B10.A|F|CH1|1..270|270 nt|1| | | | |270+0=270|partial in 5' and in 3' | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 270
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHE*04",
+    "name": "IGHE*04",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IMGT000065|IGHE*04|Mus musculus_C57BL/6J|F|CH1|2746704..2746976|273 nt|3| | | | |273+0=273| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 273
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG1*01",
+    "name": "IGHG1*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "J00453|IGHG1*01|Mus musculus_BALB/c|F|CH1|100..390|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG1*02",
+    "name": "IGHG1*02",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IMGT000065|IGHG1*02|Mus musculus_C57BL/6J|F|CH1|2689429..2689719|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG2A*01",
+    "name": "IGHG2A*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "V00825|IGHG2A*01|Mus musculus_BALB/c|F|CH1|250..540|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG2A*02",
+    "name": "IGHG2A*02",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "X16997|IGHG2A*02|Mus musculus_MAI|F|CH1|124..414|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG2B*01",
+    "name": "IGHG2B*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "V00763|IGHG2B*01|Mus musculus_BALB/c|F|CH1|116..406|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG2B*02",
+    "name": "IGHG2B*02",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "V00801|IGHG2B*02|Mus musculus|F|CH1|134..424|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG2B*03",
+    "name": "IGHG2B*03",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IMGT000065|IGHG2B*03|Mus musculus_C57BL/6J|F|CH1|2712019..2712309|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG2C*01",
+    "name": "IGHG2C*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "J00479|IGHG2C*01|Mus musculus_C57BL/6|F|CH1|135..425|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG2C*02",
+    "name": "IGHG2C*02",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "X16998|IGHG2C*02|Mus musculus_MAI|F|CH1|124..414|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG2C*03",
+    "name": "IGHG2C*03",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IMGT000065|IGHG2C*03|Mus musculus_C57BL/6J|F|CH1|2731020..2731310|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG3*01",
+    "name": "IGHG3*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "X00915|IGHG3*01|Mus musculus_BALB/c|F|CH1|2008..2298|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHG3*03",
+    "name": "IGHG3*03",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IMGT000065|IGHG3*03|Mus musculus_C57BL/6J|F|CH1|2658720..2659010|291 nt|3| | | | |291+0=291| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 291
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHM*01",
+    "name": "IGHM*01",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "V00818|IGHM*01|Mus musculus_BALB/c|F|CH1|10..324|315 nt|3| | | | |315+0=315| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 315
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHM*02",
+    "name": "IGHM*02",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "J00443|IGHM*02|Mus musculus_BALB/c|F|CH1|102..416|315 nt|3| | | | |315+0=315| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 315
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHM*03",
+    "name": "IGHM*03",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "K02103|IGHM*03|Mus musculus|F|CH1|47..361|315 nt|3| | | | |315+0=315| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 315
+    }
+  }, {
+    "baseSequence": "file://Mouse_IMGT_IGHC.fasta#IGHM*04",
+    "name": "IGHM*04",
+    "geneType": "C",
+    "isFunctional": true,
+    "chains": [ "IGH" ],
+    "meta": {
+      "comments": "IMGT000065|IGHM*04|Mus musculus_C57BL/6J|F|CH1|2597222..2597536|315 nt|3| | | | |315+0=315| | |"
+    },
+    "anchorPoints": {
+      "CBegin": 0,
+      "CExon1End": 315
+    }
+  } ],
+  "meta": {
+    "comments": "Imported from: Mouse_IMGT_IGHC.fasta"
+  }
+  } ]
+} ]
