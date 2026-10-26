@@ -1,0 +1,1292 @@
+---
+title: "10X Analysis"
+author: "Elias Tjärnhage"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(Seurat)
+library(patchwork)
+library(tidyverse)
+library(sctransform)
+library(SoupX)
+library(DropletUtils)
+library(KernSmooth)
+library(clustree)
+library(DoubletFinder)
+library(scCustomize)
+library(svglite)
+library(RColorBrewer)
+library(viridis)
+library(future)
+library(circlize)
+library(scales)
+library(scRepertoire)
+library(ggraph)
+library(ggplotify)
+library(grid)
+library(ggraph)
+library(alakazam)
+library(shazam)
+library(ggplot2)
+library(stringi)
+library(webr)
+
+plan("multisession", workers = 1)
+
+filepath_macos = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/Bioinformatics/E70/raw_feature_bc_matrix"
+output_macos = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/Bioinformatics/NatCom_Output/E70/"
+
+
+# Manually create a list of the groups from the hashtags and dCODE barcodes
+E70_group <- c('E70-CA07', 'E70-PR8', 'E70-CA07-PR8')
+E70_dCODE <- c('CA07', 'PR8', 'OVA')
+GC_markers <- c('Bcl6', 'Mki67', 'Aicda', "Hmces")
+GC_markers2 <- c('Bcl6', 'Gcsam', 'Fas', "Aicda")
+MBC_markers <- c('Ccr6', "Ccr7", 'Bcl2', "Klf2") #These are also markers for naive B cells
+PB_markers <- c('Sdc1', 'Prdm1', 'Jchain', "Xbp1")
+LZDZ_marker <-c('Cxcr4', 'Cd83', 'Hmmr', 'Icam1', 'Egr3', 'Apex1')
+IgH_markers <- c('Ighg1', "Ighg2b", 'Ighg2c', "Ighg3", "Igha", 'Ighm', 'Ighd')
+Cluster2_markers <- c('Dyrk1a', 'Sox5', 'Arid1b', 'Hivep2', 'Fhit', 'Bach2')
+clust2_markers <- c("Sox5", "Ptprc", "Cd19", "Bach2")
+Cluster2_negmarkers <- c('H2afz', 'Pclaf', 'Tuba1b', 'Cfap77', 'Ppia', 'Ptma', 'Ran')
+MHCII_genes <- c('H2-Aa', 'H2-Ab1', 'H2-Eb1', "H2-Eb2")
+other_markers <- c("Ptprc", "Cd19", "Pax5", "Bach2", "Fas", "Ung")
+proliferation_markers <- c("Mki67", "Pcna", "Mcm5", "Hmgb2")
+prollif_histone_markers <- c("Mki67", "Birc5", "Hist1h2ap", "H2afx", "Hist1h1b", "Hist1h1e")
+Heatmap_markers <- c('Bcl6', 'Mki67', 'Aicda', "Hmces", "Fas", "Aicda", "Cxcr4", "Cd83", "Cd86", "Nt5e", "Cd80", "Pdcd1lg2", 'Ccr6', "Ccr7", 'Bcl2', "Klf2", "Cd38", "Sdc1", 'Prdm1', 'Jchain', "Xbp1", "Irf4", 'Ighg1', "Ighg2b", 'Ighg2c', "Ighg3", "Igha", 'Ighm', 'Ighd')
+```
+
+## Load the 10X derived sequences
+
+```{r loading, echo=FALSE, include=TRUE, warning=FALSE}
+E70.data <- Read10X(filepath_macos)
+E70.ADT <- E70.data$`Antibody Capture`
+Cells(E70.ADT) %>% length()
+# Create Seurat Object using gene expression as main data
+E70 = CreateSeuratObject(counts = E70.data$`Gene Expression`, project = "E70", min.cells = 3, min.features = 200)
+# Create "Assay" of the Hashtags and Barcode Oligos
+E70[["ADT"]] <- CreateAssayObject(E70.data[["Antibody Capture"]][, colnames(x = E70)])
+
+DefaultAssay(E70) <- "ADT"
+
+```
+
+## HTO Hashtag Demultiplex
+
+```{r HTODemultiplex, echo=FALSE, warning=FALSE, include=TRUE, eval=TRUE}
+# TotalSeqC Hashtag HTO demultiuplexig
+E70.ADT <- t(E70.ADT)
+E70.ADT <- as.matrix(E70.ADT)
+E70.ADT.Hash <- E70.ADT[, c(4, 5, 6)]
+E70.ADT.Hash <- E70.ADT.Hash[rowSums(E70.ADT.Hash^2)>0,]
+E70.ADT.Hash <- t(E70.ADT.Hash)
+
+E70.ADT.Hash.sparse <- as(E70.ADT.Hash, "sparseMatrix")
+
+E70.ADT.seurat <- CreateSeuratObject(counts = E70.ADT.Hash.sparse, project = "E70", assay = "ADT")
+E70_ADT <- NormalizeData(E70.ADT.seurat, normalization.method = 'CLR', margin = 1)
+
+
+E70.demux <- HTODemux(E70_ADT, assay = "ADT", positive.quantile = 0.99)
+
+E70.demux <- subset(E70.demux, cells = Cells(E70))
+length(Cells(E70))
+length(Cells(E70.demux))
+
+
+E70@meta.data[["Hashtag"]] <- E70.demux@meta.data[["ADT_maxID"]]
+saveRDS(E70, file = paste(output_macos, 'E70_HashtagDemux.rds', sep = ''))
+
+E70_Hashtag_df <- data.frame(Barcode = Cells(E70.demux), Hashtag = E70@meta.data[["Hashtag"]])
+write.csv(E70_Hashtag_df, file = paste(output_macos, "E70_Hashtags.csv", sep = ""))
+
+
+remove(E70.ADT.dCODE, E70.ADT.dCODE.seurat, E70.ADT.dCODE.sparse, E70.ADT.Hash, E70.ADT.Hash.sparse, E70.ADT.seurat, E70.demux, E70.demux.dCODE, E70_ADT, E70.data, E70.ADT)
+gc()
+
+```
+
+## 
+
+## Preprocessing of the Gene expression (GEX) data
+
+```{r GEX, echo=FALSE, include=TRUE, eval=TRUE, warning=FALSE}
+# Filter out based on feature counts
+E70 <- subset(E70, subset = nFeature_RNA > 200 & nFeature_RNA < 6500)
+#E70
+E70[["percent.mt"]] <- PercentageFeatureSet(E70, pattern = "^MT-")
+VlnPlot(E70, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3)
+E70 <- subset(E70, subset = nFeature_RNA > 200 & nFeature_RNA < 6500 & percent.mt < 5)
+
+#~~~GENE EXPRESSION~~~
+DefaultAssay(E70) <- "RNA"
+
+# Normalize GEX data
+E70_GEX <- NormalizeData(E70, normalization.method = "LogNormalize", scale.factor = 10000)
+
+remove(E70)
+# Find highgly variable features, unsure whether this is even useful here?
+E70_GEX <- FindVariableFeatures(E70_GEX, selection.method = "vst", nfeatures = 2000)
+
+# scale data
+all.genes <- rownames(E70_GEX)
+E70_GEX <- ScaleData(E70_GEX, features = all.genes)
+
+# Run the PCA based on the GEX
+E70_GEX <- RunPCA(E70_GEX, features = VariableFeatures(object = E70_GEX))
+
+# Find dimensionality of GEX dataset
+Elbow <- ElbowPlot(E70_GEX, ndims = 50, reduction = "pca")
+
+# Clustering and...
+E70_GEX <- FindNeighbors(E70_GEX, dims = 1:10)
+E70_GEX <- FindClusters(E70_GEX, resolution = 0.5)
+
+# ...Run UMAP with dimensionality based on Elbowplot above
+E70_GEX <- RunUMAP(E70_GEX, dims = 1:10)
+
+gc()
+# Doubletfinder
+sweep.E70_GEX <- paramSweep(E70_GEX, PCs = 1:15, sct = T)
+sweep.E70_GEX <- summarizeSweep(sweep.E70_GEX, GT = F)
+bcmvn_E70_GEX <- find.pK(sweep.E70_GEX)
+pk_E70_GEX <- bcmvn_E70_GEX %>% filter(BCmetric == max(BCmetric)) %>% select(pK)
+pk_E70_GEX <- as.numeric(as.character(pk_E70_GEX[[1]]))
+(ggplot(bcmvn_E70_GEX, aes(pK, BCmetric, group = 1)) + geom_point() + geom_line() + theme_classic())
+
+annotations_E70_GEX <- E70_GEX@meta.data$seurat_clusters
+homo.prop_E70_GEX <- modelHomotypic(annotations_E70_GEX)
+nExp_poi_E70_GEX <- round(0.08*nrow(E70_GEX@meta.data))
+nExp_poi.adj_E70_GEX <- round(nExp_poi_E70_GEX*(1-homo.prop_E70_GEX))
+
+E70_GEX <- doubletFinder(E70_GEX, PCs = 1:15, pN = 0.25, pK = pk_E70_GEX, nExp = nExp_poi_E70_GEX, reuse.pANN = F, sct = T)
+
+length(Cells(E70_GEX))
+E70_GEX <- subset(E70_GEX, cells=rownames(E70_GEX@meta.data)[which(E70_GEX@meta.data$DF.classification == "Singlet")])
+length(Cells(E70_GEX))
+
+saveRDS(E70_GEX, file = paste(output_macos, 'E70_GEX_doubletremoval.rds', sep = ""))
+
+remove(sweep.E70_GEX, bcmvn_E70_GEX, Elbow)
+gc()
+# ~~~ Re-process the data after doublet removal ~~~
+E70_GEX <- readRDS(file = paste(output_macos, 'E70_GEX_doubletremoval.rds', sep = ""))
+plan("multisession", workers = 1)
+
+# Normalize GEX data
+E70_GEX <- NormalizeData(E70_GEX, normalization.method = "LogNormalize", scale.factor = 10000)
+
+# Find highgly variable features, unsure whether this is even useful here?
+E70_GEX <- FindVariableFeatures(E70_GEX, selection.method = "vst", nfeatures = 2000)
+
+# scale data
+all.genes <- rownames(E70_GEX)
+E70_GEX <- ScaleData(E70_GEX, features = all.genes)
+
+# Run the PCA based on the GEX
+E70_GEX <- RunPCA(E70_GEX, features = VariableFeatures(object = E70_GEX))
+
+# Find dimensionality of GEX dataset
+Elbow <- ElbowPlot(E70_GEX, ndims = 50, reduction = "pca")
+
+# Clustering and...
+E70_GEX <- FindNeighbors(E70_GEX, dims = 1:10)
+
+# ...Run UMAP with dimensionality based on Elbowplot above
+E70_GEX <- RunUMAP(E70_GEX, dims = 1:9)
+length(Cells(E70_GEX))
+
+E70_GEX <- FindClusters(E70_GEX, resolution = 0.05) #Good resotion for 5 clusters
+
+E70_GEX[["old.idents"]] <- Idents(object = E70_GEX)
+DimPlot(E70_GEX)
+E70_GEX <- RenameIdents(E70_GEX, '0'='GCBC 1', '1' = 'GCBC (G2-M cell cycle)', '2'="Circulating B cells", "3"="PreMBC", '4'="Plasma Blast")
+DimPlot(E70_GEX)
+
+saveRDS(E70_GEX, file = paste(output_macos, 'E70_GEX_temp.rds', sep = ""))
+E70_GEX <- readRDS(file = paste(output_macos, 'E70_GEX_temp.rds', sep = ""))
+
+DefaultAssay(E70_GEX) <- "RNA"
+
+
+ggsave(filename = paste(output_macos, "E70_heatmap.svg", sep = ''))
+
+remove(E70_GEX.markers, top20_E70_GEX)
+
+saveRDS(E70_GEX, file = paste(output_macos, 'E70-GEX-Finished.rds', sep = ''))
+
+```
+
+## Continue with the processing of Hashtag/Barcode (ADT) data
+
+```{r ADT, echo=FALSE, include=FALSE, warning=FALSE, eval=TRUE}
+#E70_GEX <- readRDS(file = paste(output_macos, 'E70-GEX-Finished.rds', sep = ''))
+DefaultAssay(E70_GEX) <- "ADT"
+FeaturePlot(E70_GEX, features = E70_dCODE)
+
+# Normalize ADT data
+E70_ADT <- NormalizeData(E70_GEX, normalization.method = 'CLR', margin = 2)
+
+# Find highly variable features, unsure whether this is even useful here?
+E70_ADT <- FindVariableFeatures(E70_ADT, selection.method = "vst", nfeatures = 2000)
+length(Cells(E70_ADT))
+
+# scale data
+all.genes <- rownames(E70_ADT@assays[["ADT"]])
+E70_ADT <- ScaleData(E70_ADT, features = all.genes)
+
+# Run the PCA based on the ADT
+E70_ADT <- RunPCA(E70_ADT, features = all.genes)
+
+# Find dimensionality of ADT dataset
+Elbow <- ElbowPlot(E70_ADT, ndims = 50, reduction = "pca")
+Elbow
+
+E70_ADT <- RunUMAP(E70_ADT, assay = 'ADT', dims = 1:5 )
+DimPlot(E70_ADT)
+DimPlot(E70_ADT, group.by = "Hashtag")
+FeaturePlot(E70_ADT, features = E70_group)
+# Clustering and...→
+E70_ADT <- FindNeighbors(E70_ADT, dims = 1:5)
+
+#clustree(E70_ADT)
+E70_ADT <- FindClusters(E70_ADT, resolution = 0.01) #Maybe good cluster amount??
+E70_ADT <- RenameIdents(E70_ADT, '0'='CA07', '1' = 'PR8', '2'='CA07-PR8')
+E70_ADT@meta.data[["Hashtag"]] <- E70_ADT@active.ident
+E70_GEX@meta.data[["Hashtag"]] <- E70_ADT@active.ident
+length(Cells(E70_ADT))
+
+ADT_plot <- DimPlot(E70_ADT, pt.size = 0.2, group.by = "Hashtag") + theme(aspect.ratio=1)
+ADT_plot <- ADT_plot + ggtitle('Hashtag/Bardoce clustering')
+ADT_plot
+ggsave(filename = paste(output_macos, 'E70-ADT-Cluster.svg', sep = ''), ADT_plot)
+
+plot2 <- FeaturePlot(E70_ADT, features = E70_dCODE, pt.size = 0.2, keep.scale = 'all', order = TRUE) & theme(aspect.ratio = 1)
+plot2
+
+p3 <- FeaturePlot(E70_ADT, features = E70_group, pt.size = 0.2, order = TRUE) &theme(plot.title = element_text(size = 6), axis.title = element_blank(), axis.text = element_blank())+theme(aspect.ratio=1)
+p3
+
+saveRDS(E70_ADT, file = paste(output_macos, 'E70-ADT-Finished.rds', sep = ''))
+
+```
+
+## Adding contigs from MiXCR
+
+```{r MiXCR, echo=FALSE, include=TRUE, eval=TRUE, warning=FALSE}
+E70_ADT <- readRDS(file = paste(output_macos, 'E70-ADT-Finished.rds', sep = ''))
+E70_GEX <- readRDS(file = paste(output_macos, 'E70-GEX-Finished.rds', sep = ''))
+length(Cells(E70_GEX))
+length(Cells(E70_ADT))
+
+#Loading Contig file
+E70_contigs <- read.csv(file = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/10X_files/mouse_scseq_E70_contigs.txt", header = TRUE, sep = "\t" )
+
+E70_clonotypes <- E70_contigs
+
+# Renaming MiXCR contig output to match 10X cellranger filtered contig annotations
+E70_clonotypes <- E70_clonotypes %>% 
+  mutate(chain = E70_clonotypes$chains) %>% 
+  mutate(barcode = paste(E70_clonotypes$tagValueCELL, "-1", sep = "")) %>% 
+  mutate(reads = E70_clonotypes$readCount) %>% 
+  mutate(v_gene = E70_clonotypes$bestVGene) %>% 
+  mutate(d_gene = E70_clonotypes$bestDGene) %>% 
+  mutate(j_gene = E70_clonotypes$bestJGene) %>% 
+  mutate(c_gene = E70_clonotypes$bestCGene)
+
+colnames(E70_clonotypes)[colnames(E70_clonotypes) == "nSeqFR1"] = "fwr1_nt"
+colnames(E70_clonotypes)[colnames(E70_clonotypes) == "nSeqFR2"] = "fwr2_nt"
+colnames(E70_clonotypes)[colnames(E70_clonotypes) == "nSeqFR3"] = "fwr3_nt"
+colnames(E70_clonotypes)[colnames(E70_clonotypes) == "nSeqFR4"] = "fwr4_nt"
+
+colnames(E70_clonotypes)[colnames(E70_clonotypes) == "nSeqCDR1"] = "cdr1_nt"
+colnames(E70_clonotypes)[colnames(E70_clonotypes) == "nSeqCDR2"] = "cdr2_nt"
+colnames(E70_clonotypes)[colnames(E70_clonotypes) == "nSeqCDR3"] = "cdr3_nt"
+
+colnames(E70_clonotypes)[colnames(E70_clonotypes) == "aaSeqFR1"] = "fwr1"
+colnames(E70_clonotypes)[colnames(E70_clonotypes) == "aaSeqFR2"] = "fwr2"
+colnames(E70_clonotypes)[colnames(E70_clonotypes) == "aaSeqFR3"] = "fwr3"
+colnames(E70_clonotypes)[colnames(E70_clonotypes) == "aaSeqFR4"] = "fwr4"
+
+colnames(E70_clonotypes)[colnames(E70_clonotypes) == "aaSeqCDR1"] = "cdr1"
+colnames(E70_clonotypes)[colnames(E70_clonotypes) == "aaSeqCDR2"] = "cdr2"
+colnames(E70_clonotypes)[colnames(E70_clonotypes) == "aaSeqCDR3"] = "cdr3"
+
+colnames(E70_clonotypes)[colnames(E70_clonotypes) == "uniqueUMICount"] = "umis"
+
+colnames(E70_clonotypes)[colnames(E70_clonotypes) == "targetSequences"] = "length"
+
+length(Cells(E70_ADT))
+
+E70_clonotypes <- E70_clonotypes %>% group_by(barcode) %>% arrange(chain) %>% mutate(contig_id=paste(barcode, "_contig_", row_number(), sep = ""))
+
+#11.12.2025 Write CSV file of clonotypes
+write_csv(E70_clonotypes, file = paste(output_macos, "11.12.2025_E70_clonotypes.csv", sep = ""))
+
+
+length(Cells(E70_ADT))
+#Adding contig BCR information to ADT seurat object
+contig.list <- createHTOContigList(E70_clonotypes, E70_ADT, group.by = "orig.ident")
+length(Cells(E70_ADT))
+
+combined <- combineBCR(contig.list, sample = "", threshold = 0.85, removeNA = TRUE)
+combined[[1]][["barcode"]] <- gsub("_", "", combined[[1]][["barcode"]])
+
+E70_ADT_combined_true <- combineExpression(combined, E70_ADT, 
+                  cloneCall="aa", 
+                  group.by = "none", 
+                  proportion = FALSE,
+                  filterNA = TRUE, #If this is TRUE then half the cells disapear
+                  cloneSize=c(Single=1, Small=5, Medium=20, Large=100, Hyperexpanded=500))
+
+# Asigning colors
+grid.cols.ADT <- scales::hue_pal()(length(unique(E70_ADT_combined_true@active.ident)))
+names(grid.cols.ADT) <- levels(E70_ADT_combined_true@active.ident)
+
+slot(E70_ADT_combined_true, "meta.data")$cloneType <- factor(slot(E70_ADT_combined_true, "meta.data")$cloneSize,
+                levels = c("Hyperexpanded (100 < X <= 500)",
+                           "Large (20 < X <= 100)",
+                            "Medium (5 < X <= 20)",
+                            "Small (1 < X <= 5)",
+                            "Single (0 < X <= 1)", NA))
+
+length(Cells(E70_ADT))
+length(Cells(E70_ADT_combined_true))
+saveRDS(E70_ADT_combined_true, file = paste(output_macos, 'E70-ADT-Finished-clonotypes.rds', sep = ''))
+
+
+#Adding contig BCR information to GEX seurat object
+contig.list <- createHTOContigList(E70_clonotypes, E70_GEX, group.by = "orig.ident")
+
+
+combined <- combineBCR(contig.list, sample = "", threshold = 0.85)
+
+combined[[1]][["barcode"]] <- gsub("_", "", combined[[1]][["barcode"]])
+
+E70_GEX <- combineExpression(combined, E70_GEX, 
+                  cloneCall="aa", 
+                  group.by = "none", 
+                  proportion = FALSE,
+                  filterNA = TRUE,
+                  cloneSize=c(Single=1, Small=5, Medium=20, Large=100, Hyperexpanded=500))
+
+# Asigning colors
+grid.cols.GEX <- scales::hue_pal()(length(unique(E70_GEX@active.ident)))
+names(grid.cols.GEX) <- levels(E70_GEX@active.ident)
+
+slot(E70_GEX, "meta.data")$cloneType <- factor(slot(E70_GEX, "meta.data")$cloneSize, 
+                levels = c("Hyperexpanded (100 < X <= 500)", 
+                           "Large (20 < X <= 100)", 
+                            "Medium (5 < X <= 20)", 
+                            "Small (1 < X <= 5)", 
+                            "Single (0 < X <= 1)", NA))
+
+length(Cells(E70_GEX))
+length(Cells(E70_ADT))
+saveRDS(E70_GEX, file = paste(output_macos, 'E70-GEX-Finished-clonotypes.rds', sep = ''))
+# Highlighting clonotypes
+
+
+## Renaming to IMGT gene names - Contig file
+
+IMGT_IGH <- read.csv(file = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/10X_files/OGRDB_IGH.csv", header = TRUE )
+IMGT_IGK <- read.csv(file = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/10X_files/OGRDB_IGKV.csv", header = TRUE )
+IMGT_IGL <- read.csv(file = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/10X_files/OGRDB_IGLV.csv", header = TRUE )
+IMGT_IGKJ <- read.csv(file = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/10X_files/OGRDB_IGKJ.csv", header = TRUE )
+IMGT_IGLJ <- read.csv(file = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/10X_files/OGRDB_IGLJ.csv", header = TRUE )
+IMGT_table <- rbind(IMGT_IGH, IMGT_IGK, IMGT_IGL, IMGT_IGKJ, IMGT_IGLJ)
+
+E70_contigs$IMGT_VGene = E70_contigs$bestVGene
+E70_contigs$IMGT_DGene = E70_contigs$bestDGene
+E70_contigs$IMGT_JGene = E70_contigs$bestJGene
+
+for (index in 1:nrow(E70_contigs)) {
+  #print(paste("index:",index))
+  if (E70_contigs$IMGT_VGene[index] != FALSE) {
+    table_row <- which(grepl(E70_contigs$bestVGene[index], IMGT_table$Label, fixed = TRUE))
+    #print(IMGT_table$IMGT.Name[table_row])
+    if (IMGT_table$IMGT.Name[table_row] != "") {
+      E70_contigs$IMGT_VGene[index] <- IMGT_table$IMGT.Name[table_row]
+    } else {
+      E70_contigs$IMGT_VGene[index] <- IMGT_table$Alt.Names[table_row]
+    }
+  }
+}
+
+
+for (index in 1:nrow(E70_contigs)) {
+  #print(paste("index:",index))
+  if (!is.na(E70_contigs$IMGT_JGene[index]) & E70_contigs$IMGT_JGene[index] != FALSE) {
+    table_row <- which(grepl(E70_contigs$bestJGene[index], IMGT_table$Label, fixed = TRUE))
+    #print(table_row)
+      if (IMGT_table$IMGT.Name[table_row] != "") {
+      E70_contigs$IMGT_JGene[index] <- IMGT_table$IMGT.Name[table_row]
+    } else {
+      E70_contigs$IMGT_JGene[index] <- IMGT_table$Alt.Names[table_row]
+    }
+  }
+}
+    
+    
+for (index in 1:nrow(E70_contigs)) {
+  #print(paste("index:",index))
+  if (!is.na(E70_contigs$IMGT_DGene[index]) & E70_contigs$IMGT_DGene[index] != FALSE) {
+    table_row <- which(grepl(E70_contigs$bestDGene[index], IMGT_table$Label, fixed = TRUE))
+    #print(table_row)
+      if (IMGT_table$IMGT.Name[table_row] != "") {
+      E70_contigs$IMGT_DGene[index] <- IMGT_table$IMGT.Name[table_row]
+    } else {
+      E70_contigs$IMGT_DGene[index] <- IMGT_table$Alt.Names[table_row]
+    }
+  }
+}
+
+# Simplify gene names and remove citation names - Contigs
+E70_contigs$IMGT_VGene <- gsub("Kos et al: ", "", E70_contigs$IMGT_VGene)
+E70_contigs$IMGT_DGene <- gsub("Kos et al: ", "", E70_contigs$IMGT_DGene)
+E70_contigs$IMGT_JGene <- gsub("Kos et al: ", "", E70_contigs$IMGT_JGene)
+
+E70_contigs$IMGT_VGene <- gsub("collins_et_al_2015:", "", E70_contigs$IMGT_VGene)
+E70_contigs$IMGT_DGene <- gsub("collins_et_al_2015:", "", E70_contigs$IMGT_DGene)
+E70_contigs$IMGT_JGene <- gsub("collins_et_al_2015:", "", E70_contigs$IMGT_JGene)
+
+E70_contigs$IMGT_VGene <- gsub("Musmus ", "", E70_contigs$IMGT_VGene)
+E70_contigs$IMGT_DGene <- gsub("Musmus ", "", E70_contigs$IMGT_DGene)
+E70_contigs$IMGT_JGene <- gsub("Musmus ", "", E70_contigs$IMGT_JGene)
+
+E70_contigs$IMGT_VGene <- gsub(" F", "", E70_contigs$IMGT_VGene)
+E70_contigs$IMGT_DGene <- gsub(" F", "", E70_contigs$IMGT_DGene)
+E70_contigs$IMGT_JGene <- gsub(" F", "", E70_contigs$IMGT_JGene)
+
+E70_contigs$IMGT_VGene <- gsub("Haines: ", "", E70_contigs$IMGT_VGene)
+E70_contigs$IMGT_DGene <- gsub("Haines: ", "", E70_contigs$IMGT_DGene)
+E70_contigs$IMGT_JGene <- gsub("Haines: ", "", E70_contigs$IMGT_JGene)
+
+E70_contigs$IMGT_VGene <- gsub("JACKSON: balb", "", E70_contigs$IMGT_VGene)
+E70_contigs$IMGT_DGene <- gsub("JACKSON: balb", "", E70_contigs$IMGT_DGene)
+E70_contigs$IMGT_JGene <- gsub("JACKSON: balb", "", E70_contigs$IMGT_JGene)
+
+E70_contigs$IMGT_VGene <- gsub("VBASE2: mus", "", E70_contigs$IMGT_VGene)
+E70_contigs$IMGT_DGene <- gsub("VBASE2: mus", "", E70_contigs$IMGT_DGene)
+E70_contigs$IMGT_JGene <- gsub("VBASE2: mus", "", E70_contigs$IMGT_JGene)
+
+E70_contigs$IMGT_VGene <- gsub("Mus_musculus_BALB/c", "", E70_contigs$IMGT_VGene)
+E70_contigs$IMGT_DGene <- gsub("Mus_musculus_BALB/c", "", E70_contigs$IMGT_DGene)
+E70_contigs$IMGT_JGene <- gsub("Mus_musculus_BALB/c", "", E70_contigs$IMGT_JGene)
+
+E70_contigs$IMGT_VGene <- gsub("Mus_musculus", "", E70_contigs$IMGT_VGene)
+E70_contigs$IMGT_DGene <- gsub("Mus_musculus", "", E70_contigs$IMGT_DGene)
+E70_contigs$IMGT_JGene <- gsub("Mus_musculus", "", E70_contigs$IMGT_JGene)
+
+saveRDS(E70_contigs, file = paste(output_macos, 'E70_contigs.rds', sep = ''))
+
+```
+
+## Add Ag dCODE binding
+
+```{r dCODE, echo=FALSE, include=TRUE, eval=TRUE, warning=FALSE}
+#Load processed RDS files if not already loaded
+E70_ADT <- readRDS(file = paste(output_macos, 'E70-ADT-Finished-clonotypes.rds', sep = ''))
+E70_GEX <- readRDS(file = paste(output_macos, 'E70-GEX-Finished-clonotypes.rds', sep = ''))
+
+grid.cols.ADT <- scales::hue_pal()(length(unique(E70_ADT@active.ident)))
+names(grid.cols.ADT) <- levels(E70_ADT@active.ident)
+
+DoHeatmap(E70_ADT, features = c("OVA", "CA07", "PR8"))
+
+#Check and filter out which cells are OVA binders based on exrepssion
+OVAcells <- WhichCells(E70_ADT, expression = OVA > 0.5) #144 cells are OVA binders
+E70_dCODE_csv <- data.frame(barcode = WhichCells(E70_ADT, expression = OVA > 0.5), AgBinding = "OVA")
+
+FeatureScatter(E70_ADT, "CA07", "OVA") +
+    theme(plot.title = element_blank()) & 
+    theme(axis.title = element_text(size = 12), 
+        axis.text = element_text(size = 10)) &
+    theme(aspect.ratio=1)
+FeatureScatter(E70_ADT, "PR8", "OVA") +
+    theme(plot.title = element_blank()) & 
+    theme(axis.title = element_text(size = 12), 
+        axis.text = element_text(size = 10)) &
+    theme(aspect.ratio=1)
+
+#Remove OVA binding cells
+E70_ADT.noOVA <- subset(E70_ADT, OVA < 0.5)
+
+
+#Label cells based on quadrant "gating"
+CAcells <- WhichCells(E70_ADT.noOVA, expression = CA07 >= 0.8 & PR8 < 0.25)
+PR8cells <- WhichCells(E70_ADT.noOVA, expression = CA07 < 0.8 & PR8 >= 0.25)
+Crosscells <- WhichCells(E70_ADT.noOVA, expression = CA07 >= 0.81 & PR8 >= 0.251)
+Negcells <- WhichCells(E70_ADT.noOVA, expression = CA07 < 0.8 & PR8 < 0.25)
+FeatureScatter(E70_ADT, "CA07", "PR8")
+
+
+E70_ADT.noOVA$AgGate <- "test"
+E70_ADT.noOVA$AgGate <- ifelse(colnames(E70_ADT.noOVA) %in% Crosscells, "Cross", 
+                          ifelse(colnames(E70_ADT.noOVA) %in% PR8cells, "PR8",
+                                 ifelse(colnames(E70_ADT.noOVA) %in% CAcells, "CA07",
+                                        "Negative")))
+
+E70_ADT.noOVA$AgGate1 <- ifelse(colnames(E70_ADT.noOVA) %in% CAcells, "CA07", E70_ADT.noOVA$AgGate)
+E70_ADT.noOVA$AgGate1 <- ifelse(colnames(E70_ADT.noOVA) %in% PR8cells, "PR8", E70_ADT.noOVA$AgGate)
+E70_ADT.noOVA$AgGate1 <- ifelse(colnames(E70_ADT.noOVA) %in% Crosscells, "Cross", E70_ADT.noOVA$AgGate)
+E70_ADT.noOVA$AgGate1 <- ifelse(colnames(E70_ADT.noOVA) %in% Negcells, "Negative", E70_ADT.noOVA$AgGate)
+
+FeatureScatter(E70_ADT.noOVA, "CA07", "PR8", group.by = "AgGate") +
+    theme(plot.title = element_blank()) & 
+    theme(axis.title = element_text(size = 12), 
+        axis.text = element_text(size = 10)) &
+    theme(aspect.ratio=1)
+
+
+ggsave(plot = FeatureScatter(E70_ADT.noOVA, "CA07", "PR8", jitter = TRUE, log = TRUE) +
+        theme(plot.title = element_blank()) + 
+        theme(axis.title = element_text(size = 12), 
+              axis.text = element_text(size = 10)) +
+        theme(aspect.ratio=1),
+    filename = paste(output_macos, "E70_HA_featureScatterLog.svg", sep = "")
+)
+
+ggsave(plot =
+RidgePlot(E70_ADT.noOVA, "CA07", idents = c("CA07", "PR8")) +
+RidgePlot(E70_ADT.noOVA, "PR8", idents = c("CA07", "PR8")),
+filename = paste(output_macos, "E70_HA_featureRidge.svg", sep = "")
+)
+length(Cells(subset(subset(E70_ADT.noOVA, CA07 > 0.75), idents = "PR8" ))) / 
+length(Cells(subset(E70_ADT.noOVA, idents = "PR8" )))
+
+length(Cells(subset(subset(E70_ADT.noOVA, CA07 > 0.75), idents = "CA07" ))) / 
+length(Cells(subset(E70_ADT.noOVA, idents = "CA07" )))
+
+length(Cells(subset(subset(E70_ADT.noOVA, PR8 > 0.3), idents = "CA07" ))) /
+length(Cells(subset(E70_ADT.noOVA, idents = "CA07" )))
+
+length(Cells(subset(subset(E70_ADT.noOVA, PR8 > 0.3), idents = "PR8" ))) /
+length(Cells(subset(E70_ADT.noOVA, idents = "PR8" )))
+
+#Adjust binders where the same clonotype have been asigned as both cross-reactive and specific for a single HA
+clonalOverlap(E70_ADT.noOVA, cloneCall = "CTaa", group.by = "AgGate", method = "overlap", exportTable = TRUE)
+
+# Claude AI replacement code for deprecated scRepertoire "expression2list" which the code was reliant on
+meta <- E70_ADT.noOVA[[]]
+lst  <- split(meta, meta$AgGate)
+# Drop cells without a clonotype, as expression2List did
+combined2 <- lapply(lst, function(x) x[!is.na(x$CTaa), ])
+
+overlapCA07_Cross <- intersect(combined2[["CA07"]][["CTaa"]], combined2[["Cross"]][["CTaa"]])
+overlapPR8_Cross <- intersect(combined2[["PR8"]][["CTaa"]], combined2[["Cross"]][["CTaa"]])
+overlapCA07_Neg <- intersect(combined2[["CA07"]][["CTaa"]], combined2[["Negative"]][["CTaa"]])
+overlapCA07_PR8 <- intersect(combined2[["CA07"]][["CTaa"]], combined2[["PR8"]][["CTaa"]])
+
+
+overlapCA07_Cross %in% overlapPR8_Cross
+overlapCA07_Cross %in% overlapCA07_Neg
+overlapCA07_Neg %in% overlapPR8_Cross
+
+E70_ADT.noOVA$AgGate2 <- E70_ADT.noOVA$AgGate
+E70_ADT.noOVA$AgGate2 <- ifelse(E70_ADT.noOVA@meta.data[["CTaa"]] %in% overlapCA07_Cross, "Overlap", E70_ADT.noOVA$AgGate)
+E70_ADT.noOVA$AgGate2 <- ifelse(E70_ADT.noOVA@meta.data[["CTaa"]] %in% overlapPR8_Cross, "Overlap", E70_ADT.noOVA$AgGate)
+E70_ADT.noOVA$AgGate2 <- ifelse(E70_ADT.noOVA@meta.data[["CTaa"]] %in% overlapCA07_PR8, "Overlap", E70_ADT.noOVA$AgGate)
+
+"Overlap" %in% E70_ADT.noOVA@meta.data[["AgGate2"]]
+
+E70_dCODE_csv3 <- data.frame(barcode = Cells(subset(E70_ADT.noOVA)), AgBinding = E70_ADT.noOVA@meta.data[["AgGate2"]])
+E70_dCODE_csv <- E70_dCODE_csv %>% bind_rows(
+  data.frame(barcode = Cells(subset(E70_ADT.noOVA)), AgBinding = E70_ADT.noOVA@meta.data[["AgGate2"]])
+)
+write.csv(E70_dCODE_csv, file = paste(output_macos, "E70_HA_ASSIGNMENTS.csv", sep = ""), row.names = TRUE)
+
+row_count <- as.data.frame(x = table(E70_ADT.noOVA$AgGate2))
+
+E70_ADT.noOVA.noOverlap <- subset(E70_ADT.noOVA, AgGate2 != "Overlap")
+length(Cells(E70_ADT.noOVA.noOverlap))
+length(Cells(E70_ADT.noOVA))
+length(Cells(E70_ADT))
+
+
+FeatureScatter(E70_ADT.noOVA.noOverlap, "CA07", "PR8", group.by = "AgGate2") +
+    theme(plot.title = element_blank()) & 
+    theme(axis.title = element_text(size = 12), 
+        axis.text = element_text(size = 10)) &
+    theme(aspect.ratio=1)
+
+
+DimPlot(E70_ADT.noOVA.noOverlap, group.by = "AgGate2", pt.size = 1) + theme(aspect.ratio = 1)
+
+E70_GEX.noOVA <- subset(E70_GEX, cells = Cells(E70_ADT.noOVA.noOverlap))
+length(Cells(E70_ADT.noOVA.noOverlap))
+length(Cells(E70_GEX.noOVA))
+length(Cells(E70_GEX))
+
+E70_GEX.noOVA@meta.data[["HA_binding"]] = E70_ADT.noOVA.noOverlap@meta.data[["AgGate2"]]
+E70_ADT.noOVA.noOverlap@meta.data[["HA_binding"]] = E70_ADT.noOVA.noOverlap@meta.data[["AgGate2"]]
+
+saveRDS(E70_ADT.noOVA.noOverlap, file = paste(output_macos, 'E70-ADT-Finished-NoOVA.rds', sep = ''))
+saveRDS(E70_GEX.noOVA, file = paste(output_macos, 'E70-GEX-Finished-NoOVA.rds', sep = ''))
+
+## Adding HA binding to contig file. This is used to assign HA reactivity to BCR sequences in MiXCR separately
+E70_contigs <- readRDS(file = paste(output_macos, 'E70_contigs.rds', sep = ''))
+dCODE_df <- data.frame(barcode = Cells(E70_ADT.noOVA.noOverlap))
+E70_contigs$barcode <- paste(E70_contigs$tagValueCELL, "-1", sep = "")
+
+
+E70_contigs_filtered <- inner_join(E70_contigs, dCODE_df, by = "barcode")
+E70_contigs_filtered.HC <- E70_contigs_filtered %>% filter(chains == "IGH")
+E70_contigs_filtered.LC <- E70_contigs_filtered %>% filter(chains != "IGH")
+
+E70_contigs_filtered.HC %>% mutate(HA_binding = dCODE_df$E70_ADT.noOVA.noOverlap.AgGate2)
+E70_contigs_filtered.LC %>% mutate(HA_binding = dCODE_df$E70_ADT.noOVA.noOverlap.AgGate2)
+
+E70_contigs_filtered.Both <- bind_rows(E70_contigs_filtered.HC, E70_contigs_filtered.LC)
+saveRDS(E70_contigs_filtered.Both, file = paste(output_macos, 'E70_contigs.rds', sep = ''))
+
+
+```
+
+## Manual mutation counts
+
+```{r manualMutation, echo=FALSE, fig.height=10, fig.width=10}
+pattern <- "[SN][ACTGN][0-9]{2,3}[ACTGN]"
+
+E70_contigs$nMutationsCDR1[is.na(E70_contigs$nMutationsCDR1)] <- 0
+E70_contigs$nMutationsCDR2[is.na(E70_contigs$nMutationsCDR2)] <- 0
+E70_contigs$nMutationsFR1[is.na(E70_contigs$nMutationsFR1)] <- 0
+E70_contigs$nMutationsFR2[is.na(E70_contigs$nMutationsFR2)] <- 0
+E70_contigs$nMutationsFR3[is.na(E70_contigs$nMutationsFR3)] <- 0
+E70_contigs$nMutationsFR4[is.na(E70_contigs$nMutationsFR4)] <- 0
+
+#Count occurances that match the REGEX expression for a mutation
+E70_contigs$totnMutationsCDR <- str_count(E70_contigs$nMutationsCDR1, pattern = pattern) + 
+                                str_count(E70_contigs$nMutationsCDR2, pattern = pattern)
+
+E70_contigs$totnMutationsFR <-  str_count(E70_contigs$nMutationsFR1, pattern = pattern) + 
+                                str_count(E70_contigs$nMutationsFR2, pattern = pattern) + 
+                                str_count(E70_contigs$nMutationsFR3, pattern = pattern) +
+                                str_count(E70_contigs$nMutationsFR4, pattern = pattern)
+
+
+## Merging Contig mutations with Seurat object:
+E70_GEX.noOVA <- readRDS(file = paste(output_macos, 'E70-GEX-Finished-NoOVA.rds', sep = ''))
+E70_ADT.noOVA <- readRDS(file = paste(output_macos, 'E70-ADT-Finished-NoOVA.rds', sep = ''))
+
+
+E70_mutationList <- E70_contigs
+E70_mutationList$Barcode <- E70_contigs$tagValueCELL
+E70_mutationList$CDR_mut <- E70_contigs$totnMutationsCDR
+E70_mutationList$FWR_mut <- E70_contigs$totnMutationsFR
+E70_mutationList <- E70_mutationList %>% mutate(tagValueCELL = paste(tagValueCELL, "-1", sep = ""))
+
+Cells(E70_GEX.noOVA) %>% length()
+unique(E70_mutationList$tagValueCELL) %>% length()
+
+E70_mutationList.HC <- E70_mutationList %>% filter(chains == "IGH")
+E70_mutationList.HC.ADT <- E70_mutationList.HC %>% filter(tagValueCELL %in% Cells(E70_ADT.noOVA))
+E70_mutationList.HC.ADT <- arrange(E70_mutationList.HC.ADT, tagValueCELL)
+E70_mutationList.HC.GEX <- E70_mutationList.HC %>% filter(tagValueCELL %in% Cells(E70_GEX.noOVA))
+E70_mutationList.HC.GEX <- arrange(E70_mutationList.HC.GEX, tagValueCELL)
+
+E70_mutationList.LC <- E70_mutationList %>% filter(chains == "IGL" | chains == "IGK")
+E70_mutationList.LC.ADT <- E70_mutationList.LC %>% filter(tagValueCELL %in% Cells(E70_ADT.noOVA))
+E70_mutationList.LC.ADT$tagValueCELL %>% length()
+E70_mutationList.LC.ADT <- arrange(E70_mutationList.LC.ADT, tagValueCELL)
+E70_mutationList.LC.GEX <- E70_mutationList.HC %>% filter(tagValueCELL %in% Cells(E70_GEX.noOVA))
+E70_mutationList.LC.GEX$tagValueCELL %>% length()
+E70_mutationList.LC.GEX <- arrange(E70_mutationList.LC.GEX, tagValueCELL)
+
+
+nrow(E70_GEX.noOVA@meta.data)
+E70_mutationList.HC$tagValueCELL %>% length()
+
+#HC Mutations GEX
+E70_GEX.noOVA@meta.data[["HC_CDR_mut"]] <- E70_mutationList.HC.GEX$totnMutationsCDR
+E70_GEX.noOVA@meta.data[["HC_FWR_mut"]] <- E70_mutationList.HC.GEX$totnMutationsFR
+E70_GEX.noOVA@meta.data[["HC_totMut"]] <- E70_GEX.noOVA@meta.data[["HC_FWR_mut"]] + E70_GEX.noOVA@meta.data[["HC_CDR_mut"]]
+
+#HC Mutations ADT
+E70_ADT.noOVA@meta.data[["HC_CDR_mut"]] <- E70_mutationList.HC.ADT$totnMutationsCDR
+E70_ADT.noOVA@meta.data[["HC_FWR_mut"]] <- E70_mutationList.HC.ADT$totnMutationsFR
+E70_ADT.noOVA@meta.data[["HC_totMut"]] <- E70_ADT.noOVA@meta.data[["HC_FWR_mut"]] + E70_ADT.noOVA@meta.data[["HC_CDR_mut"]]
+
+#LC Mutations GEX
+E70_GEX.noOVA@meta.data[["LC_CDR_mut"]] <- E70_mutationList.LC.GEX$totnMutationsCDR
+E70_GEX.noOVA@meta.data[["LC_FWR_mut"]] <- E70_mutationList.LC.GEX$totnMutationsFR
+E70_GEX.noOVA@meta.data[["LC_totMut"]] <- E70_GEX.noOVA@meta.data[["LC_FWR_mut"]] + E70_GEX.noOVA@meta.data[["LC_CDR_mut"]]
+
+#LC Mutations GEX
+E70_ADT.noOVA@meta.data[["LC_CDR_mut"]] <- E70_mutationList.LC.ADT$totnMutationsCDR
+E70_ADT.noOVA@meta.data[["LC_FWR_mut"]] <- E70_mutationList.LC.ADT$totnMutationsFR
+E70_ADT.noOVA@meta.data[["LC_totMut"]] <- E70_ADT.noOVA@meta.data[["LC_FWR_mut"]] + E70_ADT.noOVA@meta.data[["LC_CDR_mut"]]
+
+E70_GEX.noOVA@meta.data[["totMut"]] <- E70_GEX.noOVA@meta.data[["HC_totMut"]] + E70_GEX.noOVA@meta.data[["LC_totMut"]]
+E70_ADT.noOVA@meta.data[["totMut"]] <- E70_ADT.noOVA@meta.data[["HC_totMut"]] + E70_ADT.noOVA@meta.data[["LC_totMut"]]
+
+#Separate cells into different mutations groups based on number of mutations
+E70_ADT.noOVA@meta.data[["MutClass"]] <- ifelse(E70_ADT.noOVA@meta.data[["totMut"]] < 1 , "0",
+                                    ifelse(E70_ADT.noOVA@meta.data[["totMut"]] > 0 & E70_ADT.noOVA@meta.data[["totMut"]] < 10, "1-10",
+                                    ifelse(E70_ADT.noOVA@meta.data[["totMut"]] > 9 & E70_ADT.noOVA@meta.data[["totMut"]] < 20, "11-20", 
+                                    ifelse(E70_ADT.noOVA@meta.data[["totMut"]] > 19 & E70_ADT.noOVA@meta.data[["totMut"]] < 30, "21-30", ">30"))))
+
+
+E70_GEX.noOVA@meta.data[["MutClass"]] <- ifelse(E70_GEX.noOVA@meta.data[["totMut"]] < 1 , "0",
+                                    ifelse(E70_GEX.noOVA@meta.data[["totMut"]] > 0 & E70_GEX.noOVA@meta.data[["totMut"]] < 10, "1-10",
+                                    ifelse(E70_GEX.noOVA@meta.data[["totMut"]] > 9 & E70_GEX.noOVA@meta.data[["totMut"]] < 20, "11-20", 
+                                    ifelse(E70_GEX.noOVA@meta.data[["totMut"]] > 19 & E70_GEX.noOVA@meta.data[["totMut"]] < 30, "21-30", ">30"))))
+
+
+#Plot mutations on UMAPs
+
+FeaturePlot(E70_ADT.noOVA, features = "totMut", pt.size = 0.5, order = TRUE) + 
+  theme(aspect.ratio=1) +
+  scale_colour_gradientn(colours = brewer.pal(n = 15, name = "BuPu"))
+
+FeaturePlot(E70_ADT.noOVA, 
+            features = "totMut", 
+            pt.size = 1.5, 
+            order = TRUE, 
+            shape.by = "HA_binding") +
+  theme(aspect.ratio=1) +
+  scale_colour_gradientn(colours = brewer.pal(n = 9, name = "RdYlGn")) +
+  scale_shape_manual(values = c(16, 17, 1, 15, 2))
+
+plot <- DimPlot(E70_ADT.noOVA, group.by = "MutClass", pt.size = 1) + 
+  scale_colour_manual(values = c("#b2871b","#919191", "#a87391", "#995266", "#c62e2e"))+
+  theme(plot.title = element_blank()) +
+  theme(axis.title = element_blank(), 
+        axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.line = element_blank(),
+        aspect.ratio=1)
+
+ggsave(filename = paste(output_macos, "E70_MutUMAP_ADT.svg", sep = ""), plot = plot)
+
+plot <- DimPlot(E70_ADT.noOVA, group.by = "HA_binding", pt.size = 1) + 
+  scale_colour_manual(values = c("#89344e","#4d73c4", "#919191", "#008000"))+
+  theme(plot.title = element_blank()) +
+  theme(axis.title = element_blank(), 
+        axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.line = element_blank(),
+        aspect.ratio=1)
+
+ggsave(filename = paste(output_macos, "E70_HA_ADT.svg", sep = ""), plot = plot)
+
+plot <- DimPlot(E70_GEX.noOVA, group.by = "MutClass", pt.size = 1) + 
+  scale_colour_manual(values = c("#b2871b","#919191", "#a87391", "#995266", "#c62e2e"))+
+  theme(plot.title = element_blank()) +
+  theme(axis.title = element_blank(), 
+        axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.line = element_blank(),
+        aspect.ratio=1)
+
+ggsave(filename = paste(output_macos, "E70_MutUMAP_GEX.svg", sep = ""), plot = plot)
+
+saveRDS(E70_GEX.noOVA, file = paste(output_macos, 'E70-GEX-Finished-NoOVA.rds', sep = ''))
+saveRDS(E70_ADT.noOVA, file = paste(output_macos, 'E70-ADT-Finished-NoOVA.rds', sep = ''))
+
+write_csv(E70_GEX.noOVA@meta.data, file = paste(output_macos, "E70_GEX.noOVA_metadata.csv", sep = ""))
+write_csv(E70_ADT.noOVA@meta.data, file = paste(output_macos, "E70_ADT.noOVA_metadata.csv", sep = ""))
+```
+
+## Drawing plots - Clustering
+
+```{r GEXplot, echo=FALSE, fig.height=10, fig.width=10, warning=TRUE}
+## Merging Contig mutations with Seurat object:
+E70_GEX.noOVA <- readRDS(file = paste(output_macos, 'E70-GEX-Finished-NoOVA.rds', sep = ''))
+E70_ADT.noOVA <- readRDS(file = paste(output_macos, 'E70-ADT-Finished-NoOVA.rds', sep = ''))
+
+DefaultAssay(E70_GEX.noOVA) <- "RNA"
+RNA_plot <- DimPlot(E70_GEX.noOVA, reduction = "umap", pt.size = 0.5, cols = c('#7e575e', '#a3a500', '#ec96a4', '#2d4262', '#427752'))+
+  theme(plot.title = element_text(size = 10), 
+         axis.title = element_text(size = 8), 
+         axis.text = element_text(size = 8))+
+  theme(aspect.ratio=1)
+RNA_plot
+
+ggsave(filename = paste(output_macos, 'GEX_cluster.svg'), plot = RNA_plot)
+
+RNA_plot <- DimPlot(E70_GEX.noOVA, reduction = "umap", pt.size = 1.5, cols = c('#7e575e', '#a3a500', '#ec96a4', '#2d4262', '#427752'))+
+  theme(plot.title = element_blank(), 
+          axis.line = element_blank(), 
+          axis.title = element_blank(), 
+          axis.text = element_blank(), 
+          axis.ticks = element_blank(), 
+          plot.background = element_rect(fill='transparent', color=NA)) & 
+    theme(aspect.ratio=1) & NoLegend()
+
+RNA_plot
+
+ggsave(filename = paste(output_macos, 'GEX_cluster.png'), plot = RNA_plot)
+   
+DefaultAssay(E70_ADT.noOVA) <- "ADT"
+
+plot <- DimPlot(E70_ADT.noOVA, group.by = "Hashtag", pt.size = 1.5, cols = c("#4d73c4","#89344e", "#008000")) + 
+  theme(plot.title = element_blank(), 
+          axis.line = element_blank(), 
+          axis.title = element_blank(), 
+          axis.text = element_blank(), 
+          axis.ticks = element_blank(), 
+          plot.background = element_rect(fill='transparent', color=NA)) & 
+    theme(aspect.ratio=1) & NoLegend()
+plot
+ggsave(filename = paste(output_macos, "E70_HA_ADT.svg", sep = ""), plot = plot)
+ggsave(filename = paste(output_macos, "E70_HA_ADT.png", sep = ""), plot = plot)
+
+
+plot <- DimPlot(E70_ADT.noOVA,
+                split.by = "Hashtag",
+                group.by = "HA_binding",
+                pt.size = 1.5, 
+                cols = c("#4d73c4", "#FF0000", "#DDDDDD", "#976374")) + 
+  theme(plot.title = element_blank(), 
+          axis.line = element_blank(), 
+          axis.title = element_blank(), 
+          axis.text = element_blank(), 
+          axis.ticks = element_blank(), 
+          plot.background = element_rect(fill='transparent', color=NA)
+        ) & 
+    theme(aspect.ratio=1) & NoLegend()
+plot
+
+ADT_plot <- DimPlot(E70_ADT.noOVA, reduction = "umap", pt.size = 0.25)+theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8))+theme(aspect.ratio=1)
+RNA_plot+ ggtitle('Gene expression clustering') | ADT_plot + ggtitle('Hashtag/Bardoce clustering')
+
+DefaultAssay(E70_GEX.noOVA) <- "RNA"
+p6 <- FeaturePlot(E70_GEX.noOVA, features = GC_markers2, pt.size = 1, order = TRUE, cols = c('#DDDDDD', '#FF0000'))&theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8))&theme(aspect.ratio=1)
+#### GC Markers
+p6
+
+p7 <- FeaturePlot(E70_GEX.noOVA, features = MBC_markers, pt.size = 1, order = TRUE, cols = c('#DDDDDD', '#00AA00'))&theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8))&theme(aspect.ratio=1)
+#### MBC Markers
+p7
+
+p8 <- FeaturePlot(E70_GEX.noOVA, features = PB_markers, pt.size = 1, order = TRUE, cols = c('#DDDDDD', '#0000FF'))&theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8))&theme(aspect.ratio=1)
+#### Plasma Blast Markers
+p8
+
+p11 <- FeaturePlot(E70_GEX.noOVA, features = LZDZ_marker, pt.size = 1, order = TRUE, cols = c('#DDDDDD', '#FF00FF'))&theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8))&theme(aspect.ratio=1)
+#### Light Zone / Dark Zone Markers
+p11
+
+pIg <- FeaturePlot(E70_GEX.noOVA, features = IgH_markers, pt.size = 0.6, order = TRUE, max.cutoff = 20)&theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8))&theme(aspect.ratio=1)
+pIg
+
+pclust2 <- FeaturePlot(E70_GEX.noOVA, features = Cluster2_markers, pt.size = 1, order = TRUE, cols = c('#DDDDDD', '#FF00FF'), max.cutoff = 20)&theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8))&theme(aspect.ratio=1)
+#### Light Zone / Dark Zone Markers
+pclust2
+
+
+pclust2neg <- FeaturePlot(E70_GEX.noOVA, features = Cluster2_negmarkers, pt.size = 1, order = TRUE, cols = c('#DDDDDD', '#FF00FF'))&theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8))&theme(aspect.ratio=1)
+pclust2neg
+
+plot_MHCII <- FeaturePlot(E70_GEX.noOVA, features = MHCII_genes, pt.size = 1, order = TRUE, cols = c('#DDDDDD', '#FF00FF'))&theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8))&theme(aspect.ratio=1)
+plot_MHCII
+
+p9 <- FeaturePlot(E70_GEX.noOVA, features = E70_group, pt.size = 1, order = TRUE, cols = c('#DDDDDD', '#0000FF'))&theme(plot.title = element_text(size = 6), axis.title = element_text(size = 4), axis.text = element_text(size = 4))&theme(aspect.ratio=1)&NoLegend()
+#### Hashtag groups
+p9
+
+p10 <- FeaturePlot(E70_GEX.noOVA, features = E70_dCODE, pt.size = 1, order = TRUE, cols = c('#DDDDDD', '#0000FF'))&theme(plot.title = element_text(size = 6), axis.title = element_text(size = 4), axis.text = element_text(size = 4))&theme(aspect.ratio=1)&NoLegend()
+#### dCODE Antigens
+p10
+
+FeaturePlot(E70_GEX.noOVA, features = other_markers, pt.size = 0.2, order = TRUE) & theme(aspect.ratio=1, plot.title = element_text(size = 12), axis.title = element_text(size = 8), axis.text = element_text(size = 8))
+
+FeaturePlot(E70_GEX.noOVA, features = proliferation_markers, pt.size = 0.2, order = TRUE) & theme(aspect.ratio=1, plot.title = element_text(size = 12), axis.title = element_text(size = 8), axis.text = element_text(size = 8))
+
+FeaturePlot(E70_GEX.noOVA, features = prollif_histone_markers, pt.size = 0.2, order = TRUE) & theme(aspect.ratio=1, plot.title = element_text(size = 12), axis.title = element_text(size = 8), axis.text = element_text(size = 8))
+
+DimPlot(E70_GEX.noOVA, group.by = "Hashtag", pt.size = 1, cols = c("#4d73c4", "#eda070", "#606060", "#008000")) & theme(aspect.ratio=1)
+ggsave(filename = paste(output_macos, "E70_GEX.noOVA_Hashtag_dimplot.svg", sep=""), plot = 
+        DimPlot(E70_GEX.noOVA, group.by = "Hashtag", pt.size = 0.6, cols = c("#4d73c4", "#eda070", "#606060", "#008000")) & theme(aspect.ratio=1) )
+```
+
+## Drawing plots - Hashtags/Barcodes
+
+```{r ADTplot, echo=FALSE, fig.height=10, fig.width=10}
+DefaultAssay(E70_ADT.noOVA) <- "ADT"
+ADT_plot <- ADT_plot + ggtitle('Hashtag/Bardoce clustering')
+ADT_plot
+plot2 <- FeaturePlot(E70_ADT.noOVA, features = E70_dCODE, pt.size = 0.2, keep.scale = 'all', order = TRUE) & theme(aspect.ratio = 1)
+plot2
+p3 <- FeaturePlot(E70_ADT.noOVA, features = E70_group, pt.size = 0.2, order = TRUE) &theme(plot.title = element_text(size = 6), axis.title = element_blank(), axis.text = element_blank())+theme(aspect.ratio=1)
+p3
+
+DefaultAssay(E70_GEX.noOVA) <- "RNA"
+FeaturePlot(E70_GEX.noOVA, features = E70_group, pt.size = 0.2, order = TRUE, max.cutoff = 4500) &theme(plot.title = element_text(size = 6), axis.title = element_blank(), axis.text = element_blank())+theme(aspect.ratio=1)
+
+DefaultAssay(E70_ADT.noOVA) <- "ADT"
+ggsave(FeaturePlot(E70_ADT.noOVA, features = c("CA07", "PR8"), blend = TRUE, label = FALSE, order = TRUE, pt.size = 0.1) &theme(aspect.ratio = 1, plot.title = element_text(size = 6), axis.title = element_blank(), axis.text = element_blank()) &NoLegend(), file = paste(output_macos, "Blendtest.pdf", sep = ""))
+
+
+DimPlot(E70_ADT.noOVA, group.by = "Hashtag", pt.size = 1)
+```
+
+## Saving GEX images
+
+```{r GEXimg, eval=FALSE, echo=FALSE, fig.height=7, fig.width=7, warning=TRUE, include=FALSE}
+E70_GEX.noOVA <- readRDS(file = paste(output_macos, 'E70-GEX-Finished-NoOVA.rds', sep = ''))
+plotGC <- FeaturePlot(E70_GEX.noOVA, features = GC_markers[1], pt.size = 1.5, order = TRUE, max.cutoff = 15) & theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8)) & theme(aspect.ratio=1) & scale_colour_gradientn(colours = brewer.pal(n = 10, name = "BuPu"))
+plotGC
+ggsave(filename = paste(output_macos, 'GC_plot.svg', sep = ''), plot = plotGC)
+       
+plotMBC <- FeaturePlot(E70_GEX.noOVA, features = MBC_markers, pt.size = 1.5, order = TRUE, max.cutoff = 35) & theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8)) & theme(aspect.ratio=1) & scale_colour_gradientn(colours = brewer.pal(n = 10, name = "PuRd"))
+plotMBC
+ggsave(filename = paste(output_macos, 'MBC_plot.svg', sep = ''), plot = plotMBC)
+
+plotPB <- FeaturePlot(E70_GEX.noOVA, features = PB_markers, pt.size = 1.5, order = TRUE) & theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8)) & theme(aspect.ratio=1) & scale_colour_gradientn(colours = brewer.pal(n = 10, name = "PuBuGn"))
+plotPB
+ggsave(filename = paste(output_macos, 'PB_plot.svg', sep = ''), plot = plotPB)
+
+plotMHCII <- FeaturePlot(E70_GEX.noOVA, features = MHCII_genes, pt.size = 1.5, order = TRUE, max.cutoff = 120) & theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8)) & theme(aspect.ratio=1) & scale_colour_gradientn(colours = brewer.pal(n = 10, name = "Purples"))
+plotMHCII
+ggsave(filename = paste(output_macos, 'MHCII_plot.svg', sep = ''), plot = plotMHCII)
+
+plottest <- FeaturePlot(E70_GEX.noOVA, features = "Itgax", pt.size = 2, order = TRUE) & theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8)) & theme(aspect.ratio=1) & scale_colour_gradientn(colours = brewer.pal(n = 10, name = "Purples"))
+plottest
+
+for (index in GC_markers2) {
+  plotGC2 <- FeaturePlot(E70_GEX.noOVA, features = index, pt.size = 1, order = TRUE) & 
+    theme(plot.title = element_blank(), 
+          axis.line = element_blank(), 
+          axis.title = element_blank(), 
+          axis.text = element_blank(), 
+          axis.ticks = element_blank(), 
+          plot.background = element_rect(fill='transparent', color=NA)) & 
+    theme(aspect.ratio=1) & 
+    scale_colour_gradientn(colours = brewer.pal(n = 10, name = "BuPu")) & 
+    NoLegend()
+  ggsave(filename = paste(output_macos, "GCplot", index, ".png", sep = ""), plot = plotGC2)
+}
+for (index in MBC_markers) {
+  plotMBC2 <- FeaturePlot(E70_GEX.noOVA, features = index, pt.size = 1.5, order = TRUE) & 
+    theme(plot.title = element_blank(), 
+          axis.line = element_blank(), 
+          axis.title = element_blank(), 
+          axis.text = element_blank(), 
+          axis.ticks = element_blank(), 
+          plot.background = element_rect(fill='transparent', color=NA)) & 
+    theme(aspect.ratio=1) & 
+    scale_colour_gradientn(colours = brewer.pal(n = 10, name = "PuRd")) & 
+    NoLegend()
+  ggsave(filename = paste(output_macos, "MBCplot", index, ".png", sep = ""), plot = plotMBC2)
+}
+
+for (index in PB_markers) {
+  plotPB <- FeaturePlot(E70_GEX.noOVA, features = index, pt.size = 1.5, order = TRUE) & 
+    theme(plot.title = element_blank(), 
+          axis.line = element_blank(), 
+          axis.title = element_blank(), 
+          axis.text = element_blank(), 
+          axis.ticks = element_blank(), 
+          plot.background = element_rect(fill='transparent', color=NA)) & 
+    theme(aspect.ratio=1) & 
+    scale_colour_gradientn(colours = brewer.pal(n = 10, name = "PuBuGn")) & 
+    NoLegend()
+  ggsave(filename = paste(output_macos, "PBplot", index, ".png", sep = ""), plot = plotPB)
+}
+
+for (index in clust2_markers) {
+  plotMHCII <- FeaturePlot(E70_GEX.noOVA, features = index, pt.size = 1, order = TRUE) & 
+    theme(plot.title = element_blank(), 
+          axis.line = element_blank(), 
+          axis.title = element_blank(), 
+          axis.text = element_blank(), 
+          axis.ticks = element_blank(), 
+          plot.background = element_rect(fill='transparent', color=NA)) & 
+    theme(aspect.ratio=1) & 
+    scale_colour_gradientn(colours = brewer.pal(n = 10, name = "Purples")) & 
+    NoLegend()
+  ggsave(filename = paste(output_macos, "E70_clust2", index, ".png", sep = ""), plot = plotMHCII)
+}
+
+for (i in 1:7) {
+  plotGroup <- FeaturePlot(E70_GEX.noOVA, features = IgH_markers[i], pt.size = 0.9, order = TRUE, cols =c("#EEEEEE", c("#7e575e", "#7e575e", "#7e575e", "#7e575e", "#8593ae", "#5a4e4d", "#2d4262")[i]), max.cutoff = 10) & 
+    theme(plot.title = element_blank(), 
+          axis.line = element_blank(), 
+          axis.title = element_blank(), 
+          axis.text = element_blank(), 
+          axis.ticks = element_blank(), 
+          plot.background = element_rect(fill='transparent', color=NA)) & 
+    theme(aspect.ratio=1) & NoLegend()
+  ggsave(filename = paste(output_macos, "E70_", IgH_markers[i], ".png", sep = ""), plot = plotGroup)
+}
+
+```
+
+## Saving ADT images
+
+```{r ADTimg, eval=FALSE, echo=FALSE, fig.height=5, fig.width=5, warning=FALSE, include=FALSE}
+#E70_ADT.noOVA <- readRDS(file = paste(output_macos, 'E70-ADT-Finished-clonotypes.rds', sep = ''))
+#E70_GEX.noOVA <- readRDS(file = paste(output_macos, 'E70-GEX-Finished-clonotypes.rds', sep = ''))
+
+plotCA07 <- FeaturePlot(E70_ADT.noOVA, features = E70_dCODE[1], pt.size = 1, order = TRUE, cols = c("#EEEEEE", "#4d73c4"), max.cutoff = 2) & theme(plot.title = element_blank(), axis.line = element_blank(), axis.title = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), plot.background = element_rect(fill='transparent', color=NA)) & theme(aspect.ratio=1) & theme(aspect.ratio=1) & NoLegend()
+plotCA07
+ggsave(filename = paste(output_macos, "CA07pos.png", sep = ""), plot = plotCA07)
+
+plotPR8 <- FeaturePlot(E70_ADT.noOVA, features = E70_dCODE[2], pt.size = 1, order = FALSE, cols = c("#EEEEEE", "#976374"), max.cutoff = 2) & theme(plot.title = element_blank(), axis.line = element_blank(), axis.title = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), plot.background = element_rect(fill='transparent', color=NA)) & theme(aspect.ratio=1) & theme(aspect.ratio=1) & NoLegend()
+plotPR8
+ggsave(filename = paste(output_macos, "PR8pos.png", sep = ""), plot = plotPR8)
+
+plotOVA <- FeaturePlot(E70_ADT.noOVA, features = E70_dCODE[3], pt.size = 1, order = TRUE, max.cutoff = 15) & theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8)) & theme(aspect.ratio=1) & scale_colour_gradientn(colours = brewer.pal(n = 10, name = "Greys"))
+plotOVA
+ggsave(filename = paste(output_macos, "OVApos.png", sep = ""), plot = plotOVA)
+
+for (i in 1:2) {
+  plotdCODE <- FeaturePlot(E70_ADT.noOVA, features = E70_dCODE[i], pt.size = 1, order = TRUE, cols =c("#EEEEEE", c("#4d73c4", "#976374")[i]), max.cutoff = 20, keep.scale = "feature") & theme(plot.title = element_blank(), axis.line = element_blank(), axis.title = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), plot.background = element_rect(fill='transparent', color=NA)) & theme(aspect.ratio=1) & NoLegend()
+  ggsave(filename = paste(output_macos, E70_dCODE[i], "_ADT.png", sep = ""), plot = plotdCODE)
+}
+
+for (i in 1:2) {
+  plotdCODE <- FeaturePlot(E70_GEX.noOVA, features = E70_dCODE[i], pt.size = 1, order = TRUE, cols =c("#EEEEEE", c("#4d73c4", "#976374")[i]), max.cutoff = 20, keep.scale = NULL) & theme(plot.title = element_blank(), axis.line = element_blank(), axis.title = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), plot.background = element_rect(fill='transparent', color=NA)) & theme(aspect.ratio=1) & NoLegend()
+  ggsave(filename = paste(output_macos, E70_dCODE[i], "_GEX.png", sep = ""), plot = plotdCODE)
+}
+
+for (i in 1:3) {
+  plotGroup <- FeaturePlot(E70_ADT.noOVA, features = E70_group[i], pt.size = 1.5, order = TRUE, cols =c("#EEEEEE", c("#4d73c4", "#008000", "#89344e", "#")[i])) & theme(plot.title = element_blank(), axis.line = element_blank(), axis.title = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), plot.background = element_rect(fill='transparent', color=NA)) & theme(aspect.ratio=1) & NoLegend()
+  print(c("#DDDDDD", c("#4d73c4", "#008000", "#89344e")[i]))
+  print(paste(output_macos, E70_group[i], ".png", sep = ""))
+  ggsave(filename = paste(output_macos, E70_group[i], ".png", sep = ""), plot = plotGroup)
+}
+
+DefaultAssay(E70_GEX.noOVA) <- "RNA"
+for (i in 1:3) {
+  plotGroup <- FeaturePlot(E70_GEX.noOVA, features = E70_group[i], pt.size = 1, order = TRUE, cols =c("#EEEEEE", c("#4d73c4", "#89344e", "#008000")[i]), max.cutoff = 1000) & theme(plot.title = element_blank(), axis.line = element_blank(), axis.title = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), plot.background = element_rect(fill='transparent', color=NA)) & theme(aspect.ratio=1) & NoLegend()
+  print(c("#DDDDDD", c("#4d73c4", "#89344e", "#008000")[i]))
+  print(paste(output_macos, E70_group[i], ".png", sep = ""))
+  ggsave(filename = paste(output_macos, "E70_", E70_group[i], ".png", sep = ""), plot = plotGroup)
+}
+
+ggsave(file = paste(output_macos, "E70_NEW_Hashtag_color.svg", sep = ""), 
+       DimPlot(E70_ADT.noOVA, group.by = "Hashtag", pt.size = 0.2, cols = c("#4d73c4", "#008000", "#89344e") 
+) & theme(plot.title = element_blank(), axis.line = element_blank(), axis.title = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), plot.background = element_rect(fill='transparent', color=NA)) & theme(aspect.ratio=1))
+```
+
+## Plotting with scRepertoire
+
+```{r ChordDiagram, echo=FALSE, fig.height=10, fig.width=10, warning=FALSE}
+E70_GEX.noOVA <- readRDS(file = paste(output_macos, 'E70-GEX-Finished-NoOVA.rds', sep = ''))
+E70_ADT.noOVA <- readRDS(file = paste(output_macos, 'E70-ADT-Finished-NoOVA.rds', sep = ''))
+
+grid.cols.ADT <- scales::hue_pal()(length(unique(E70_ADT.noOVA@active.ident)))
+names(grid.cols.ADT) <- levels(E70_ADT.noOVA@active.ident)
+
+grid.cols.GEX <- scales::hue_pal()(length(unique(E70_GEX.noOVA@active.ident)))
+names(grid.cols.GEX) <- levels(E70_GEX.noOVA@active.ident)
+
+
+### Chord diagram over clonal overlap - based on HA bindng
+circles.ADT.HA <- getCirclize(E70_ADT.noOVA, 
+                       group.by = "HA_binding")
+circlize::chordDiagram(circles.ADT.HA,
+                       self.link = 1, 
+                       grid.col = grid.cols.ADT)
+
+### Chord diagram over clonal overlap - based on Experimental groups
+circles.ADT.ident <- getCirclize(E70_ADT.noOVA, 
+                       group.by = "ident")
+circlize::chordDiagram(circles.ADT.ident,
+                       self.link = 1, 
+                       grid.col = grid.cols.ADT)
+
+### Chord diagram over clonal overlap - based on Cell clusters
+circles.GEX.ident <- getCirclize(E70_GEX.noOVA, 
+                       group.by = "ident")
+circlize::chordDiagram(circles.GEX.ident,
+                       self.link = 1, 
+                       grid.col = grid.cols.ADT)
+
+
+
+### Clonal expansion overlayed on ADT clustering
+DimPlot(E70_ADT.noOVA, group.by = "cloneType", pt.size = 1) + 
+  scale_colour_manual(values = rev(c("#919191", "#a87391", "#995266", "#c62e2e", "#b2871b")), 
+                      na.value = "grey") + 
+  theme(plot.title = element_blank()) & 
+  theme(axis.title = element_text(size = 24), 
+        axis.text = element_text(size = 20)) &
+  theme(aspect.ratio=1)
+
+
+### Clonal expansion overlayed on GEX clustering
+DimPlot(E70_GEX.noOVA, group.by = "cloneType", pt.size = 0.5) + 
+  scale_colour_manual(values = rev(c("#919191", "#a87391", "#995266", "#c62e2e", "#b2871b")),
+                      na.value = "grey") + 
+  theme(plot.title = element_blank()) & 
+  theme(axis.title = element_text(size = 24), 
+        axis.text = element_text(size = 20))&
+  theme(aspect.ratio=1)
+
+
+```
+
+## Saving ScRepertoire plots
+
+```{r SaveScRepertoire, echo=FALSE, fig.height=10, fig.width=10, warning=FALSE, include=FALSE, eval=FALSE}
+pdf(file = paste(output_macos, "Chord_Ag.pdf", sep = ""))
+circlize::chordDiagram(circles.ADT.HA,
+                       self.link = 1,
+                       grid.col = grid.cols.ADT)
+dev.off()
+
+pdf(file = paste(output_macos, "Chord_ADT.pdf", sep = ""))
+circlize::chordDiagram(circles.ADT.ident,
+                       self.link = 1, 
+                       grid.col = grid.cols.ADT)
+dev.off()
+
+pdf(file = paste(output_macos, "Chord_GEX.pdf", sep = ""))
+circlize::chordDiagram(circles.GEX.ident,
+                       self.link = 1, 
+                       grid.col = grid.cols.ADT)
+dev.off()
+
+
+ggsave(filename = paste(output_macos, "E70_ADT.noOVA_clonalexpansion_dimplot.svg", sep = ""), plot = DimPlot(E70_ADT.noOVA, group.by = "cloneType", pt.size = 0.5) + 
+  scale_colour_manual(values = rev(c("#919191", "#a87391", "#995266", "#c62e2e", "#b2871b")), 
+                      na.value = "grey") + 
+  theme(plot.title = element_blank()) & 
+  theme(axis.title = element_text(size = 24), 
+        axis.text = element_text(size = 20)) &
+  theme(aspect.ratio=1))
+
+ggsave(filename = paste(output_macos, "E70_GEX.noOVA_clonalexpansion_dimplot.svg", sep = ""), plot = DimPlot(E70_GEX.noOVA, group.by = "cloneType", pt.size = 0.5) + 
+  scale_colour_manual(values = rev(c("#919191", "#a87391", "#995266", "#c62e2e", "#b2871b")),
+                      na.value = "grey") + 
+  theme(plot.title = element_blank()) & 
+  theme(axis.title = element_text(size = 24), 
+        axis.text = element_text(size = 20))&
+  theme(aspect.ratio=1))
+
+```
+
+## Doughnut repertoire overlap plots
+
+```{r}
+#Load Bulk cell sequencing repertoire and compare with single cell seurat object
+Bulk <- readRDS("/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/Bioinformatics/data_all_bulk.RDS")
+SingleCell <- readRDS("/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/Bioinformatics/data_all_sc.RDS")
+Bulk_SC_overlap <- readRDS("/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/Bioinformatics/data_all_sc_overlap.RDS")
+
+E70_overlap <- bind_rows(Bulk_SC_overlap[["data"]][["mouse_scseq_2_hc_PBS;PBS"]], 
+                         Bulk_SC_overlap[["data"]][["mouse_scseq_2_hc_PBS;CA07"]],
+                         Bulk_SC_overlap[["data"]][["mouse_scseq_2_hc_CA07;CA07"]],
+                         Bulk_SC_overlap[["data"]][["mouse_scseq_2_hc_PR8;CA07"]],
+                         Bulk_SC_overlap[["data"]][["mouse_scseq_2_lc_PBS;PBS"]], 
+                         Bulk_SC_overlap[["data"]][["mouse_scseq_2_lc_PBS;CA07"]],
+                         Bulk_SC_overlap[["data"]][["mouse_scseq_2_lc_CA07;CA07"]],
+                         Bulk_SC_overlap[["data"]][["mouse_scseq_2_lc_PR8;CA07"]])
+
+E70_singleCell <- bind_rows(SingleCell[["data"]][["mouse_scseq_2_hc_PBS;PBS"]], 
+                         SingleCell[["data"]][["mouse_scseq_2_hc_PBS;CA07"]],
+                         SingleCell[["data"]][["mouse_scseq_2_hc_CA07;CA07"]],
+                         SingleCell[["data"]][["mouse_scseq_2_hc_PR8;CA07"]],
+                         SingleCell[["data"]][["mouse_scseq_2_lc_PBS;PBS"]], 
+                         SingleCell[["data"]][["mouse_scseq_2_lc_PBS;CA07"]],
+                         SingleCell[["data"]][["mouse_scseq_2_lc_CA07;CA07"]],
+                         SingleCell[["data"]][["mouse_scseq_2_lc_PR8;CA07"]])
+
+E70_singleCell$Overlap = FALSE
+for (row in 1:nrow(E70_singleCell)) {
+  E70_singleCell[row, 46] <- if_else(E70_singleCell[row, 41] %in% E70_overlap$Barcode, TRUE, FALSE)
+}
+unique(E70_singleCell$Barcode) %>% length()
+
+PD = E70_singleCell %>% group_by(Overlap, Infections)
+DoughnutPlot <- PieDonut(PD, aes(Overlap, Infections),
+                         title = "Clonal overlap SC - Bulk",
+                         r0 = 0.45, r1 = 0.9)
+pdf(file = paste(output_macos, "E70_OverlapDoughnut.pdf", sep = ""))
+PieDonut(PD, aes(Overlap, Infections),
+                         title = "Clonal overlap SC - Bulk",
+                         r0 = 0.45, r1 = 0.9)
+dev.off()
+
+
+PD2 = E70_singleCell %>% filter(HA.binding != "OVA") %>% group_by(Overlap, HA.binding)
+
+pdf(file = paste(output_macos, "E70_OverlapDoughnut_HA.pdf", sep = ""))
+PieDonut(PD2, aes(Overlap, HA.binding),
+        title = "Clonal overlap SC - Bulk",
+        r0 = 0.45, r1 = 0.9)
+dev.off()
+```
+
+## Expression Heatmap
+
+```{r}
+#Generating heatmaps for figure 4
+E70_GEX.noOVA <- readRDS(file = paste(output_macos, 'E70-GEX-Finished-NoOVA.rds', sep = ''))
+E70_GEX_CA07PR8 <- subset(E70_GEX.noOVA, Hashtag == "E70-CA07-PR8")
+E70_GEX_CA07 <- subset(E70_GEX.noOVA, Hashtag == "E70-CA07")
+E70_GEX_PR8 <- subset(E70_GEX.noOVA, Hashtag == "E70-PR8")
+
+DoHeatmap(E70_GEX_CA07PR8, 
+          features = Heatmap_markers, 
+          group.by = "ident",
+          lines.width = 2) + scale_fill_gradientn(colours = c("Black","#2d2d2d", "#207241"), na.value = "white") + 
+  geom_hline(yintercept = 20.5, color = "White", size = 1.5) +
+  geom_hline(yintercept = 12.5, color = "White", size = 1.5) +
+  geom_hline(yintercept = 7.5, color = "White", size = 1.5)
+
+ggsave(filename = paste(output_macos, "E70_phenotype_CA07-PR8_heatmap.png", sep = ''))
+
+
+DoHeatmap(E70_GEX_CA07, 
+          features = Heatmap_markers, 
+          group.by = "ident",
+          lines.width = 20) + scale_fill_gradientn(colours = c("Black","#2d2d2d", "#7d82ba"), na.value = "white") + 
+  geom_hline(yintercept = 20.5, color = "White", size = 1.5) +
+  geom_hline(yintercept = 12.5, color = "White", size = 1.5) +
+  geom_hline(yintercept = 7.5, color = "White", size = 1.5)
+
+ggsave(filename = paste(output_macos, "E70_phenotype_CA07_heatmap.png", sep = ''))
+
+
+DoHeatmap(E70_GEX_PR8, 
+          features = Heatmap_markers, 
+          group.by = "ident",
+          lines.width = 3) + scale_fill_gradientn(colours = c("Black","#2d2d2d", "#89344e"), na.value = "white") + 
+  geom_hline(yintercept = 20.5, color = "White", size = 1.5) +
+  geom_hline(yintercept = 12.5, color = "White", size = 1.5) +
+  geom_hline(yintercept = 7.5, color = "White", size = 1.5)
+
+ggsave(filename = paste(output_macos, "E70_phenotype_PR8_heatmap.png", sep = ''))
+
+
+DoHeatmap(E70_GEX.noOVA, 
+          features = Heatmap_markers, 
+          group.by = "ident",
+          lines.width = 35) + scale_fill_gradientn(colours = c("Black","#2d2d2d", "#9fd3bd"), na.value = "white") + 
+  geom_hline(yintercept = 20.5, color = "White", size = 1.5) +
+  geom_hline(yintercept = 12.5, color = "White", size = 1.5) +
+  geom_hline(yintercept = 7.5, color = "White", size = 1.5)
+
+ggsave(filename = paste(output_macos, "E70_phenotype_heatmap.png", sep = ''))
+
+
+E70_GEX.noOVA$Hashtag <- factor(E70_GEX.noOVA$Hashtag, 
+                          levels = c("E70-CA07-PR8", "E70-CA07", "E70-PR8"))
+
+DoHeatmap(E70_GEX.noOVA, features = Heatmap_markers, 
+          group.by = "Hashtag", 
+          lines.width = 35) + scale_fill_gradientn(colours = c("Black","#2d2d2d", "#9fd3bd"),
+                                                   na.value = "white") + 
+  geom_hline(yintercept = 20.5, color = "White", size = 1.5) +
+  geom_hline(yintercept = 12.5, color = "White", size = 1.5) +
+  geom_hline(yintercept = 7.5, color = "White", size = 1.5)
+
+ggsave(filename = paste(output_macos, "E70_phenotype_infections_heatmap.svg", sep = ''))
+
+
+x<- FetchData(E70_GEX.noOVA, vars = "Ighm", use.scaled = TRUE) 
+x <- as.data.frame(x)
+head(x)
+order.index <- order(x$Ighm, decreasing = FALSE)
+cell.order <- rownames(x)[order.index]
+head(cell.order)
+```

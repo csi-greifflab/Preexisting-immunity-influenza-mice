@@ -1,0 +1,1635 @@
+---
+title: "E51 10X Analysis"
+author: "Elias Tjärnhage"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(Seurat)
+library(patchwork)
+library(tidyverse)
+library(sctransform)
+library(SoupX)
+library(DropletUtils)
+library(KernSmooth)
+library(clustree)
+library(DoubletFinder)
+library(scCustomize)
+library(svglite)
+library(RColorBrewer)
+library(viridis)
+library(future)
+library(circlize)
+library(scales)
+library(scRepertoire)
+library(ggraph)
+library(ggplotify)
+library(grid)
+library(cowplot)
+library(ggraph)
+library(alakazam)
+library(shazam)
+library(ggplot2)
+library(stringi)
+library(webr)
+
+plan("multisession", workers = 1)
+
+filepath_macos = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/10X_files/E51/E51 GEX/sample_filtered_feature_bc_matrix/"
+output_macos = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/10X_files/Output/E51v2/"
+
+contigs_path = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/10X_files/2_Ig_all_filtered_contigs/mouse_scseq_rep3_contigs.txt"
+cite_seq_path = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/10X_files/cite_seq_count/E51_citeseq/umi_count/"
+
+# Manually create a list of the groups from the hashtags and dCODE barcodes
+E51_group <- c('GC-PBS-PBS', 'GC-PBS-CA07', 'GC-CA07-CA07', 'GC-PR8-CA07', "unassigned")
+E51_dCODE <- c('CA07', 'PR8', 'OVA')
+GC_markers <- c('Bcl6', 'Mki67', 'Aicda', "Hmces")
+GC_markers2 <- c('Bcl6', 'Gcsam', 'Fas', "Aicda")
+MBC_markers <- c('Ccr6', "Ccr7", 'Bcl2', "Klf2") #These are also markers for naive B cells
+PB_markers <- c('Sdc1', 'Prdm1', 'Jchain', "Xbp1")
+LZDZ_marker <-c('Cxcr4', 'Cd83', 'Hmmr', 'Icam1', 'Egr3', 'Apex1')
+IgH_markers <- c('Ighg1', "Ighg2b", 'Ighg2c', "Ighg3", "Igha", 'Ighm', 'Ighd')
+Cluster2_markers <- c('Dyrk1a', 'Sox5', 'Arid1b', 'Hivep2', 'Fhit', 'Bach2')
+clust2_markers <- c("Sox5", "Ptprc", "Cd19", "Bach2")
+Cluster2_negmarkers <- c('H2afz', 'Pclaf', 'Tuba1b', 'Cfap77', 'Ppia', 'Ptma', 'Ran')
+MHCII_genes <- c('H2-Aa', 'H2-Ab1', 'H2-Eb1', "H2-Eb2")
+other_markers <- c("Ptprc", "Cd19", "Pax5", "Bach2", "Fas", "Ung")
+proliferation_markers <- c("Mki67", "Pcna", "Mcm5", "Hmgb2")
+Heatmap_markers <- c('Bcl6', 'Mki67', 'Aicda', "Hmces", "Fas", "Aicda", "Cxcr4", "Cd83", "Cd86", "Nt5e", "Cd80", "Pdcd1lg2", 'Ccr6', "Ccr7", 'Bcl2', "Klf2", "Cd38", "Sdc1", 'Prdm1', 'Jchain', "Xbp1", "Irf4", 'Ighg1', "Ighg2b", 'Ighg2c', "Ighg3", "Igha", 'Ighm', 'Ighd')
+```
+
+## Load the 10X derived sequences :)
+
+```{r loading, echo=FALSE, include=TRUE, warning=FALSE}
+E51.data <- Read10X(filepath_macos)
+E51.ADT <- E51.data$`Antibody Capture`
+Cells(E51.ADT) %>% length()
+# Create Seurat Object using gene expression as main data
+E51 = CreateSeuratObject(counts = E51.data$`Gene Expression`, project = "E51", min.cells = 3, min.features = 200)
+# Create "Assay" of the Hashtags and Barcode Oligos
+E51[["ADT"]] <- CreateAssayObject(E51.data[["Antibody Capture"]][, colnames(x = E51)])
+
+DefaultAssay(E51) <- "RNA"
+
+```
+
+## HTO Hashtag Demultiplex
+
+```{r HTODemultiplex, echo=FALSE, warning=FALSE, include=FALSE, eval=FALSE}
+# TotalSeqC Hashtag HTO demultiuplexig
+E51.ADT <- t(E51.ADT)
+E51.ADT <- as.matrix(E51.ADT)
+E51.ADT.Hash <- E51.ADT[, c(4, 6, 8, 10)]
+E51.ADT.Hash <- t(E51.ADT.Hash)
+
+E51.ADT.Hash.sparse <- as(E51.ADT.Hash, "sparseMatrix")
+
+E51.ADT.seurat <- CreateSeuratObject(counts = E51.ADT.Hash.sparse, project = "E51", assay = "ADT")
+E51_ADT <- NormalizeData(E51.ADT.seurat, normalization.method = 'CLR', margin = 1)
+E51.demux <- HTODemux(E51_ADT, assay = "ADT", positive.quantile = 0.99)
+
+E51.demux <- subset(E51.demux, cells = Cells(E51))
+
+E51@meta.data[["Hashtag"]] <- E51.demux@meta.data[["ADT_maxID"]]
+
+
+# dCODE HTO demultiuplexig
+E51.ADT.dCODE <- E51.ADT[, c(1:3)]
+
+E51.ADT.dCODE <-cbind(E51.ADT.dCODE, total = rowSums(E51.ADT.dCODE))
+
+E51.ADT.dCODE <- subset.matrix(E51.ADT.dCODE, E51.ADT.dCODE[, 4] > 0)
+E51.ADT.dCODE <- t(E51.ADT.dCODE[, c(1:3)])
+
+E51.ADT.dCODE.sparse <- as(E51.ADT.dCODE, "sparseMatrix")
+
+E51.ADT.dCODE.seurat <- CreateSeuratObject(counts = E51.ADT.dCODE.sparse, project = "E51", assay = "ADT")
+E51.ADT.dCODE.seurat <- NormalizeData(E51.ADT.dCODE.seurat, normalization.method = 'CLR', margin = 1)
+
+E51.demux.dCODE <- HTODemux(E51.ADT.dCODE.seurat, assay = "ADT", positive.quantile = 0.5)
+
+E51.demux.dCODE@meta.data[["HA_binding"]] <- E51.demux.dCODE@meta.data[["ADT_classification"]]
+
+E51.demux.dCODE@meta.data[["HA_binding"]] <- gsub("CA07_CA07", "CA07", E51.demux.dCODE@meta.data[["HA_binding"]])
+E51.demux.dCODE@meta.data[["HA_binding"]] <- gsub("CA07_OVA", "CA07", E51.demux.dCODE@meta.data[["HA_binding"]])
+E51.demux.dCODE@meta.data[["HA_binding"]] <- gsub("OVA_PR8", "OVA", E51.demux.dCODE@meta.data[["HA_binding"]])
+
+
+E51 <- subset(E51, cells = Cells(E51.demux.dCODE))
+E51.demux.dCODE <- subset(E51.demux.dCODE, cells = Cells(E51))
+
+E51@meta.data[["HA_binding"]] <- E51.demux.dCODE@meta.data[["HA_binding"]]
+
+#E51_test <- t(data.frame(E51@assays[["ADT"]]@counts))
+#E51_test <- as.data.frame(E51_test)
+#E51_test <- E51_test %>% mutate(dCODE_sum = CA07 + PR8 + OVA)
+#E51_test <- E51_test %>% mutate(binder = ifelse(dCODE_sum < 11, "None", "Binder"))
+#E51@meta.data <- E51@meta.data %>% mutate(HA_binder_2 = ifelse(E51_test == "None", "No Binder", #E51@meta.data[["HA_binding"]]))
+
+#E51@meta.data[["HA_binding"]] == E51@meta.data[["HA_binder_2"]]
+
+#remove(E51.ADT.dCODE, E51.ADT.dCODE.seurat, E51.ADT.dCODE.sparse, E51.ADT.Hash, E51.ADT.Hash.sparse, E51.ADT.seurat, E51.demux, E51.demux.dCODE, E51_ADT, E51.data, E51.ADT)
+gc()
+
+
+```
+
+## 
+
+## Preprocessing of the Gene expression (GEX) data
+
+```{r GEX, echo=FALSE, include=FALSE, eval=FALSE, warning=FALSE}
+# Filter out based on feature counts
+#VlnPlot(E51, features = c("nFeature_RNA", "nCount_RNA"),ncol = 2)
+E51 <- subset(E51, subset = nFeature_RNA > 200 & nFeature_RNA < 6500)
+#E51
+
+#~~~GENE EXPRESSION~~~
+DefaultAssay(E51) <- "RNA"
+
+# Normalize GEX data
+E51_GEX <- NormalizeData(E51, normalization.method = "LogNormalize", scale.factor = 10000)
+
+remove(E51)
+# Find highgly variable features, unsure whether this is even useful here?
+E51_GEX <- FindVariableFeatures(E51_GEX, selection.method = "vst", nfeatures = 2000)
+
+# scale data
+all.genes <- rownames(E51_GEX)
+E51_GEX <- ScaleData(E51_GEX, features = all.genes)
+
+# Run the PCA based on the GEX
+E51_GEX <- RunPCA(E51_GEX, features = VariableFeatures(object = E51_GEX))
+
+# Find dimensionality of GEX dataset
+Elbow <- ElbowPlot(E51_GEX, ndims = 50, reduction = "pca")
+
+# Clustering and...
+E51_GEX <- FindNeighbors(E51_GEX, dims = 1:10)
+E51_GEX <- FindClusters(E51_GEX, resolution = 0.5)
+
+# ...Run UMAP with dimensionality based on Elbowplot above
+E51_GEX <- RunUMAP(E51_GEX, dims = 1:10)
+
+gc()
+# Doubletfinder
+sweep.E51_GEX <- paramSweep_v3(E51_GEX, PCs = 1:15, sct = T)
+sweep.E51_GEX <- summarizeSweep(sweep.E51_GEX, GT = F)
+bcmvn_E51_GEX <- find.pK(sweep.E51_GEX)
+pk_E51_GEX <- bcmvn_E51_GEX %>% filter(BCmetric == max(BCmetric)) %>% select(pK)
+pk_E51_GEX <- as.numeric(as.character(pk_E51_GEX[[1]]))
+(ggplot(bcmvn_E51_GEX, aes(pK, BCmetric, group = 1)) + geom_point() + geom_line() + theme_classic())
+
+annotations_E51_GEX <- E51_GEX@meta.data$seurat_clusters
+homo.prop_E51_GEX <- modelHomotypic(annotations_E51_GEX)
+nExp_poi_E51_GEX <- round(0.08*nrow(E51_GEX@meta.data))
+nExp_poi.adj_E51_GEX <- round(nExp_poi_E51_GEX*(1-homo.prop_E51_GEX))
+
+E51_GEX <- doubletFinder_v3(E51_GEX, PCs = 1:15, pN = 0.25, pK = pk_E51_GEX, nExp = nExp_poi_E51_GEX, reuse.pANN = F, sct = T)
+
+
+E51_GEX <- subset(E51_GEX, cells=rownames(E51_GEX@meta.data)[which(E51_GEX@meta.data$DF.classification == "Singlet")])
+
+saveRDS(E51_GEX, file = paste(output_macos, 'E51_GEX_doubletremoval.rds', sep = ""))
+
+remove(sweep.E51_GEX, bcmvn_E51_GEX, Elbow)
+gc()
+# ~~~ Re-process the data after doublet removal ~~~
+E51_GEX <- readRDS(file = paste(output_macos, 'E51_GEX_doubletremoval.rds', sep = ""))
+plan("multisession", workers = 1)
+
+# Normalize GEX data
+E51_GEX <- NormalizeData(E51_GEX, normalization.method = "LogNormalize", scale.factor = 10000)
+
+# Find highgly variable features, unsure whether this is even useful here?
+E51_GEX <- FindVariableFeatures(E51_GEX, selection.method = "vst", nfeatures = 2000)
+
+# scale data
+all.genes <- rownames(E51_GEX)
+E51_GEX <- ScaleData(E51_GEX, features = all.genes)
+
+# Run the PCA based on the GEX
+E51_GEX <- RunPCA(E51_GEX, features = VariableFeatures(object = E51_GEX))
+
+# Find dimensionality of GEX dataset
+Elbow <- ElbowPlot(E51_GEX, ndims = 50, reduction = "pca")
+
+# Clustering and...
+E51_GEX <- FindNeighbors(E51_GEX, dims = 1:10)
+#E51_GEX <- FindClusters(E51_GEX, resolution = seq(0,1,by = 0.05))
+
+# ...Run UMAP with dimensionality based on Elbowplot above
+E51_GEX <- RunUMAP(E51_GEX, dims = 1:9)
+
+# Run Clustree to better identify Clusters
+clustree(E51_GEX)
+
+
+E51_GEX <- FindClusters(E51_GEX, resolution = 0.025) #Good resotion for 5 clusters
+
+E51_GEX[["old.idents"]] <- Idents(object = E51_GEX)
+DimPlot(E51_GEX)
+E51_GEX <- RenameIdents(E51_GEX, '0'='GC B cells', '1' = 'Circulating B cells', '2'="preMBC", '3'="Plasma Blast")
+
+saveRDS(E51_GEX, file = paste(output_macos, 'E51_GEX_temp.rds', sep = ""))
+E51_GEX <- readRDS(file = paste(output_macos, 'E51_GEX_temp.rds', sep = ""))
+
+DefaultAssay(E51_GEX) <- "RNA"
+
+E51_GEX.markers <- FindAllMarkers(E51_GEX, only.pos = F, min.pct = 0.1, logfc.threshold = 0.2, verbose = F)
+top20_E51_GEX <- E51_GEX.markers %>% group_by(cluster) %>% top_n(n = 20, wt = avg_log2FC)
+heatmap <- DoHeatmap(E51_GEX, features = top20_E51_GEX$gene, label = T)
+ggsave(filename = paste(output_macos, "E51_heatmap.svg", sep = ''))
+
+remove(E51_GEX.markers, top20_E51_GEX)
+
+saveRDS(E51_GEX, file = paste(output_macos, 'E51-GEX-Finished.rds', sep = ''))
+
+```
+
+## Continue with the processing of Hashtag/Barcode (ADT) data
+
+```{r ADT, echo=FALSE, include=FALSE, warning=FALSE, eval=FALSE}
+E51_GEX <- readRDS(file = paste(output_macos, 'E51-GEX-Finished.rds', sep = ''))
+DefaultAssay(E51_GEX) <- "ADT"
+
+
+# Normalize ADT data
+E51_ADT <- NormalizeData(E51_GEX, normalization.method = 'CLR', margin = 2)
+
+# Find highly variable features, unsure whether this is even useful here?
+E51_ADT <- FindVariableFeatures(E51_ADT, selection.method = "vst", nfeatures = 2000)
+
+
+# scale data
+all.genes <- rownames(E51_ADT@assays[["ADT"]])
+E51_ADT <- ScaleData(E51_ADT, features = all.genes)
+
+# Run the PCA based on the ADT
+E51_ADT <- RunPCA(E51_ADT, features = all.genes)
+
+# Find dimensionality of ADT dataset
+Elbow <- ElbowPlot(E51_ADT, ndims = 50, reduction = "pca")
+Elbow
+
+E51_ADT <- RunUMAP(E51_ADT, assay = 'ADT', dims = 1:4)
+DimPlot(E51_ADT, group.by = "Hashtag")
+DimPlot(E51_ADT)
+# Clustering and...→
+E51_ADT <- FindNeighbors(E51_ADT, dims = 1:5)
+#E51_ADT <- FindClusters(E51_ADT, resolution = seq(0, 1 , by = 0.05))
+
+#clustree(E51_ADT)
+E51_ADT <- FindClusters(E51_ADT, resolution = 0.01) #Maybe good cluster amount??
+E51_ADT <- RenameIdents(E51_ADT, '0'='PBS-CA07', '1' = 'PR8-CA07', '2'='PBS-PBS', '3'='CA07-CA07')
+
+
+ADT_plot <- DimPlot(E51_ADT, pt.size = 0.2, group.by = "Hashtag") + theme(aspect.ratio=1)
+ADT_plot <- ADT_plot + ggtitle('Hashtag/Bardoce clustering')
+ADT_plot
+ggsave(filename = paste(output_macos, 'E51-ADT-Cluster.svg', sep = ''), ADT_plot)
+
+plot2 <- FeaturePlot(E51_ADT, features = E51_dCODE, pt.size = 0.2, keep.scale = 'all', order = TRUE) & theme(aspect.ratio = 1)
+plot2
+
+p3 <- FeaturePlot(E51_ADT, features = E51_group, pt.size = 0.2, order = TRUE) &theme(plot.title = element_text(size = 6), axis.title = element_blank(), axis.text = element_blank())+theme(aspect.ratio=1)
+p3
+
+saveRDS(E51_ADT, file = paste(output_macos, 'E51-ADT-Finished.rds', sep = ''))
+
+```
+
+## Drawing plots - Clustering
+
+```{r GEXplot, echo=FALSE, fig.height=10, fig.width=10, warning=TRUE}
+E51_GEX <- readRDS(file = paste(output_macos, 'E51-GEX-Finished.rds', sep = ''))
+E51_ADT <- readRDS(file = paste(output_macos, 'E51-ADT-Finished.rds', sep = ''))
+DefaultAssay(E51_GEX) <- "RNA"
+RNA_plot <- DimPlot(E51_GEX, reduction = "umap", pt.size = 0.5)+theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8))+theme(aspect.ratio=1)
+RNA_plot
+ggsave(filename = paste(output_macos, 'GEX_cluster.svg'), plot = RNA_plot)
+DefaultAssay(E51_ADT) <- "ADT"
+ADT_plot <- DimPlot(E51_ADT, reduction = "umap", pt.size = 0.25)+theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8))+theme(aspect.ratio=1)
+RNA_plot+ ggtitle('Gene expression clustering') | ADT_plot + ggtitle('Hashtag/Bardoce clustering')
+
+DefaultAssay(E51_GEX) <- "RNA"
+p6 <- FeaturePlot(E51_GEX, features = GC_markers2, pt.size = 1, order = TRUE, cols = c('#DDDDDD', '#FF0000'))&theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8))&theme(aspect.ratio=1)
+#### GC Markers
+p6
+
+p7 <- FeaturePlot(E51_GEX, features = MBC_markers, pt.size = 1, order = TRUE, cols = c('#DDDDDD', '#00AA00'))&theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8))&theme(aspect.ratio=1)
+#### MBC Markers
+p7
+
+p8 <- FeaturePlot(E51_GEX, features = PB_markers, pt.size = 1, order = TRUE, cols = c('#DDDDDD', '#0000FF'))&theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8))&theme(aspect.ratio=1)
+#### Plasma Blast Markers
+p8
+
+p11 <- FeaturePlot(E51_GEX, features = LZDZ_marker, pt.size = 1, order = TRUE, cols = c('#DDDDDD', '#FF00FF'))&theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8))&theme(aspect.ratio=1)
+#### Light Zone / Dark Zone Markers
+p11
+
+pIg <- FeaturePlot(E51_GEX, features = IgH_markers, pt.size = 0.6, order = TRUE, max.cutoff = 20)&theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8))&theme(aspect.ratio=1)
+pIg
+
+pclust2 <- FeaturePlot(E51_GEX, features = Cluster2_markers, pt.size = 1, order = TRUE, cols = c('#DDDDDD', '#FF00FF'), max.cutoff = 20)&theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8))&theme(aspect.ratio=1)
+#### Light Zone / Dark Zone Markers
+pclust2
+
+
+pclust2neg <- FeaturePlot(E51_GEX, features = Cluster2_negmarkers, pt.size = 1, order = TRUE, cols = c('#DDDDDD', '#FF00FF'))&theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8))&theme(aspect.ratio=1)
+pclust2neg
+
+plot_MHCII <- FeaturePlot(E51_GEX, features = MHCII_genes, pt.size = 1, order = TRUE, cols = c('#DDDDDD', '#FF00FF'))&theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8))&theme(aspect.ratio=1)
+plot_MHCII
+
+p9 <- FeaturePlot(E51_GEX, features = E51_group, pt.size = 1, order = TRUE, cols = c('#DDDDDD', '#0000FF'))&theme(plot.title = element_text(size = 6), axis.title = element_text(size = 4), axis.text = element_text(size = 4))&theme(aspect.ratio=1)&NoLegend()
+#### Hashtag groups
+p9
+
+p10 <- FeaturePlot(E51_GEX, features = E51_dCODE, pt.size = 1, order = TRUE, cols = c('#DDDDDD', '#0000FF'))&theme(plot.title = element_text(size = 6), axis.title = element_text(size = 4), axis.text = element_text(size = 4))&theme(aspect.ratio=1)&NoLegend()
+#### dCODE Antigens
+p10
+
+FeaturePlot(E51_GEX, features = other_markers, pt.size = 0.2, order = TRUE) & theme(aspect.ratio=1, plot.title = element_text(size = 12), axis.title = element_text(size = 8), axis.text = element_text(size = 8))
+
+FeaturePlot(E51_GEX, features = proliferation_markers, pt.size = 0.2, order = TRUE) & theme(aspect.ratio=1, plot.title = element_text(size = 12), axis.title = element_text(size = 8), axis.text = element_text(size = 8))
+
+DimPlot(E51_GEX, group.by = "Hashtag", pt.size = 1, cols = c("#4d73c4", "#eda070", "#606060", "#008000")) & theme(aspect.ratio=1)
+ggsave(filename = paste(output_macos, "E51_GEX_Hashtag_dimplot.svg", sep=""), plot = 
+        DimPlot(E51_GEX, group.by = "Hashtag", pt.size = 0.6, cols = c("#4d73c4", "#eda070", "#606060", "#008000")) & theme(aspect.ratio=1) )
+```
+
+## Drawing plots - Hashtags/Barcodes
+
+```{r ADTplot, echo=FALSE, fig.height=10, fig.width=10}
+DefaultAssay(E51_ADT) <- "ADT"
+ADT_plot <- ADT_plot + ggtitle('Hashtag/Bardoce clustering')
+ADT_plot
+plot2 <- FeaturePlot(E51_ADT, features = E51_dCODE, pt.size = 0.2, keep.scale = 'all', order = TRUE) & theme(aspect.ratio = 1)
+plot2
+p3 <- FeaturePlot(E51_ADT, features = E51_group, pt.size = 0.2, order = TRUE) &theme(plot.title = element_text(size = 6), axis.title = element_blank(), axis.text = element_blank())+theme(aspect.ratio=1)
+p3
+
+DefaultAssay(E51_GEX) <- "RNA"
+FeaturePlot(E51_GEX, features = E51_group, pt.size = 0.2, order = TRUE, max.cutoff = 4500) &theme(plot.title = element_text(size = 6), axis.title = element_blank(), axis.text = element_blank())+theme(aspect.ratio=1)
+
+DefaultAssay(E51_ADT) <- "ADT"
+ggsave(FeaturePlot(E51_ADT, features = c("CA07", "PR8"), blend = TRUE, label = FALSE, order = TRUE, pt.size = 0.1) &theme(aspect.ratio = 1, plot.title = element_text(size = 6), axis.title = element_blank(), axis.text = element_blank()) &NoLegend(), file = paste(output_macos, "BlendE51_test.pdf", sep = ""))
+
+
+# Feature plot of CITE-Seq Hashtags
+DimPlot(E51_ADT, group.by = "Hashtag", pt.size = 1)
+```
+
+## Saving GEX images
+
+```{r GEXimg, eval=FALSE, echo=FALSE, fig.height=7, fig.width=7, warning=TRUE, include=FALSE}
+E51_GEX <- readRDS(file = paste(output_macos, 'E51-GEX-Finished.rds', sep = ''))
+plotGC <- FeaturePlot(E51_GEX, features = GC_markers[1], pt.size = 1.5, order = TRUE, max.cutoff = 15) & theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8)) & theme(aspect.ratio=1) & scale_colour_gradientn(colours = brewer.pal(n = 10, name = "BuPu"))
+plotGC
+ggsave(filename = paste(output_macos, 'GC_plot.svg', sep = ''), plot = plotGC)
+       
+plotMBC <- FeaturePlot(E51_GEX, features = MBC_markers, pt.size = 1.5, order = TRUE, max.cutoff = 35) & theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8)) & theme(aspect.ratio=1) & scale_colour_gradientn(colours = brewer.pal(n = 10, name = "PuRd"))
+plotMBC
+ggsave(filename = paste(output_macos, 'MBC_plot.svg', sep = ''), plot = plotMBC)
+
+plotPB <- FeaturePlot(E51_GEX, features = PB_markers, pt.size = 1.5, order = TRUE) & theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8)) & theme(aspect.ratio=1) & scale_colour_gradientn(colours = brewer.pal(n = 10, name = "PuBuGn"))
+plotPB
+ggsave(filename = paste(output_macos, 'PB_plot.svg', sep = ''), plot = plotPB)
+
+plotMHCII <- FeaturePlot(E51_GEX, features = MHCII_genes, pt.size = 1.5, order = TRUE, max.cutoff = 120) & theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8)) & theme(aspect.ratio=1) & scale_colour_gradientn(colours = brewer.pal(n = 10, name = "Purples"))
+plotMHCII
+ggsave(filename = paste(output_macos, 'MHCII_plot.svg', sep = ''), plot = plotMHCII)
+
+plotE51_test <- FeaturePlot(E51_GEX, features = "Itgax", pt.size = 2, order = TRUE) & theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8)) & theme(aspect.ratio=1) & scale_colour_gradientn(colours = brewer.pal(n = 10, name = "Purples"))
+plotE51_test
+
+for (index in GC_markers2) {
+  plotGC2 <- FeaturePlot(E51_GEX, features = index, pt.size = 1, order = TRUE) & 
+    theme(plot.title = element_blank(), 
+          axis.line = element_blank(), 
+          axis.title = element_blank(), 
+          axis.text = element_blank(), 
+          axis.ticks = element_blank(), 
+          plot.background = element_rect(fill='transparent', color=NA)) & 
+    theme(aspect.ratio=1) & 
+    scale_colour_gradientn(colours = brewer.pal(n = 10, name = "BuPu")) & 
+    NoLegend()
+  ggsave(filename = paste(output_macos, "GCplot", index, ".png", sep = ""), plot = plotGC2)
+}
+for (index in MBC_markers) {
+  plotMBC2 <- FeaturePlot(E51_GEX, features = index, pt.size = 1.5, order = TRUE) & 
+    theme(plot.title = element_blank(), 
+          axis.line = element_blank(), 
+          axis.title = element_blank(), 
+          axis.text = element_blank(), 
+          axis.ticks = element_blank(), 
+          plot.background = element_rect(fill='transparent', color=NA)) & 
+    theme(aspect.ratio=1) & 
+    scale_colour_gradientn(colours = brewer.pal(n = 10, name = "PuRd")) & 
+    NoLegend()
+  ggsave(filename = paste(output_macos, "MBCplot", index, ".png", sep = ""), plot = plotMBC2)
+}
+
+for (index in PB_markers) {
+  plotPB <- FeaturePlot(E51_GEX, features = index, pt.size = 1.5, order = TRUE) & 
+    theme(plot.title = element_blank(), 
+          axis.line = element_blank(), 
+          axis.title = element_blank(), 
+          axis.text = element_blank(), 
+          axis.ticks = element_blank(), 
+          plot.background = element_rect(fill='transparent', color=NA)) & 
+    theme(aspect.ratio=1) & 
+    scale_colour_gradientn(colours = brewer.pal(n = 10, name = "PuBuGn")) & 
+    NoLegend()
+  ggsave(filename = paste(output_macos, "PBplot", index, ".png", sep = ""), plot = plotPB)
+}
+
+for (index in clust2_markers) {
+  plotMHCII <- FeaturePlot(E51_GEX, features = index, pt.size = 1, order = TRUE) & 
+    theme(plot.title = element_blank(), 
+          axis.line = element_blank(), 
+          axis.title = element_blank(), 
+          axis.text = element_blank(), 
+          axis.ticks = element_blank(), 
+          plot.background = element_rect(fill='transparent', color=NA)) & 
+    theme(aspect.ratio=1) & 
+    scale_colour_gradientn(colours = brewer.pal(n = 10, name = "Purples")) & 
+    NoLegend()
+  ggsave(filename = paste(output_macos, "E51_clust2", index, ".png", sep = ""), plot = plotMHCII)
+}
+
+for (i in 1:7) {
+  plotGroup <- FeaturePlot(E51_GEX, features = IgH_markers[i], pt.size = 0.9, order = TRUE, cols =c("#EEEEEE", c("#7e575e", "#7e575e", "#7e575e", "#7e575e", "#8593ae", "#5a4e4d", "#2d4262")[i]), max.cutoff = 10) & 
+    theme(plot.title = element_blank(), 
+          axis.line = element_blank(), 
+          axis.title = element_blank(), 
+          axis.text = element_blank(), 
+          axis.ticks = element_blank(), 
+          plot.background = element_rect(fill='transparent', color=NA)) & 
+    theme(aspect.ratio=1) & NoLegend()
+  ggsave(filename = paste(output_macos, "E51_", IgH_markers[i], ".png", sep = ""), plot = plotGroup)
+}
+#panel.border = element_rect(colour = "black", fill=NA, size=1
+#colours = brewer.pal(n = 10, name = "BuPu")
+#scale_colour_viridis(option = "cividis", direction = -1)
+```
+
+## Saving ADT images
+
+```{r ADTimg, eval=FALSE, echo=FALSE, fig.height=5, fig.width=5, warning=FALSE, include=FALSE}
+E51_ADT <- readRDS(file = paste(output_macos, 'E51-ADT-Finished.rds', sep = ''))
+E51_GEX <- readRDS(file = paste(output_macos, 'E51-GEX-Finished.rds', sep = ''))
+
+plotCA07 <- FeaturePlot(E51_ADT, features = E51_dCODE[1], pt.size = 2, order = TRUE, cols = c("#EEEEEE", "#4d73c4"), max.cutoff = 4) & theme(plot.title = element_blank(), axis.line = element_blank(), axis.title = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), plot.background = element_rect(fill='transparent', color=NA)) & theme(aspect.ratio=1) & theme(aspect.ratio=1) & NoLegend()
+plotCA07
+ggsave(filename = paste(output_macos, "CA07pos.png", sep = ""), plot = plotCA07)
+
+plotPR8 <- FeaturePlot(E51_ADT, features = E51_dCODE[2], pt.size = 2, order = TRUE, cols = c("#EEEEEE", "#008000"), max.cutoff = 4) & theme(plot.title = element_blank(), axis.line = element_blank(), axis.title = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), plot.background = element_rect(fill='transparent', color=NA)) & theme(aspect.ratio=1) & theme(aspect.ratio=1) & NoLegend()
+plotPR8
+ggsave(filename = paste(output_macos, "PR8pos.png", sep = ""), plot = plotPR8)
+
+plotOVA <- FeaturePlot(E51_ADT, features = E51_dCODE[3], pt.size = 1.5, order = TRUE, max.cutoff = 15) & theme(plot.title = element_text(size = 10), axis.title = element_text(size = 8), axis.text = element_text(size = 8)) & theme(aspect.ratio=1) & scale_colour_gradientn(colours = brewer.pal(n = 10, name = "Greys"))
+plotOVA
+
+for (i in 1:2) {
+  plotdCODE <- FeaturePlot(E51_ADT, features = E51_dCODE[i], pt.size = 1, order = TRUE, cols =c("#EEEEEE", c("#4d73c4", "#976374")[i]), max.cutoff = 200) & theme(plot.title = element_blank(), axis.line = element_blank(), axis.title = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), plot.background = element_rect(fill='transparent', color=NA)) & theme(aspect.ratio=1) & NoLegend()
+  ggsave(filename = paste(output_macos, E51_dCODE[i], "_ADT.png", sep = ""), plot = plotdCODE)
+}
+
+for (i in 1:2) {
+  plotdCODE <- FeaturePlot(E51_GEX, features = E51_dCODE[i], pt.size = 1, order = TRUE, cols =c("#EEEEEE", c("#4d73c4", "#976374")[i]), max.cutoff = 200) & theme(plot.title = element_blank(), axis.line = element_blank(), axis.title = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), plot.background = element_rect(fill='transparent', color=NA)) & theme(aspect.ratio=1) & NoLegend()
+  ggsave(filename = paste(output_macos, E51_dCODE[i], "_GEX.png", sep = ""), plot = plotdCODE)
+}
+
+for (i in 1:4) {
+  plotGroup <- FeaturePlot(E51_ADT, features = E51_group[i], pt.size = 1.5, order = TRUE, cols =c("#EEEEEE", c("#606060", "#eda070", "#4d73c4", "#008000")[i])) & theme(plot.title = element_blank(), axis.line = element_blank(), axis.title = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), plot.background = element_rect(fill='transparent', color=NA)) & theme(aspect.ratio=1) & NoLegend()
+  print(c("#DDDDDD", c("#606060", "#eda070", "#4d73c4", "#008000")[i]))
+  print(paste(output_macos, E51_group[i], ".png", sep = ""))
+  ggsave(filename = paste(output_macos, E51_group[i], ".png", sep = ""), plot = plotGroup)
+}
+
+DefaultAssay(E51_GEX) <- "RNA"
+for (i in 1:4) {
+  plotGroup <- FeaturePlot(E51_GEX, features = E51_group[i], pt.size = 1, order = TRUE, cols =c("#EEEEEE", c("#606060", "#eda070", "#4d73c4", "#008000")[i]), max.cutoff = 1000) & theme(plot.title = element_blank(), axis.line = element_blank(), axis.title = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), plot.background = element_rect(fill='transparent', color=NA)) & theme(aspect.ratio=1) & NoLegend()
+  print(c("#DDDDDD", c("#606060", "#eda070", "#4d73c4", "#008000")[i]))
+  print(paste(output_macos, E51_group[i], ".png", sep = ""))
+  ggsave(filename = paste(output_macos, "E51_", E51_group[i], ".png", sep = ""), plot = plotGroup)
+}
+
+ggsave(file = paste(output_macos, "E51_NEW_Hashtag_color.svg", sep = ""), 
+       DimPlot(E51_ADT, group.by = "Hashtag", pt.size = 0.2, cols = c("#4d73c4", "#eda070", "#606060", "#008000") 
+) & theme(plot.title = element_blank(), axis.line = element_blank(), axis.title = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), plot.background = element_rect(fill='transparent', color=NA)) & theme(aspect.ratio=1))
+```
+
+## Merging Seurat with BCR contig using scRepertoire
+
+```{r scRepertoire, echo=FALSE, include=TRUE, eval=TRUE, warning=FALSE}
+E51_ADT <- readRDS(file = paste(output_macos, 'E51-ADT-Finished.rds', sep = ''))
+E51_GEX <- readRDS(file = paste(output_macos, 'E51-GEX-Finished.rds', sep = ''))
+
+
+#Loading Contig file
+E51_contigs <- read.csv(file = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/10X_files/2_Ig_all_filtered_contigs/mouse_scseq_rep3_contigs.txt", header = TRUE, sep = "\t" )
+
+E51_clonotypes <- E51_contigs
+
+# Renaming MiXCR contig output to match 10X cellranger filtered contig annotations
+E51_clonotypes <- E51_clonotypes %>% 
+  mutate(chain = E51_clonotypes$chains) %>% 
+  mutate(barcode = paste(E51_clonotypes$tagValueCELL, "-1", sep = "")) %>% 
+  mutate(reads = E51_clonotypes$readCount) %>% 
+  mutate(v_gene = E51_clonotypes$bestVGene) %>% 
+  mutate(d_gene = E51_clonotypes$bestDGene) %>% 
+  mutate(j_gene = E51_clonotypes$bestJGene) %>% 
+  mutate(c_gene = E51_clonotypes$bestCGene)
+
+colnames(E51_clonotypes)[colnames(E51_clonotypes) == "nSeqFR1"] = "fwr1_nt"
+colnames(E51_clonotypes)[colnames(E51_clonotypes) == "nSeqFR2"] = "fwr2_nt"
+colnames(E51_clonotypes)[colnames(E51_clonotypes) == "nSeqFR3"] = "fwr3_nt"
+colnames(E51_clonotypes)[colnames(E51_clonotypes) == "nSeqFR4"] = "fwr4_nt"
+
+colnames(E51_clonotypes)[colnames(E51_clonotypes) == "nSeqCDR1"] = "cdr1_nt"
+colnames(E51_clonotypes)[colnames(E51_clonotypes) == "nSeqCDR2"] = "cdr2_nt"
+colnames(E51_clonotypes)[colnames(E51_clonotypes) == "nSeqCDR3"] = "cdr3_nt"
+
+colnames(E51_clonotypes)[colnames(E51_clonotypes) == "aaSeqFR1"] = "fwr1"
+colnames(E51_clonotypes)[colnames(E51_clonotypes) == "aaSeqFR2"] = "fwr2"
+colnames(E51_clonotypes)[colnames(E51_clonotypes) == "aaSeqFR3"] = "fwr3"
+colnames(E51_clonotypes)[colnames(E51_clonotypes) == "aaSeqFR4"] = "fwr4"
+
+colnames(E51_clonotypes)[colnames(E51_clonotypes) == "aaSeqCDR1"] = "cdr1"
+colnames(E51_clonotypes)[colnames(E51_clonotypes) == "aaSeqCDR2"] = "cdr2"
+colnames(E51_clonotypes)[colnames(E51_clonotypes) == "aaSeqCDR3"] = "cdr3"
+
+colnames(E51_clonotypes)[colnames(E51_clonotypes) == "uniqueUMICount"] = "umis"
+
+colnames(E51_clonotypes)[colnames(E51_clonotypes) == "targetSequences"] = "length"
+
+E51_clonotypes <- E51_clonotypes %>% group_by(barcode) %>% mutate(contig_id=paste(barcode, "_contig_", row_number(), sep = ""))
+
+
+
+E51_clono.E51_test <- read.csv(file = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/10X_files/E51/E51 VDJ_B/filtered_contig_annotations.csv")
+
+#Adding contig BCR information to ADT seurat object
+contig.list <- createHTOContigList(E51_clonotypes, E51_ADT, group.by = "orig.ident")
+
+combined <- combineBCR(contig.list, sample = "", threshold = 0.85, removeNA = TRUE)
+combined[[1]][["barcode"]] <- gsub("_", "", combined[[1]][["barcode"]])
+
+E51_ADT <- combineExpression(combined, E51_ADT, 
+                  cloneCall="aa", 
+                  group.by = "none", 
+                  proportion = FALSE,
+                  filterNA = TRUE,
+                  cloneTypes=c(Single=1, Small=5, Medium=20, Large=100, Hyperexpanded=500))
+
+# Asigning colors
+grid.cols.ADT <- scales::hue_pal()(length(unique(E51_ADT@active.ident)))
+names(grid.cols.ADT) <- levels(E51_ADT@active.ident)
+
+slot(E51_ADT, "meta.data")$cloneType <- factor(slot(E51_ADT, "meta.data")$cloneType, 
+                levels = c("Hyperexpanded (100 < X <= 500)", 
+                           "Large (20 < X <= 100)", 
+                            "Medium (5 < X <= 20)", 
+                            "Small (1 < X <= 5)", 
+                            "Single (0 < X <= 1)", NA))
+
+saveRDS(E51_ADT, file = paste(output_macos, 'E51-ADT-Finished.rds', sep = ''))
+
+
+#Adding contig BCR information to GEX seurat object
+contig.list <- createHTOContigList(E51_clonotypes, E51_GEX, group.by = "orig.ident")
+
+
+combined <- combineBCR(contig.list, sample = "", threshold = 0.85)
+combined[[1]][["barcode"]] <- gsub("_", "", combined[[1]][["barcode"]])
+
+E51_GEX <- combineExpression(combined, E51_GEX, 
+                  cloneCall="aa", 
+                  group.by = "none", 
+                  proportion = FALSE,
+                  filterNA = TRUE,
+                  cloneTypes=c(Single=1, Small=5, Medium=20, Large=100, Hyperexpanded=500))
+
+# Asigning colors
+grid.cols.GEX <- scales::hue_pal()(length(unique(E51_GEX@active.ident)))
+names(grid.cols.GEX) <- levels(E51_GEX@active.ident)
+
+slot(E51_GEX, "meta.data")$cloneType <- factor(slot(E51_GEX, "meta.data")$cloneType, 
+                levels = c("Hyperexpanded (100 < X <= 500)", 
+                           "Large (20 < X <= 100)", 
+                            "Medium (5 < X <= 20)", 
+                            "Small (1 < X <= 5)", 
+                            "Single (0 < X <= 1)", NA))
+
+# Highlighting clonotypes
+Selected_clones <- c("CARSPLVGGYYYPMDYW_CQQSNQDPWTF", "CTGGGNYFAYW_CQQSYEDPLTF", "CARGGLVYAMDYW_CQQHNEYPWTF", "CARGRYGNTAFAYW_CLQFYEFPLTF", "CARTGNWDGYFDVW_CQQYNSYPLTF", "CARRDRNYFDYW_CQNDHHYPLTF", "CARVGPIYYGYDDYAMDYW_CQQRSSYPLTF")
+
+E51_ADT <- highlightClonotypes(E51_ADT, cloneCall = "aa", sequence = Selected_clones)
+E51_ADT_selected_clones <- DimPlot(E51_ADT, group.by = "highlight", order = TRUE) + 
+                              theme(aspect.ratio = 1) + 
+                              scale_color_brewer(palette = "Paired", na.value = "grey")
+
+E51_GEX <- highlightClonotypes(E51_GEX, cloneCall = "aa", sequence = Selected_clones)
+E51_GEX_selected_clones <- DimPlot(E51_GEX, group.by = "highlight", order = TRUE) + 
+                                  theme(aspect.ratio = 1) + 
+                                  scale_color_brewer(palette = "Paired", na.value = "grey")
+
+ggsave(filename = paste(output_macos, "E51_ADT_selected_clones.svg", sep = ""), plot = E51_ADT_selected_clones)
+ggsave(filename = paste(output_macos, "E51_GEX_selected_clones.svg", sep = ""), plot = E51_GEX_selected_clones)
+
+saveRDS(E51_GEX, file = paste(output_macos, 'E51-GEX-Finished.rds', sep = ''))
+
+```
+
+## Plotting with scRepertoire
+
+```{r ChordDiagram, echo=FALSE, fig.height=10, fig.width=10, warning=FALSE}
+E51_ADT <- readRDS(file = paste(output_macos, 'E51-ADT-Finished.rds', sep = ''))
+E51_GEX <- readRDS(file = paste(output_macos, 'E51-GEX-Finished.rds', sep = ''))
+
+grid.cols.ADT <- scales::hue_pal()(length(unique(E51_ADT@active.ident)))
+names(grid.cols.ADT) <- levels(E51_ADT@active.ident)
+
+grid.cols.GEX <- scales::hue_pal()(length(unique(E51_GEX@active.ident)))
+names(grid.cols.GEX) <- levels(E51_GEX@active.ident)
+
+
+# Ova removed E51_testing
+E51_ADT.noOVA <- subset(E51_ADT, HA_binding != "OVA")
+circles.E51_ADT.noOVA <- getCirclize(E51_ADT.noOVA, 
+                       group.by = "HA_binding")
+chord <- circlize::chordDiagram(circles.E51_ADT.noOVA,
+                       self.link = 1,
+                       directional = 1,
+                       symmetric = TRUE,
+                       grid.col = grid.cols.ADT)
+
+
+
+### Chord diagram over clonal overlap - based on HA bindng
+circles.ADT.HA <- getCirclize(E51_ADT, 
+                       group.by = "HA_binding")
+circlize::chordDiagram(circles.ADT.HA,
+                       self.link = 1, 
+                       grid.col = grid.cols.ADT)
+
+### Chord diagram over clonal overlap - based on Experimental groups
+circles.ADT.ident <- getCirclize(E51_ADT, 
+                       group.by = "ident")
+circlize::chordDiagram(circles.ADT.ident,
+                       self.link = 1, 
+                       grid.col = grid.cols.ADT)
+
+### Chord diagram over clonal overlap - based on Cell clusters
+circles.GEX.ident <- getCirclize(E51_GEX, 
+                       group.by = "ident")
+circlize::chordDiagram(circles.GEX.ident,
+                       self.link = 1, 
+                       grid.col = grid.cols.ADT)
+
+
+
+### Clonal expansion overlayed on ADT clustering
+DimPlot(E51_ADT, group.by = "cloneType", pt.size = 1) + 
+  scale_colour_manual(values = rev(c("#919191", "#a87391", "#995266", "#c62e2e", "#b2871b")), 
+                      na.value = "grey") + 
+  theme(plot.title = element_blank()) & 
+  theme(axis.title = element_text(size = 24), 
+        axis.text = element_text(size = 20)) &
+  theme(aspect.ratio=1)
+
+
+### Clonal expansion overlayed on GEX clustering
+DimPlot(E51_GEX, group.by = "cloneType", pt.size = 0.5) + 
+  scale_colour_manual(values = rev(c("#919191", "#a87391", "#995266", "#c62e2e", "#b2871b")),
+                      na.value = "grey") + 
+  theme(plot.title = element_blank()) & 
+  theme(axis.title = element_text(size = 24), 
+        axis.text = element_text(size = 20))&
+  theme(aspect.ratio=1)
+
+
+### Clonal expansion network overlayed on ADT clustering
+clonalNetwork(E51_ADT, 
+              reduction = "umap", 
+              identity = "ident",
+              filter.clones = NULL,
+              filter.identity = NULL,
+              cloneCall = "strict") & theme(axis.title = element_text(size = 24), axis.text = element_text(size = 20))&theme(aspect.ratio=1)
+
+### Clonal expansion network overlayed on GEX clustering
+clonalNetwork(E51_GEX, 
+              reduction = "umap", 
+              identity = "ident",
+              filter.clones = NULL,
+              filter.identity = NULL,
+              cloneCall = "strict") & theme(axis.title = element_text(size = 24), axis.text = element_text(size = 20))&theme(aspect.ratio=1)
+
+### Number of cells binned by clonal expansion by HA binding, GEX cluster, and ADT cluster
+p1 <- occupiedscRepertoire(E51_GEX, x.axis = "HA_binding")
+p2 <- occupiedscRepertoire(E51_GEX, x.axis = "ident")
+p3 <- occupiedscRepertoire(E51_ADT, x.axis = "ident")
+
+(p1 + NoLegend() | p2 + NoLegend() | p3) & theme(plot.title = element_text(size = 12), axis.title = element_text(size = 12), axis.text = element_text(size = 12))&theme(aspect.ratio=1)
+
+
+combined.ADT <- expression2List(E51_ADT, 
+                             split.by = "Hashtag")
+combined.GEX <- expression2List(E51_GEX, 
+                             split.by = "ident")
+### Relative abundance
+p1 <- clonalHomeostasis(combined.ADT, 
+                  cloneCall = "strict", group.by = "Hashtag")
+p2 <- clonalHomeostasis(combined.GEX, 
+                  cloneCall = "strict")
+(p1 + NoLegend() | p2) & theme(plot.title = element_text(size = 12), axis.title = element_text(size = 16), axis.text = element_text(size = 16), axis.text.x = element_text(angle = 45, vjust = 0.8 , hjust = 0.95)) & theme(aspect.ratio=1)
+
+### Occupied Reperoire space
+p1 <- clonalProportion(combined.ADT, 
+                 cloneCall = "aa")
+p2 <- clonalProportion(combined.GEX, 
+                 cloneCall = "aa")
+clonalpropotionplot <- (p1 + NoLegend() | p2) & theme(plot.title = element_text(size = 12), axis.title = element_text(size = 16), axis.text = element_text(size = 16), axis.text.x = element_text(angle = 45, vjust = 0.8 , hjust = 0.95)) & theme(aspect.ratio=1)
+clonalpropotionplot
+
+#ggsave(filename = paste(output_macos, "E51_clonalproportion.svg", sep = ""), plot = clonalpropotionplot)
+
+
+### CLonal overlap
+p1 <- clonalOverlap(combined.ADT, 
+              cloneCall="aa", 
+              method="overlap")
+p2 <- clonalOverlap(combined.GEX, 
+              cloneCall="aa", 
+              method="overlap")
+(p1 | p2) & theme(plot.title = element_text(size = 12), axis.title = element_text(size = 15), axis.text = element_text(size = 15), axis.text.x = element_text(angle = 45, vjust = 0.8 , hjust = 0.95)) & theme(aspect.ratio=1)
+
+```
+
+## Saving ScRepertoire plots
+
+```{r SaveScRepertoire, echo=FALSE, fig.height=10, fig.width=10, warning=FALSE, include=FALSE, eval=FALSE}
+pdf(file = paste(output_macos, "Chord_Ag.pdf", sep = ""))
+circlize::chordDiagram(circles.E51_ADT.noOVA,
+                       self.link = 1,
+                       grid.col = grid.cols.ADT)
+dev.off()
+
+pdf(file = paste(output_macos, "Chord_ADT.pdf", sep = ""))
+circlize::chordDiagram(circles.ADT.ident,
+                       self.link = 1, 
+                       grid.col = grid.cols.ADT)
+dev.off()
+
+pdf(file = paste(output_macos, "Chord_GEX.pdf", sep = ""))
+circlize::chordDiagram(circles.GEX.ident,
+                       self.link = 1, 
+                       grid.col = grid.cols.ADT)
+dev.off()
+
+
+ggsave(filename = paste(output_macos, "E51_ADT_clonalexpansion_dimplot.svg", sep = ""), plot = DimPlot(E51_ADT, group.by = "cloneType", pt.size = 0.5) + 
+  scale_colour_manual(values = rev(c("#919191", "#a87391", "#995266", "#c62e2e", "#b2871b")), 
+                      na.value = "grey") + 
+  theme(plot.title = element_blank()) & 
+  theme(axis.title = element_text(size = 24), 
+        axis.text = element_text(size = 20)) &
+  theme(aspect.ratio=1))
+
+ggsave(filename = paste(output_macos, "E51_GEX_clonalexpansion_dimplot.svg", sep = ""), plot = DimPlot(E51_GEX, group.by = "cloneType", pt.size = 0.5) + 
+  scale_colour_manual(values = rev(c("#919191", "#a87391", "#995266", "#c62e2e", "#b2871b")),
+                      na.value = "grey") + 
+  theme(plot.title = element_blank()) & 
+  theme(axis.title = element_text(size = 24), 
+        axis.text = element_text(size = 20))&
+  theme(aspect.ratio=1))
+
+
+ggsave(filename = paste(output_macos, "E51_RelativeAbundance.svg", sep = ""), plot = 
+        (p1 + NoLegend() | p2) & 
+         theme(plot.title = element_text(size = 12), 
+               axis.title = element_text(size = 10), 
+               axis.text = element_text(size = 10), 
+               axis.text.x = element_text(angle = 45, vjust = 0.8 , hjust = 0.95)) & 
+         theme(aspect.ratio=1) )
+```
+
+## Loading and processing files/names for VDJ analysis
+
+```{r FileProcessing, echo=FALSE, fig.height=8, fig.width=20}
+E51_AIRR_HC <- read.csv(file = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/10X_files/3B_airr_filtered_clonotypes/mouse_scseq_rep3_clonotypes_hc.tsv", header = TRUE, sep = "\t" )
+E51_AIRR_LC <- read.csv(file = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/10X_files/3B_airr_filtered_clonotypes/mouse_scseq_rep3_clonotypes_lc.tsv", header = TRUE, sep = "\t" )
+E51_contigs <- read.csv(file = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/10X_files/2_Ig_all_filtered_contigs/mouse_scseq_rep3_contigs.txt", header = TRUE, sep = "\t" )
+
+
+IMGT_IGH <- read.csv(file = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/10X_files/OGRDB_IGH.csv", header = TRUE )
+IMGT_IGK <- read.csv(file = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/10X_files/OGRDB_IGKV.csv", header = TRUE )
+IMGT_IGL <- read.csv(file = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/10X_files/OGRDB_IGLV.csv", header = TRUE )
+IMGT_IGKJ <- read.csv(file = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/10X_files/OGRDB_IGKJ.csv", header = TRUE )
+IMGT_IGLJ <- read.csv(file = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/10X_files/OGRDB_IGLJ.csv", header = TRUE )
+IMGT_table <- rbind(IMGT_IGH, IMGT_IGK, IMGT_IGL, IMGT_IGKJ, IMGT_IGLJ)
+
+
+Khang_scVDJ <- readRDS(file = "/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/10X_files/data_all_sc2.RDS")
+
+E51_HC <- rbind(Khang_scVDJ[["data"]][["mouse_scseq_3_hc_CA07;CA07_CA07+PR8"]], 
+                Khang_scVDJ[["data"]][["mouse_scseq_3_hc_PBS;CA07_CA07+PR8"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_hc_PBS;PBS_CA07+PR8"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_hc_PR8;CA07_CA07+PR8"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_hc_CA07;CA07_CA07"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_hc_PBS;CA07_CA07"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_hc_PBS;PBS_CA07"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_hc_PR8;CA07_CA07"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_hc_CA07;CA07_PR8"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_hc_PBS;CA07_PR8"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_hc_PBS;PBS_PR8"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_hc_PR8;CA07_PR8"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_hc_CA07;CA07_OVA"]],    
+                Khang_scVDJ[["data"]][["mouse_scseq_3_hc_PBS;CA07_OVA"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_hc_PBS;PBS_OVA"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_hc_PR8;CA07_OVA"]])
+
+E51_HC <- E51_HC %>% arrange(Clone.ID)
+E51_HC <-  E51_HC %>% group_by(Clone.ID) %>% slice_max(UMI.count) # Dealing with multiple binders
+E51_HC <-  E51_HC %>% group_by(Clone.ID) %>% slice_head() # Dealing with ties
+
+E51_LC <- rbind(Khang_scVDJ[["data"]][["mouse_scseq_3_lc_CA07;CA07_CA07+PR8"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_lc_PBS;CA07_CA07+PR8"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_lc_PBS;PBS_CA07+PR8"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_lc_PR8;CA07_CA07+PR8"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_lc_CA07;CA07_CA07"]],    
+                Khang_scVDJ[["data"]][["mouse_scseq_3_lc_PBS;CA07_CA07"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_lc_PBS;PBS_CA07"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_lc_PR8;CA07_CA07"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_lc_CA07;CA07_PR8"]],    
+                Khang_scVDJ[["data"]][["mouse_scseq_3_lc_PBS;CA07_PR8"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_lc_PBS;PBS_PR8"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_lc_PR8;CA07_PR8"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_lc_CA07;CA07_OVA"]],    
+                Khang_scVDJ[["data"]][["mouse_scseq_3_lc_PBS;CA07_OVA"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_lc_PBS;PBS_OVA"]],
+                Khang_scVDJ[["data"]][["mouse_scseq_3_lc_PR8;CA07_OVA"]])
+
+E51_LC <- E51_LC %>% arrange(Clone.ID)
+E51_LC <-  E51_LC %>% group_by(Clone.ID) %>% slice_max(UMI.count) # Dealing with multiple binders
+E51_LC <-  E51_LC %>% group_by(Clone.ID) %>% slice_head() # Dealing with ties
+
+#Merge Heavy and light chain in case its needed
+E51_HC_LC <- rbind(E51_HC, E51_LC)
+
+# Addign HA binding to AIRR table from MiXCR output - heavy chain
+E51_AIRR_HC.subset <- subset(E51_AIRR_HC, E51_AIRR_HC$sequence_id %in% E51_HC$Clone.ID) # Filter for overlap in both datasets
+E51_AIRR_HC.subset$HA_binding <- E51_HC$HA.binding
+
+# Addign HA binding to AIRR table from MiXCR output - Light chain
+E51_AIRR_LC.subset <- subset(E51_AIRR_LC, E51_AIRR_LC$sequence_id %in% E51_LC$Clone.ID) # Filter for overlap in both datasets
+E51_AIRR_LC.subset$HA_binding <- E51_LC$HA.binding
+
+
+# Simplify C gene names to only isotyopes
+# Heavy chain
+E51_AIRR_HC.subset$IMGT_CGene <- E51_AIRR_HC.subset$c_call
+E51_AIRR_HC.subset$IMGT_CGene <- gsub("\\*0[0-9]", "", E51_AIRR_HC.subset$IMGT_CGene)
+E51_AIRR_HC.subset$IMGT_CGene <- vapply(strsplit(E51_AIRR_HC.subset$IMGT_CGene, ","), `[`, 1, FUN.VALUE=character(1))
+# Light chain
+E51_AIRR_LC.subset$IMGT_CGene <- E51_AIRR_LC.subset$c_call
+E51_AIRR_LC.subset$IMGT_CGene <- gsub("\\*0[0-9]", "", E51_AIRR_LC.subset$IMGT_CGene)
+E51_AIRR_LC.subset$IMGT_CGene <- vapply(strsplit(E51_AIRR_LC.subset$IMGT_CGene, ","), `[`, 1, FUN.VALUE=character(1))
+
+## Renaming to IMGT gene names - Contig file
+E51_contigs$IMGT_VGene = E51_contigs$bestVGene
+E51_contigs$IMGT_DGene = E51_contigs$bestDGene
+E51_contigs$IMGT_JGene = E51_contigs$bestJGene
+
+for (index in 1:nrow(E51_contigs)) {
+  #print(paste("index:",index))
+  if (E51_contigs$IMGT_VGene[index] != FALSE) {
+    table_row <- which(grepl(E51_contigs$bestVGene[index], IMGT_table$Label, fixed = TRUE))
+    #print(IMGT_table$IMGT.Name[table_row])
+    if (IMGT_table$IMGT.Name[table_row] != "") {
+      E51_contigs$IMGT_VGene[index] <- IMGT_table$IMGT.Name[table_row]
+    } else {
+      E51_contigs$IMGT_VGene[index] <- IMGT_table$Alt.Names[table_row]
+    }
+  }
+}
+
+
+for (index in 1:nrow(E51_contigs)) {
+  #print(paste("index:",index))
+  if (!is.na(E51_contigs$IMGT_JGene[index]) & E51_contigs$IMGT_JGene[index] != FALSE) {
+    table_row <- which(grepl(E51_contigs$bestJGene[index], IMGT_table$Label, fixed = TRUE))
+    #print(table_row)
+      if (IMGT_table$IMGT.Name[table_row] != "") {
+      E51_contigs$IMGT_JGene[index] <- IMGT_table$IMGT.Name[table_row]
+    } else {
+      E51_contigs$IMGT_JGene[index] <- IMGT_table$Alt.Names[table_row]
+    }
+  }
+}
+    
+    
+for (index in 1:nrow(E51_contigs)) {
+  #print(paste("index:",index))
+  if (!is.na(E51_contigs$IMGT_DGene[index]) & E51_contigs$IMGT_DGene[index] != FALSE) {
+    table_row <- which(grepl(E51_contigs$bestDGene[index], IMGT_table$Label, fixed = TRUE))
+    #print(table_row)
+      if (IMGT_table$IMGT.Name[table_row] != "") {
+      E51_contigs$IMGT_DGene[index] <- IMGT_table$IMGT.Name[table_row]
+    } else {
+      E51_contigs$IMGT_DGene[index] <- IMGT_table$Alt.Names[table_row]
+    }
+  }
+}
+
+# Simplify gene names and remove citation names - Contigs
+E51_contigs$IMGT_VGene <- gsub("Kos et al: ", "", E51_contigs$IMGT_VGene)
+E51_contigs$IMGT_DGene <- gsub("Kos et al: ", "", E51_contigs$IMGT_DGene)
+E51_contigs$IMGT_JGene <- gsub("Kos et al: ", "", E51_contigs$IMGT_JGene)
+
+E51_contigs$IMGT_VGene <- gsub("collins_et_al_2015:", "", E51_contigs$IMGT_VGene)
+E51_contigs$IMGT_DGene <- gsub("collins_et_al_2015:", "", E51_contigs$IMGT_DGene)
+E51_contigs$IMGT_JGene <- gsub("collins_et_al_2015:", "", E51_contigs$IMGT_JGene)
+
+E51_contigs$IMGT_VGene <- gsub("Musmus ", "", E51_contigs$IMGT_VGene)
+E51_contigs$IMGT_DGene <- gsub("Musmus ", "", E51_contigs$IMGT_DGene)
+E51_contigs$IMGT_JGene <- gsub("Musmus ", "", E51_contigs$IMGT_JGene)
+
+E51_contigs$IMGT_VGene <- gsub(" F", "", E51_contigs$IMGT_VGene)
+E51_contigs$IMGT_DGene <- gsub(" F", "", E51_contigs$IMGT_DGene)
+E51_contigs$IMGT_JGene <- gsub(" F", "", E51_contigs$IMGT_JGene)
+
+E51_contigs$IMGT_VGene <- gsub("Haines: ", "", E51_contigs$IMGT_VGene)
+E51_contigs$IMGT_DGene <- gsub("Haines: ", "", E51_contigs$IMGT_DGene)
+E51_contigs$IMGT_JGene <- gsub("Haines: ", "", E51_contigs$IMGT_JGene)
+
+E51_contigs$IMGT_VGene <- gsub("JACKSON: balb", "", E51_contigs$IMGT_VGene)
+E51_contigs$IMGT_DGene <- gsub("JACKSON: balb", "", E51_contigs$IMGT_DGene)
+E51_contigs$IMGT_JGene <- gsub("JACKSON: balb", "", E51_contigs$IMGT_JGene)
+
+E51_contigs$IMGT_VGene <- gsub("VBASE2: mus", "", E51_contigs$IMGT_VGene)
+E51_contigs$IMGT_DGene <- gsub("VBASE2: mus", "", E51_contigs$IMGT_DGene)
+E51_contigs$IMGT_JGene <- gsub("VBASE2: mus", "", E51_contigs$IMGT_JGene)
+
+E51_contigs$IMGT_VGene <- gsub("Mus_musculus_BALB/c", "", E51_contigs$IMGT_VGene)
+E51_contigs$IMGT_DGene <- gsub("Mus_musculus_BALB/c", "", E51_contigs$IMGT_DGene)
+E51_contigs$IMGT_JGene <- gsub("Mus_musculus_BALB/c", "", E51_contigs$IMGT_JGene)
+
+E51_contigs$IMGT_VGene <- gsub("Mus_musculus", "", E51_contigs$IMGT_VGene)
+E51_contigs$IMGT_DGene <- gsub("Mus_musculus", "", E51_contigs$IMGT_DGene)
+E51_contigs$IMGT_JGene <- gsub("Mus_musculus", "", E51_contigs$IMGT_JGene)
+
+
+## Renaming to IMGT gene names - AIRR Heavy chain
+E51_AIRR_HC.subset$IMGT_VGene = E51_AIRR_HC.subset$v_call
+E51_AIRR_HC.subset$IMGT_DGene = E51_AIRR_HC.subset$d_call
+E51_AIRR_HC.subset$IMGT_JGene = E51_AIRR_HC.subset$j_call
+
+
+## V name change
+for (index in 1:nrow(E51_AIRR_HC.subset)) {
+  #print(paste("index:",index))
+  if (E51_AIRR_HC.subset$IMGT_VGene[index] != FALSE) {
+    table_row <- which(grepl(strsplit(E51_AIRR_HC.subset$v_call[index], split = ",")[[1]][1], IMGT_table$Label, fixed = TRUE))
+    #print(paste("Table Row:", table_row))
+    #print(paste("IMGT Name:", IMGT_table$IMGT.Name[table_row]))
+    if (IMGT_table$IMGT.Name[table_row] != "") {
+      E51_AIRR_HC.subset$IMGT_VGene[index] <- IMGT_table$IMGT.Name[table_row]
+    } else {
+      E51_AIRR_HC.subset$IMGT_VGene[index] <- IMGT_table$Alt.Names[table_row]
+    }
+  }
+}
+
+## D name change
+for (index in 1:nrow(E51_AIRR_HC.subset)) {
+  #print(paste("index:",index))
+ if (!is.na(E51_AIRR_HC.subset$IMGT_DGene[index]) & E51_AIRR_HC.subset$IMGT_DGene[index] != FALSE) {
+    table_row <- which(grepl(strsplit(E51_AIRR_HC.subset$d_call[index], split = ",")[[1]][1], IMGT_table$Label, fixed = TRUE))
+    #print(paste("Table Row:", table_row))
+    #print(paste("IMGT Name:", IMGT_table$IMGT.Name[table_row]))
+    if (IMGT_table$IMGT.Name[table_row] != "") {
+      E51_AIRR_HC.subset$IMGT_DGene[index] <- IMGT_table$IMGT.Name[table_row]
+    } else {
+      E51_AIRR_HC.subset$IMGT_DGene[index] <- IMGT_table$Alt.Names[table_row]
+    }
+  }
+}
+
+## J name change
+for (index in 1:nrow(E51_AIRR_HC.subset)) {
+  #print(paste("index:",index))
+ if (!is.na(E51_AIRR_HC.subset$IMGT_JGene[index]) & E51_AIRR_HC.subset$IMGT_JGene[index] != FALSE) {
+    table_row <- which(grepl(strsplit(E51_AIRR_HC.subset$j_call[index], split = ",")[[1]][1], IMGT_table$Label, fixed = TRUE))
+    #print(paste("Table Row:", table_row))
+    #print(paste("IMGT Name:", IMGT_table$IMGT.Name[table_row]))
+    if (IMGT_table$IMGT.Name[table_row] != "") {
+      E51_AIRR_HC.subset$IMGT_JGene[index] <- IMGT_table$IMGT.Name[table_row]
+    } else {
+      E51_AIRR_HC.subset$IMGT_JGene[index] <- IMGT_table$Alt.Names[table_row]
+    }
+  }
+}
+
+# Simplify gene names and remove citation names - AIRR Heavy chain
+E51_AIRR_HC.subset$IMGT_VGene <- gsub("Kos et al: ", "", E51_AIRR_HC.subset$IMGT_VGene)
+E51_AIRR_HC.subset$IMGT_DGene <- gsub("Kos et al: ", "", E51_AIRR_HC.subset$IMGT_DGene)
+E51_AIRR_HC.subset$IMGT_JGene <- gsub("Kos et al: ", "", E51_AIRR_HC.subset$IMGT_JGene)
+
+E51_AIRR_HC.subset$IMGT_VGene <- gsub("collins_et_al_2015:", "", E51_AIRR_HC.subset$IMGT_VGene)
+E51_AIRR_HC.subset$IMGT_DGene <- gsub("collins_et_al_2015:", "", E51_AIRR_HC.subset$IMGT_DGene)
+E51_AIRR_HC.subset$IMGT_JGene <- gsub("collins_et_al_2015:", "", E51_AIRR_HC.subset$IMGT_JGene)
+
+E51_AIRR_HC.subset$IMGT_VGene <- gsub("Musmus ", "", E51_AIRR_HC.subset$IMGT_VGene)
+E51_AIRR_HC.subset$IMGT_DGene <- gsub("Musmus ", "", E51_AIRR_HC.subset$IMGT_DGene)
+E51_AIRR_HC.subset$IMGT_JGene <- gsub("Musmus ", "", E51_AIRR_HC.subset$IMGT_JGene)
+
+E51_AIRR_HC.subset$IMGT_VGene <- gsub(" F", "", E51_AIRR_HC.subset$IMGT_VGene)
+E51_AIRR_HC.subset$IMGT_DGene <- gsub(" F", "", E51_AIRR_HC.subset$IMGT_DGene)
+E51_AIRR_HC.subset$IMGT_JGene <- gsub(" F", "", E51_AIRR_HC.subset$IMGT_JGene)
+
+E51_AIRR_HC.subset$IMGT_VGene <- gsub("Haines: ", "", E51_AIRR_HC.subset$IMGT_VGene)
+E51_AIRR_HC.subset$IMGT_DGene <- gsub("Haines: ", "", E51_AIRR_HC.subset$IMGT_DGene)
+E51_AIRR_HC.subset$IMGT_JGene <- gsub("Haines: ", "", E51_AIRR_HC.subset$IMGT_JGene)
+
+E51_AIRR_HC.subset$IMGT_VGene <- gsub("JACKSON: balb", "", E51_AIRR_HC.subset$IMGT_VGene)
+E51_AIRR_HC.subset$IMGT_DGene <- gsub("JACKSON: balb", "", E51_AIRR_HC.subset$IMGT_DGene)
+E51_AIRR_HC.subset$IMGT_JGene <- gsub("JACKSON: balb", "", E51_AIRR_HC.subset$IMGT_JGene)
+
+E51_AIRR_HC.subset$IMGT_VGene <- gsub("VBASE2: mus", "", E51_AIRR_HC.subset$IMGT_VGene)
+E51_AIRR_HC.subset$IMGT_DGene <- gsub("VBASE2: mus", "", E51_AIRR_HC.subset$IMGT_DGene)
+E51_AIRR_HC.subset$IMGT_JGene <- gsub("VBASE2: mus", "", E51_AIRR_HC.subset$IMGT_JGene)
+
+E51_AIRR_HC.subset$IMGT_VGene <- gsub("Mus_musculus_BALB/c", "", E51_AIRR_HC.subset$IMGT_VGene)
+E51_AIRR_HC.subset$IMGT_DGene <- gsub("Mus_musculus_BALB/c", "", E51_AIRR_HC.subset$IMGT_DGene)
+E51_AIRR_HC.subset$IMGT_JGene <- gsub("Mus_musculus_BALB/c", "", E51_AIRR_HC.subset$IMGT_JGene)
+
+E51_AIRR_HC.subset$IMGT_VGene <- gsub("Mus_musculus", "", E51_AIRR_HC.subset$IMGT_VGene)
+E51_AIRR_HC.subset$IMGT_DGene <- gsub("Mus_musculus", "", E51_AIRR_HC.subset$IMGT_DGene)
+E51_AIRR_HC.subset$IMGT_JGene <- gsub("Mus_musculus", "", E51_AIRR_HC.subset$IMGT_JGene)
+
+
+```
+
+## Manual mutation count on nucleotide level
+
+```{r manualMutation, echo=FALSE, fig.height=10, fig.width=10}
+pattern <- "[SN][ACTGN][0-9]{2,3}[ACTGN]"
+
+E51_contigs$nMutationsCDR1[is.na(E51_contigs$nMutationsCDR1)] <- 0
+E51_contigs$nMutationsCDR2[is.na(E51_contigs$nMutationsCDR2)] <- 0
+E51_contigs$nMutationsFR1[is.na(E51_contigs$nMutationsFR1)] <- 0
+E51_contigs$nMutationsFR2[is.na(E51_contigs$nMutationsFR2)] <- 0
+E51_contigs$nMutationsFR3[is.na(E51_contigs$nMutationsFR3)] <- 0
+E51_contigs$nMutationsFR4[is.na(E51_contigs$nMutationsFR4)] <- 0
+
+E51_contigs$totnMutationsCDR <- str_count(E51_contigs$nMutationsCDR1, pattern = pattern) + 
+                                str_count(E51_contigs$nMutationsCDR2, pattern = pattern)
+
+E51_contigs$totnMutationsFR <-  str_count(E51_contigs$nMutationsFR1, pattern = pattern) + 
+                                str_count(E51_contigs$nMutationsFR2, pattern = pattern) + 
+                                str_count(E51_contigs$nMutationsFR3, pattern = pattern) +
+                                str_count(E51_contigs$nMutationsFR4, pattern = pattern)
+
+
+## Mergin Contig mutations with Seurat object:
+E51_GEX <- readRDS(file = paste(output_macos, 'E51-GEX-Finished.rds', sep = ''))
+E51_ADT <- readRDS(file = paste(output_macos, 'E51-ADT-Finished.rds', sep = ''))
+
+
+E51_mutationList <- E51_contigs
+E51_mutationList$Barcode <- E51_contigs$tagValueCELL
+E51_mutationList$CDR_mut <- E51_contigs$totnMutationsCDR
+E51_mutationList$FWR_mut <- E51_contigs$totnMutationsFR
+E51_mutationList <- E51_mutationList %>% mutate(tagValueCELL = paste(tagValueCELL, "-1", sep = ""))
+
+Cells(E51_GEX) %>% length()
+unique(E51_mutationList$tagValueCELL) %>% length()
+
+E51_mutationList.HC <- E51_mutationList %>% filter(chains == "IGH")
+E51_mutationList.HC.ADT <- E51_mutationList.HC %>% filter(tagValueCELL %in% Cells(E51_ADT))
+#E51_mutationList.HC.ADT$tagValueCELL %>% length()
+E51_mutationList.HC.ADT <- arrange(E51_mutationList.HC.ADT, tagValueCELL)
+E51_mutationList.HC.GEX <- E51_mutationList.HC %>% filter(tagValueCELL %in% Cells(E51_GEX))
+#E51_mutationList.HC.GEX$tagValueCELL %>% length()
+E51_mutationList.HC.GEX <- arrange(E51_mutationList.HC.GEX, tagValueCELL)
+
+E51_mutationList.LC <- E51_mutationList %>% filter(chains == "IGL" | chains == "IGK")
+E51_mutationList.LC.ADT <- E51_mutationList.LC %>% filter(tagValueCELL %in% Cells(E51_ADT))
+E51_mutationList.LC.ADT$tagValueCELL %>% length()
+E51_mutationList.LC.ADT <- arrange(E51_mutationList.LC.ADT, tagValueCELL)
+E51_mutationList.LC.GEX <- E51_mutationList.HC %>% filter(tagValueCELL %in% Cells(E51_GEX))
+E51_mutationList.LC.GEX$tagValueCELL %>% length()
+E51_mutationList.LC.GEX <- arrange(E51_mutationList.LC.GEX, tagValueCELL)
+
+
+
+E51_mutationList.HC$tagValueCELL
+
+#HC Mutations GEX
+E51_GEX@meta.data[["HC_CDR_mut"]] <- E51_mutationList.HC.GEX$totnMutationsCDR
+E51_GEX@meta.data[["HC_FWR_mut"]] <- E51_mutationList.HC.GEX$totnMutationsFR
+E51_GEX@meta.data[["HC_totMut"]] <- E51_GEX@meta.data[["HC_FWR_mut"]] + E51_GEX@meta.data[["HC_CDR_mut"]]
+
+#HC Mutations ADT
+E51_ADT@meta.data[["HC_CDR_mut"]] <- E51_mutationList.HC.ADT$totnMutationsCDR
+E51_ADT@meta.data[["HC_FWR_mut"]] <- E51_mutationList.HC.ADT$totnMutationsFR
+E51_ADT@meta.data[["HC_totMut"]] <- E51_ADT@meta.data[["HC_FWR_mut"]] + E51_ADT@meta.data[["HC_CDR_mut"]]
+
+#LC Mutations GEX
+E51_GEX@meta.data[["LC_CDR_mut"]] <- E51_mutationList.LC.GEX$totnMutationsCDR
+E51_GEX@meta.data[["LC_FWR_mut"]] <- E51_mutationList.LC.GEX$totnMutationsFR
+E51_GEX@meta.data[["LC_totMut"]] <- E51_GEX@meta.data[["LC_FWR_mut"]] + E51_GEX@meta.data[["LC_CDR_mut"]]
+
+#LC Mutations GEX
+E51_ADT@meta.data[["LC_CDR_mut"]] <- E51_mutationList.LC.ADT$totnMutationsCDR
+E51_ADT@meta.data[["LC_FWR_mut"]] <- E51_mutationList.LC.ADT$totnMutationsFR
+E51_ADT@meta.data[["LC_totMut"]] <- E51_ADT@meta.data[["LC_FWR_mut"]] + E51_ADT@meta.data[["LC_CDR_mut"]]
+
+E51_GEX@meta.data[["totMut"]] <- E51_GEX@meta.data[["HC_totMut"]] + E51_GEX@meta.data[["LC_totMut"]]
+E51_ADT@meta.data[["totMut"]] <- E51_ADT@meta.data[["HC_totMut"]] + E51_ADT@meta.data[["LC_totMut"]]
+
+
+E51_ADT@meta.data[["MutClass"]] <- ifelse(E51_ADT@meta.data[["totMut"]] < 1 , "0",
+                                    ifelse(E51_ADT@meta.data[["totMut"]] > 0 & E51_ADT@meta.data[["totMut"]] < 10, "1-10",
+                                    ifelse(E51_ADT@meta.data[["totMut"]] > 9 & E51_ADT@meta.data[["totMut"]] < 20, "11-20", 
+                                    ifelse(E51_ADT@meta.data[["totMut"]] > 19 & E51_ADT@meta.data[["totMut"]] < 30, "21-30", ">30"))))
+
+
+E51_GEX@meta.data[["MutClass"]] <- ifelse(E51_GEX@meta.data[["totMut"]] < 1 , "0",
+                                    ifelse(E51_GEX@meta.data[["totMut"]] > 0 & E51_GEX@meta.data[["totMut"]] < 10, "1-10",
+                                    ifelse(E51_GEX@meta.data[["totMut"]] > 9 & E51_GEX@meta.data[["totMut"]] < 20, "11-20", 
+                                    ifelse(E51_GEX@meta.data[["totMut"]] > 19 & E51_GEX@meta.data[["totMut"]] < 30, "21-30", ">30"))))
+
+
+FeaturePlot(E51_ADT, features = "totMut", pt.size = 0.5, order = TRUE) + 
+  theme(aspect.ratio=1) +
+  scale_colour_gradientn(colours = brewer.pal(n = 15, name = "BuPu"))
+
+FeaturePlot(E51_ADT, 
+            features = "totMut", 
+            pt.size = 1.5, 
+            order = TRUE, 
+            shape.by = "HA_binding") +
+  theme(aspect.ratio=1) +
+  scale_colour_gradientn(colours = brewer.pal(n = 15, name = "RdYlGn")) +
+  scale_shape_manual(values = c(16, 17, 1, 15))
+
+plot <- DimPlot(E51_ADT, group.by = "MutClass", pt.size = 1) + 
+  scale_colour_manual(values = c("#b2871b","#919191", "#a87391", "#995266", "#c62e2e"))+
+  theme(plot.title = element_blank()) +
+  theme(axis.title = element_blank(), 
+        axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.line = element_blank(),
+        aspect.ratio=1)
+
+ggsave(filename = paste(output_macos, "E51_MutUMAP_ADT.svg", sep = ""), plot = plot)
+
+plot <- DimPlot(E51_GEX, group.by = "MutClass", pt.size = 1) + 
+  scale_colour_manual(values = c("#b2871b","#919191", "#a87391", "#995266", "#c62e2e"))+
+  theme(plot.title = element_blank()) +
+  theme(axis.title = element_blank(), 
+        axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.line = element_blank(),
+        aspect.ratio=1)
+
+ggsave(filename = paste(output_macos, "E51_MutUMAP_GEX.svg", sep = ""), plot = plot)
+
+FeaturePlot(E51_GEX, features = "CDR_mut", pt.size = 0.5, order = TRUE) + theme(aspect.ratio=1)
+FeaturePlot(E51_GEX, features = "totMut", pt.size = 0.5, order = TRUE) + theme(aspect.ratio=1)
+
+saveRDS(E51_GEX, file = paste(output_macos, 'E51-GEX-Finished.rds', sep = ''))
+saveRDS(E51_ADT, file = paste(output_macos, 'E51-ADT-Finished.rds', sep = ''))
+
+write_csv(E51_GEX@meta.data, file = paste(output_macos, "E51_GEX_metadata.csv", sep = ""))
+write_csv(E51_ADT@meta.data, file = paste(output_macos, "E51_ADT_metadata.csv", sep = ""))
+```
+
+## Shazam Calculation
+
+```{r Shazam, echo=FALSE}
+# Calculate combined R and S mutation frequencies
+
+# Mutaiton counts - heavy chain
+E51_obs_count.HC <- observedMutations(E51_AIRR_HC.subset, 
+                                  sequenceColumn="sequence_alignment",
+                                  germlineColumn="germline_alignment",
+                                  cloneColumn="sequence_id",
+                                  regionDefinition=IMGT_V,
+                                  frequency=FALSE, 
+                                  combine=FALSE,
+                                  nproc=8)
+
+# Mutaiton frequenct - heavy chain
+E51_obs_freq.HC <- observedMutations(E51_AIRR_HC.subset, 
+                                  sequenceColumn="sequence_alignment",
+                                  germlineColumn="germline_alignment",
+                                  cloneColumn="sequence_id",
+                                  regionDefinition=IMGT_V,
+                                  frequency=TRUE, 
+                                  combine=FALSE,
+                                  nproc=8)
+
+# Mutaiton counts - Light chain
+E51_obs_count.LC <- observedMutations(E51_AIRR_LC.subset, sequenceColumn="sequence_alignment",
+                            germlineColumn="germline_alignment",
+                            cloneColumn="sequence_id",
+                            regionDefinition=IMGT_V,
+                            frequency=FALSE, 
+                            combine=FALSE,
+                            nproc=8)
+
+# Mutaiton Frequency - Light chain
+E51_obs_freq.LC <- observedMutations(E51_AIRR_LC.subset, sequenceColumn="sequence_alignment",
+                            germlineColumn="germline_alignment",
+                            cloneColumn="sequence_id",
+                            regionDefinition=IMGT_V,
+                            frequency=TRUE, 
+                            combine=FALSE,
+                            nproc=8)
+
+
+# Merging Counts and frequencies to one dataframe for plotting
+E51_obs_HC <- E51_obs_count.HC
+E51_obs_HC$mu_freq_cdr_r <- E51_obs_freq.HC$mu_freq_cdr_r
+E51_obs_HC$mu_freq_cdr_s <- E51_obs_freq.HC$mu_freq_cdr_s
+E51_obs_HC$mu_freq_fwr_r <- E51_obs_freq.HC$mu_freq_fwr_r
+E51_obs_HC$mu_freq_fwr_s <- E51_obs_freq.HC$mu_freq_fwr_s
+
+
+E51_obs_LC <- E51_obs_count.LC
+E51_obs_LC$mu_freq_cdr_r <- E51_obs_freq.LC$mu_freq_cdr_r
+E51_obs_LC$mu_freq_cdr_s <- E51_obs_freq.LC$mu_freq_cdr_s
+E51_obs_LC$mu_freq_fwr_r <- E51_obs_freq.LC$mu_freq_fwr_r
+E51_obs_LC$mu_freq_fwr_s <- E51_obs_freq.LC$mu_freq_fwr_s
+```
+
+## Doughnut plots
+
+```{r}
+Bulk <- readRDS("/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/Bioinformatics/data_all_bulk.RDS")
+SingleCell <- readRDS("/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/Bioinformatics/data_all_sc.RDS")
+Bulk_SC_overlap <- readRDS("/Users/eliastjarnhage/Library/CloudStorage/OneDrive-UniversitetetiOslo/Documents/Research/Bioinformatics/data_all_sc_overlap.RDS")
+
+E51_overlap <- bind_rows(Bulk_SC_overlap[["data"]][["mouse_scseq_3_hc_PBS;PBS"]], 
+                         Bulk_SC_overlap[["data"]][["mouse_scseq_3_hc_PBS;CA07"]],
+                         Bulk_SC_overlap[["data"]][["mouse_scseq_3_hc_CA07;CA07"]],
+                         Bulk_SC_overlap[["data"]][["mouse_scseq_3_hc_PR8;CA07"]],
+                         Bulk_SC_overlap[["data"]][["mouse_scseq_3_lc_PBS;PBS"]], 
+                         Bulk_SC_overlap[["data"]][["mouse_scseq_3_lc_PBS;CA07"]],
+                         Bulk_SC_overlap[["data"]][["mouse_scseq_3_lc_CA07;CA07"]],
+                         Bulk_SC_overlap[["data"]][["mouse_scseq_3_lc_PR8;CA07"]])
+
+E51_singleCell <- bind_rows(SingleCell[["data"]][["mouse_scseq_3_hc_PBS;PBS"]], 
+                         SingleCell[["data"]][["mouse_scseq_3_hc_PBS;CA07"]],
+                         SingleCell[["data"]][["mouse_scseq_3_hc_CA07;CA07"]],
+                         SingleCell[["data"]][["mouse_scseq_3_hc_PR8;CA07"]],
+                         SingleCell[["data"]][["mouse_scseq_3_lc_PBS;PBS"]], 
+                         SingleCell[["data"]][["mouse_scseq_3_lc_PBS;CA07"]],
+                         SingleCell[["data"]][["mouse_scseq_3_lc_CA07;CA07"]],
+                         SingleCell[["data"]][["mouse_scseq_3_lc_PR8;CA07"]])
+
+E51_singleCell$Overlap = FALSE
+for (row in 1:nrow(E51_singleCell)) {
+  E51_singleCell[row, 46] <- if_else(E51_singleCell[row, 41] %in% E51_overlap$Barcode, TRUE, FALSE)
+}
+unique(E51_singleCell$Barcode) %>% length()
+
+PD = E51_singleCell %>% group_by(Overlap, Infections)
+DoughnutPlot <- PieDonut(PD, aes(Overlap, Infections),
+                         title = "Clonal overlap SC - Bulk",
+                         r0 = 0.45, r1 = 0.9)
+pdf(file = paste(output_macos, "E51_OverlapDoughnut.pdf", sep = ""))
+PieDonut(PD, aes(Overlap, Infections),
+                         title = "Clonal overlap SC - Bulk",
+                         r0 = 0.45, r1 = 0.9)
+dev.off()
+
+
+PD2 = E51_singleCell %>% filter(HA.binding != "OVA") %>% group_by(Overlap, HA.binding)
+
+pdf(file = paste(output_macos, "E51_OverlapDoughnut_HA.pdf", sep = ""))
+PieDonut(PD2, aes(Overlap, HA.binding),
+        title = "Clonal overlap SC - Bulk",
+        r0 = 0.45, r1 = 0.9)
+dev.off()
+
+
+```
+
+## Alt HA Assignemts
+
+```{r Alt HA assignments E51_testing}
+E51_ADT <- readRDS(file = paste(output_macos, 'E51-ADT-Finished.rds', sep = ''))
+E51_GEX <- readRDS(file = paste(output_macos, 'E51-GEX-Finished.rds', sep = ''))
+
+grid.cols.ADT <- scales::hue_pal()(length(unique(E51_ADT@active.ident)))
+names(grid.cols.ADT) <- levels(E51_ADT@active.ident)
+
+Selected_clones <- c("CARSPLVGGYYYPMDYW_CQQSNQDPWTF", "CTGGGNYFAYW_CQQSYEDPLTF", "CARGGLVYAMDYW_CQQHNEYPWTF", "CARGRYGNTAFAYW_CLQFYEFPLTF", "CARTGNWDGYFDVW_CQQYNSYPLTF", "CARRDRNYFDYW_CQNDHHYPLTF", "CARVGPIYYGYDDYAMDYW_CQQRSSYPLTF")
+
+VlnPlot(E51_ADT, features = c("CA07", "PR8", "OVA")) + ylim(c(0,5))
+
+E51_ADT_NOT <- subset(E51_ADT, OVA > CA07 & OVA > PR8)
+#E51_ADT <- subset(E51_ADT, !(Cells(E51_ADT) %in% Cells(E51_ADT_NOT)))
+VlnPlot(E51_ADT, features = c("CA07", "PR8", "OVA")) + ylim(c(0,5))
+Cells(E51_ADT) %>% length()
+
+
+CAcells <- WhichCells(E51_ADT, expression = CA07 >= 1.2 & PR8 < 1.5)
+PR8cells <- WhichCells(E51_ADT, expression = CA07 < 1.2 & PR8 >= 1.5)
+Crosscells <- WhichCells(E51_ADT, expression = CA07 >= 1.1 & PR8 >= 0.9)
+Negcells <- WhichCells(E51_ADT, expression = CA07 < 1.2 & PR8 < 1.5)
+
+E51_ADT$AgGate <- "E51_test"
+E51_ADT$AgGate <- ifelse(colnames(E51_ADT) %in% Crosscells, "Cross", 
+                          ifelse(colnames(E51_ADT) %in% PR8cells, "PR8",
+                                 ifelse(colnames(E51_ADT) %in% CAcells, "CA07",
+                                        "Negative")))
+
+E51_ADT$AgGate1 <- ifelse(colnames(E51_ADT) %in% CAcells, "CA07", E51_ADT$AgGate)
+E51_ADT$AgGate1 <- ifelse(colnames(E51_ADT) %in% PR8cells, "PR8", E51_ADT$AgGate)
+E51_ADT$AgGate1 <- ifelse(colnames(E51_ADT) %in% Crosscells, "Cross", E51_ADT$AgGate)
+E51_ADT$AgGate1 <- ifelse(colnames(E51_ADT) %in% Negcells, "Negative", E51_ADT$AgGate)
+
+FeatureScatter(E51_ADT, "CA07", "PR8", group.by = "AgGate") +
+    theme(plot.title = element_blank()) & 
+    theme(axis.title = element_text(size = 12), 
+        axis.text = element_text(size = 10)) &
+    theme(aspect.ratio=1)
+
+
+
+circles.ADT.HA <- getCirclize(E51_ADT, 
+                       group.by = "AgGate")
+circlize::chordDiagram(circles.ADT.HA,
+                       self.link = 1, 
+                       grid.col = grid.cols.ADT,
+                       )
+
+E51_ADT.noNeg <- subset(E51_ADT, AgGate != "Negative")
+circles.E51_ADT.noNeg <- getCirclize(E51_ADT.noNeg, 
+                       group.by = "AgGate")
+circlize::chordDiagram(circles.E51_ADT.noNeg,
+                       self.link = 1, 
+                       grid.col = grid.cols.ADT,
+                       )
+
+combined.ADT <- expression2List(E51_ADT, 
+                             split.by = "AgGate")
+
+
+combined2 <- expression2List(E51_ADT, split.by = "AgGate")
+overlapCA07_Cross <- intersect(combined2[["CA07"]][["CTstrict"]], combined2[["Cross"]][["CTstrict"]])
+#overlapPR8_Cross <- intersect(combined2[["PR8"]][["CTaa"]], combined2[["Cross"]][["CTaa"]])
+#overlapCA07_Neg <- intersect(combined2[["CA07"]][["CTaa"]], combined2[["Negative"]][["CTaa"]])
+
+E51_ADT$AgGate2 <- E51_ADT$AgGate
+E51_ADT$AgGate2 <- ifelse(E51_ADT@meta.data[["CTstrict"]] %in% overlapCA07_Cross, "Overlap", E51_ADT$AgGate)
+#E51_ADT$AgGate2 <- ifelse(E51_ADT@meta.data[["CTaa"]] %in% overlapPR8_Cross, "Overlap(PR8/Cross)", E51_ADT$AgGate)
+#E51_ADT$AgGate2 <- ifelse(E51_ADT@meta.data[["CTaa"]] %in% overlapCA07_Neg, "Overlap(CA07/Negative)", E51_ADT$AgGate)
+
+
+FeatureScatter(E51_ADT, "CA07", "PR8", group.by = "AgGate2") +
+    theme(plot.title = element_blank()) & 
+    theme(axis.title = element_text(size = 12), 
+        axis.text = element_text(size = 10)) &
+    theme(aspect.ratio=1)
+
+
+DimPlot(E51_ADT, group.by = "AgGate", pt.size = 1) + theme(aspect.ratio = 1)
+DimPlot(E51_ADT, group.by = "AgGate2", pt.size = 1) + theme(aspect.ratio = 1)
+
+E51_ADT$AgGate3 <- gsub("Overlap", "CA07",
+  E51_ADT$AgGate2)
+
+FeatureScatter(E51_ADT, "CA07", "PR8", group.by = "AgGate3") +
+    theme(plot.title = element_blank()) & 
+    theme(axis.title = element_text(size = 12), 
+        axis.text = element_text(size = 10)) &
+    theme(aspect.ratio=1)
+
+DimPlot(E51_ADT, group.by = "AgGate3", pt.size = 1) + theme(aspect.ratio = 1)
+
+circles.E51_ADT <- getCirclize(E51_ADT, 
+                       group.by = "AgGate")
+circlize::chordDiagram(circles.E51_ADT,
+                       self.link = 1, 
+                       grid.col = grid.cols.ADT,
+                       )
+
+circles.E51_ADT <- getCirclize(E51_ADT, 
+                       group.by = "AgGate2")
+circlize::chordDiagram(circles.E51_ADT,
+                       self.link = 1, 
+                       grid.col = grid.cols.ADT,
+                       )
+
+circles.E51_ADT <- getCirclize(E51_ADT, 
+                       group.by = "AgGate3")
+circlize::chordDiagram(circles.E51_ADT,
+                       self.link = 1, 
+                       grid.col = grid.cols.ADT,
+                       )
+
+E51_ADT.noNeg <- subset(E51_ADT, AgGate3 != "Negative")
+circles.E51_ADT.noNeg <- getCirclize(E51_ADT.noNeg, 
+                       group.by = "AgGate3")
+circlize::chordDiagram(circles.E51_ADT.noNeg,
+                       self.link = 1, 
+                       grid.col = grid.cols.ADT,
+                       )
+
+combined3 <- expression2List(E51_ADT, split.by = "AgGate3")
+overlapPR8_Cross <- intersect(combined2[["PR8"]][["CTstrict"]], combined2[["Cross"]][["CTstrict"]])
+E51_ADT$AgGate5 <- ifelse(E51_ADT@meta.data[["CTstrict"]] %in% overlapPR8_Cross, "Overlap", E51_ADT$AgGate3)
+E51_ADT$AgGate6 <- gsub("Overlap", "PR8",
+  E51_ADT$AgGate5)
+
+E51_ADT.noNeg <- subset(E51_ADT, AgGate6 != "Negative")
+circles.E51_ADT.noNeg <- getCirclize(E51_ADT.noNeg, 
+                       group.by = "AgGate6")
+
+circlize::chordDiagram(circles.E51_ADT.noNeg,
+                       self.link = 1, 
+                       grid.col = grid.cols.ADT,
+                       )
+pdf(file = paste(output_macos, "Chord_Ag_NEW_Assignment.pdf", sep = ""))
+circlize::chordDiagram(circles.E51_ADT.noNeg,
+                       self.link = 1, 
+                       grid.col = grid.cols.ADT,
+                       )
+dev.off()
+
+FeatureScatter(E51_ADT, "CA07", "PR8", group.by = "AgGate6") +
+    theme(plot.title = element_blank()) & 
+    theme(axis.title = element_text(size = 12), 
+        axis.text = element_text(size = 10)) &
+    theme(aspect.ratio=1)
+ggsave(filename = paste(output_macos, "E51_HAScatter_Assigned.svg", sep = ''))
+
+FeatureScatter(E51_ADT.noNeg, "CA07", "PR8", group.by = "AgGate6") +
+    theme(plot.title = element_blank()) & 
+    theme(axis.title = element_text(size = 12), 
+        axis.text = element_text(size = 10)) &
+    theme(aspect.ratio=1)
+
+
+E51_ADT$E51_test <- E51_ADT@meta.data[["CTaa"]] %in% Selected_clones
+E51_selected_clones <- subset(E51_ADT, E51_test == TRUE)
+
+unique(E51_selected_clones@meta.data[["CTaa"]])
+
+E51_selected_clones@meta.data
+
+FeatureScatter(E51_selected_clones, "CA07", "PR8", group.by = "CTaa") +
+    theme(plot.title = element_blank()) & 
+    theme(axis.title = element_text(size = 12), 
+        axis.text = element_text(size = 10)) &
+    theme(aspect.ratio=1) & 
+    xlim(c(0,5)) &
+    ylim(c(0,5))
+
+FeatureScatter(E51_ADT, "CA07", "PR8", 
+               group.by = "Hashtag", 
+               cols =c("#4d73c4", "#eda070", "#606060", "#008000"),
+               pt.size = 1) +
+    theme(plot.title = element_blank()) & 
+    theme(axis.title = element_text(size = 12), 
+        axis.text = element_text(size = 10)) &
+    theme(aspect.ratio=1) & 
+    xlim(c(0,5)) & 
+    ylim(c(0,5))
+ggsave(filename = paste(output_macos, "E51_HAScatter_Groups.svg", sep = ''))
+
+
+E51_ADT$seurat_clusters <- E51_GEX@active.ident
+FeatureScatter(E51_ADT, "CA07", "PR8", 
+               group.by = "seurat_clusters", 
+               cols =c("#4d73c4", "#eda070", "#606060", "#008000"),
+               pt.size = 1) +
+    theme(plot.title = element_blank()) & 
+    theme(axis.title = element_text(size = 12), 
+        axis.text = element_text(size = 10)) &
+    theme(aspect.ratio=1) & 
+    xlim(c(0,5)) & 
+    ylim(c(0,5))
+
+FeatureScatter(E51_ADT, "CA07", "PR8", group.by = "cloneType") +
+    theme(plot.title = element_blank()) & 
+    theme(axis.title = element_text(size = 12), 
+        axis.text = element_text(size = 10)) &
+    theme(aspect.ratio=1) & 
+    xlim(c(0,5)) & 
+    ylim(c(0,5))
+
+E51_ADT_PR8 <- subset(E51_ADT, cells = PR8cells)
+E51_ADT_PR8 <- subset(E51_ADT_PR8, Hashtag == "GC-PR8-CA07")
+
+E51_ADT_CA07 <- subset(E51_ADT, Hashtag == "GC-CA07-CA07")
+
+df <- data.frame(Cells(E51_ADT), E51_ADT$AgGate6)
+df
+write.csv(df, file = paste(output_macos, "REP3_NEW_HA_ASSIGNMENTS.csv", sep = ""), row.names = TRUE) 
+```
+
+## Heatmaps
+
+```{r}
+E51_GEX <- readRDS(file = paste(output_macos, 'E51-GEX-Finished.rds', sep = ''))
+E51_GEX_PBS <- subset(E51_GEX, Hashtag == "GC-PBS-PBS")
+E51_GEX_CA07 <- subset(E51_GEX, Hashtag == "GC-PBS-CA07")
+E51_GEX_CA07CA07 <- subset(E51_GEX, Hashtag == "GC-CA07-CA07")
+E51_GEX_PR8CA07 <- subset(E51_GEX, Hashtag == "GC-PR8-CA07")
+
+DoHeatmap(E51_GEX_PBS, 
+          features = Heatmap_markers, 
+          group.by = "ident",
+          lines.width = 2) + scale_fill_gradientn(colours = c("Black","#2d2d2d", "#9b9b9b"), na.value = "white") + 
+  geom_hline(yintercept = 17.5, color = "White", size = 1.5) +
+  geom_hline(yintercept = 14.5, color = "White", size = 1.5) +
+  geom_hline(yintercept = 11.5, color = "White", size = 1.5) + 
+  geom_hline(yintercept = 5.5, color = "White", size = 1.5)
+
+ggsave(filename = paste(output_macos, "E51_phenotype_PBS-PBS_heatmap.png", sep = ''))
+
+
+DoHeatmap(E51_GEX_CA07, 
+          features = Heatmap_markers, 
+          group.by = "ident",
+          lines.width = 20) + scale_fill_gradientn(colours = c("Black","#2d2d2d", "#EDA070"), na.value = "white") + 
+  geom_hline(yintercept = 17.5, color = "White", size = 1.5) +
+  geom_hline(yintercept = 14.5, color = "White", size = 1.5) +
+  geom_hline(yintercept = 11.5, color = "White", size = 1.5) + 
+  geom_hline(yintercept = 5.5, color = "White", size = 1.5)
+
+ggsave(filename = paste(output_macos, "E51_phenotype_PBS-CA07_heatmap.png", sep = ''))
+
+
+DoHeatmap(E51_GEX_CA07CA07, 
+          features = Heatmap_markers, 
+          group.by = "ident",
+          lines.width = 3) + scale_fill_gradientn(colours = c("Black","#2d2d2d", "#6b8fce"), na.value = "white") + 
+  geom_hline(yintercept = 17.5, color = "White", size = 1.5) +
+  geom_hline(yintercept = 14.5, color = "White", size = 1.5) +
+  geom_hline(yintercept = 11.5, color = "White", size = 1.5) + 
+  geom_hline(yintercept = 5.5, color = "White", size = 1.5)
+
+ggsave(filename = paste(output_macos, "E51_phenotype_CA07-CA07_heatmap.png", sep = ''))
+
+
+DoHeatmap(E51_GEX_PR8CA07, 
+          features = Heatmap_markers, 
+          group.by = "ident",
+          lines.width = 10) + scale_fill_gradientn(colours = c("Black","#2d2d2d", "#61e564"), na.value = "white") + 
+  geom_hline(yintercept = 17.5, color = "White", size = 1.5) +
+  geom_hline(yintercept = 14.5, color = "White", size = 1.5) +
+  geom_hline(yintercept = 11.5, color = "White", size = 1.5) + 
+  geom_hline(yintercept = 5.5, color = "White", size = 1.5)
+
+ggsave(filename = paste(output_macos, "E51_phenotype_PR8-CA07_heatmap.png", sep = ''))
+
+DoHeatmap(E51_GEX, 
+          features = Heatmap_markers, 
+          group.by = "ident",
+          lines.width = 35) + scale_fill_gradientn(colours = c("Black","#2d2d2d", "#9fd3bd"), na.value = "white") + 
+  geom_hline(yintercept = 20.5, color = "White", size = 1.5) +
+  geom_hline(yintercept = 12.5, color = "White", size = 1.5) +
+  geom_hline(yintercept = 7.5, color = "White", size = 1.5)
+
+ggsave(filename = paste(output_macos, "E51_phenotype_heatmap.png", sep = ''))
+
+
+seurat_obj$Sample_Type <- factor(seurat_obj$Sample_Type, 
+                                 levels = c("Control", "Treated_A", "Treated_B"))
+E51_GEX$Hashtag <- factor(E51_GEX$Hashtag, 
+                          levels = c("GC-PBS-PBS", "GC-PBS-CA07", "GC-CA07-CA07", "GC-PR8-CA07"))
+
+DoHeatmap(E51_GEX, 
+          features = Heatmap_markers, 
+          group.by = "Hashtag",
+          lines.width = 35) + scale_fill_gradientn(colours = c("Black","#2d2d2d", "#9fd3bd"), na.value = "white") + 
+  geom_hline(yintercept = 20.5, color = "White", size = 1.5) +
+  geom_hline(yintercept = 12.5, color = "White", size = 1.5) +
+  geom_hline(yintercept = 7.5, color = "White", size = 1.5)
+
+ggsave(filename = paste(output_macos, "E51_phenotype_infection_heatmap.png", sep = ''))
+
+
+x<- FetchData(E51_GEX, vars = "Ighm", use.scaled = TRUE) 
+x <- as.data.frame(x)
+head(x)
+order.index <- order(x$Ighm, decreasing = FALSE)
+cell.order <- rownames(x)[order.index]
+head(cell.order)
+```

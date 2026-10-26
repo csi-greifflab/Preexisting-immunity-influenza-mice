@@ -1,0 +1,82 @@
+HOW TO UNZIP THE CELLRANGER ARCHIVES
+=====================================
+Dataset: Preexisting-immunity-influenza-mice / cellranger_out
+
+Each sample folder (E48, E50, E51, E70) is provided as a single .tar.xz
+archive. Each archive is well under 100 MB:
+
+    Archive        Size      Original folder size
+    E48.tar.xz      5.7 MB      12 MB
+    E50.tar.xz     55   MB     115 MB
+    E51.tar.xz     76   MB     157 MB
+    E70.tar.xz     66   MB     138 MB
+
+
+1) HOW TO EXTRACT
+-----------------
+
+macOS / Linux (Terminal):
+
+    tar -xJf E48.tar.xz
+
+    (replace E48 with the sample you want; run inside the folder where
+    you downloaded the archive)
+
+    Extract all four at once:
+
+        for f in E48 E50 E51 E70; do tar -xJf $f.tar.xz; done
+
+Windows 10/11 (Command Prompt or PowerShell):
+
+    tar -xJf E48.tar.xz
+
+    ("tar" is built into Windows 10 version 1803+ / Windows 11.
+     Alternatively, open with 7-Zip: right-click > 7-Zip > Extract here.
+     You may need to extract twice: first the .xz layer, then the .tar.)
+
+
+2) IMPORTANT NOTE ABOUT matrix.mtx
+---------------------------------
+To get under the 100 MB limit, the matrix file inside each archive is
+stored UNCOMPRESSED as:
+
+    matrix.mtx        (originally: matrix.mtx.gz)
+
+barcodes.tsv.gz and features.tsv.gz are unchanged. After extraction the
+folder looks like:
+
+    E48/
+        barcodes.tsv.gz
+        features.tsv.gz
+        matrix.mtx          <- was matrix.mtx.gz
+
+The data content is identical to the original -- nothing was lost.
+
+If your analysis tool expects "matrix.mtx.gz" (most tools such as
+Seurat's Read10X() and Scanpy's read_10x_mtx() also read the plain
+matrix.mtx), you can simply re-compress it to restore the original file:
+
+    macOS / Linux:      gzip matrix.mtx          (run inside the sample folder)
+
+    Windows:            use WSL, or in 7-Zip:
+                        right-click matrix.mtx > "Add to archive..." >
+                        archive format: gzip > name it matrix.mtx.gz
+
+
+3) VERIFY YOUR DOWNLOAD (optional but recommended)
+-------------------------------------------------
+Check the SHA-256 checksum of each downloaded archive:
+
+    shasum -a 256 E48.tar.xz      (macOS / Linux)
+    certutil -hashfile E48.tar.xz SHA256      (Windows)
+
+Expected checksums:
+
+    9ac2b7cb544550116a59d2a9970f4f8983bf1ee3f57d5f4c02848bfe91db8b86  E48.tar.xz
+    59a7a0a61b8370ec779cdcf8900de60c93e437350bcefb71fc2df0f5c4be3fa5  E50.tar.xz
+    3309a4665e61211b3537b91b02e310562e7b490accb151e8e93bc8b7c91e486e  E51.tar.xz
+    14c517c2c26a15aa63ea03f726d2502a7f9f2cb2003ec34cb62b183bdf80b98c  E70.tar.xz
+
+The integrity of every archive was verified against the original files
+(all checksums of barcodes.tsv.gz, features.tsv.gz and the matrix
+contents match the source data exactly).
