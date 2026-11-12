@@ -110,4 +110,4 @@ Tjärnhage E, Lê Quý K, de Matos Kasahara T, Dæhli MLT, Greiff V, Grødeland 
 
 ## Contact
 
-For questions, please open a GitHub issue or contact the corresponding authors of the manuscript.
+For questions, please contact the corresponding authors of the manuscript.
